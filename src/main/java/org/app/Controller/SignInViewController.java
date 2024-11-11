@@ -7,8 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import net.synedra.validatorfx.Check;
-import org.app.DataBase.CheckUserAccountLogIn;
+import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 
 import java.io.IOException;
@@ -46,11 +45,11 @@ public class SignInViewController {
     }
 
     private void navigate(int check) {
-        if (check == CheckUserAccountLogIn.ACCOUNT_NOT_FOUND) {
+        if (check == HandleUserAccount.ACCOUNT_NOT_FOUND) {
             messageLabel.setText("User not found");
             usernameTextField.setText("");
             passwordTextField.setText("");
-        } else if (check == CheckUserAccountLogIn.WRONG_PASSWORD) {
+        } else if (check == HandleUserAccount.WRONG_PASSWORD) {
             messageLabel.setText("Wrong password");
             passwordTextField.setText("");
         } else {
@@ -73,11 +72,15 @@ public class SignInViewController {
     }
 
     private int checkLogin() {
-        return CheckUserAccountLogIn.checkLogIn(username, password);
+        return HandleUserAccount.checkLogIn(username, password);
     }
 
     private void extractData() {
         username = usernameTextField.getText();
         password = passwordTextField.getText();
+    }
+
+    public void setMessageLabel(String message) {
+        messageLabel.setText(message);
     }
 }
