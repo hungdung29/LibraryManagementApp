@@ -11,7 +11,10 @@ module org.app {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires jdk.compiler;
 
     opens org.app to javafx.fxml;
     exports org.app;
+    exports org.app.Controller;
+    opens org.app.Controller to javafx.fxml;
 }

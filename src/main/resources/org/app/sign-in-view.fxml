@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="436.0" prefWidth="473.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.SignInViewController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+   <Label fx:id="messageLabel" prefHeight="41.0" prefWidth="173.0" text="Sign in to use Triple Wolves app" />
+    <TextField fx:id="usernameTextField" alignment="CENTER" opacity="0.63" />
+    <PasswordField fx:id="passwordTextField" />
+    <Button fx:id="logInButton" mnemonicParsing="false" onAction="#onLogInButtonClicked" text="Log In" />
+   <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
+</VBox>
