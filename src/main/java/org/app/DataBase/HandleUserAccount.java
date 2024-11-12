@@ -17,7 +17,7 @@ public class HandleUserAccount extends DataBaseAccessor {
 
         // check user account info in database
 
-        return ADMIN;
+        return LOG_IN_SUCCESS;
     }
 
     public void addAccount(String username, String password) {

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane prefHeight="400.0" prefWidth="600.0" side="LEFT" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController">
+    <tabs>
+        <Tab fx:id="user_info" text="User information">
+            <content>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="User information">
+                            <font>
+                                <Font size="33.0" />
+                            </font>
+                        </Label>
+                        <VBox alignment="CENTER" prefHeight="117.0" prefWidth="571.0">
+                            <children>
+                                <Label fx:id="nameLabel" layoutX="258.0" layoutY="31.0" text="Name: Thọ óc chó">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="usernameLabel" text="Username: thooccho123">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="addressLabel" text="Address: Hà Nội">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="phoneLabel" text="Phone number: 113">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                            <children>
+                                <Button fx:id="changePassButton" mnemonicParsing="false" onAction="#onChangePassButtonClicked" text="Change password" />
+                                <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutButtonClicked" text="Log out" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </Tab>
+        <Tab fx:id="borrow_book" text="Borrow book">
+            <content>
+                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                    </items>
+                </SplitPane>
+            </content>
+            <content>
+                <SplitPane dividerPositions="0.5373790677220757" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <TextField fx:id="borrowSearchTextField" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="borrowSearchButton" mnemonicParsing="false" onAction="#onBorrowSearchButtonClicked" text="Search" />
+                                    </children>
+                                </HBox>
+                                <TableView fx:id="borrowBookTable" prefHeight="430.0" prefWidth="297.0">
+                                    <columns>
+                                        <TableColumn fx:id="bookColumn" prefWidth="75.0" text="Book" />
+                                        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
+                                        <TableColumn fx:id="isbnBorrowColumn" prefWidth="75.0" text="ISBN" />
+                                        <TableColumn fx:id="remainingColumn" prefWidth="75.0" text="Remaining" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+                            <children>
+                                <Label fx:id="nameBorrowBookDetailLabel" text="Name:" />
+                        <Label fx:id="publisherBorrowLabel" text="Publisher" />
+                                <Label fx:id="descripDetailLabel" text="Description:" />
+                                <Label text="Comment:" />
+                                <ListView fx:id="commentList" prefHeight="346.0" prefWidth="260.0" />
+                                <Button fx:id="borrowButton" mnemonicParsing="false" onAction="#onBorrowButtonClicked" text="Borrow" />
+                            </children>
+                        </VBox>
+                    </items>
+                </SplitPane>
+            </content>
+        </Tab>
+        <Tab fx:id="return_book" text="Return book">
+            <content>
+                <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                    </items>
+                </SplitPane>
+            </content>
+            <content>
+                <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <TextField fx:id="returnSearchTextField" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="returnSearchButton" mnemonicParsing="false" onAction="#onReturnsSearchClicked" text="Search" />
+                                    </children>
+                                </HBox>
+                        <TableView fx:id="borrowedBookTable" prefHeight="441.0" prefWidth="281.0">
+                          <columns>
+                            <TableColumn fx:id="bookBorrowedColumn" prefWidth="75.0" text="Book Title" />
+                            <TableColumn fx:id="isbnBorrowedColumn" prefWidth="75.0" text="ISBN" />
+                          </columns>
+                        </TableView>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+                            <children>
+                                <Label fx:id="nameReturnBookLabel" text="Name:" />
+                                <Label fx:id="borrowDateLabel" text="Borrow date:" />
+                                <Label fx:id="commentLabel" text="Comment:" />
+                                <TextField fx:id="commentTextField" />
+                                <Button fx:id="returnButton" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Return" />
+                            </children>
+                        </VBox>
+                    </items>
+                </SplitPane>
+            </content>
+        </Tab>
+        <Tab text="Chatbot" />
+    </tabs>
+</TabPane>
