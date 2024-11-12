@@ -10,8 +10,8 @@
     </padding>
 
    <Label fx:id="messageLabel" prefHeight="41.0" prefWidth="173.0" text="Sign in to use Triple Wolves app" />
-    <TextField fx:id="usernameTextField" alignment="CENTER" opacity="0.63" />
-    <PasswordField fx:id="passwordTextField" />
+    <TextField fx:id="usernameTextField" alignment="CENTER" opacity="0.63" promptText="username" />
+    <PasswordField fx:id="passwordTextField" alignment="CENTER" promptText="password" />
     <Button fx:id="logInButton" mnemonicParsing="false" onAction="#onLogInButtonClicked" text="Log In" />
    <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
 </VBox>

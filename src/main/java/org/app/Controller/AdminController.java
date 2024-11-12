@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
+    public Tab memberTab;
     @FXML
     private TableView<Member> memberTable;
     @FXML
@@ -27,6 +29,7 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         MemberData memberData = new MemberData();
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("username"));
