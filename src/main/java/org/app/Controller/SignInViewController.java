@@ -77,7 +77,8 @@ public class SignInViewController {
 //
 //        MainApp.setScene(root);
 
-        MainApp.navigateToScene("user-view.fxml");
+        MainApp.navigateToScene("admin-view.fxml");
+        //MainApp.navigateToScene("user-view.fxml");
     }
 
     private void extractData() {

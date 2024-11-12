@@ -14,7 +14,9 @@ import org.app.Object.Member;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminController implements Initializable {
+public class AdminController
+//        implements Initializable
+{
     public Tab memberTab;
     @FXML
     private TableView<Member> memberTable;
@@ -27,16 +29,16 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<Member, Integer> nBorrowedColumn;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        MemberData memberData = new MemberData();
-
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("username"));
-        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("phoneNumber"));
-        addressColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("address"));
-        nBorrowedColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("numberOfBorrowedBooks"));
-
-        memberTable.setItems(memberData.getMembers());
-    }
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//        MemberData memberData = new MemberData();
+//
+//        nameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("username"));
+//        phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("phoneNumber"));
+//        addressColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("address"));
+//        nBorrowedColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("numberOfBorrowedBooks"));
+//
+//        memberTable.setItems(memberData.getMembers());
+//    }
 }

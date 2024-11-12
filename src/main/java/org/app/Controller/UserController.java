@@ -2,6 +2,7 @@ package org.app.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import org.app.MainApp;
 import org.app.Object.Book;
 
 public class UserController {
@@ -41,9 +42,19 @@ public class UserController {
 
 
     public void onChangePassButtonClicked(ActionEvent actionEvent) {
+        try {
+            MainApp.navigateToScene("change-password-view.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onLogOutButtonClicked(ActionEvent actionEvent) {
+        try {
+            MainApp.navigateToScene("hello-view.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void onBorrowSearchButtonClicked(ActionEvent actionEvent) {
@@ -56,5 +67,8 @@ public class UserController {
     }
 
     public void onReturnButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public static class AdminController {
     }
 }
