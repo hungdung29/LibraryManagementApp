@@ -3,17 +3,17 @@ package org.app.DataBase;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DataBaseAccessor {
-    public static Connection connection;
+abstract public class DataBaseAccessor {
+    public Connection connection;
 
     /**
      * Connect to database
      */
-    public static void connect() {
+    public void connect() {
         return;
     }
 
-    public static void disconnect() throws SQLException {
+    public void disconnect() throws SQLException {
         if (connection != null) {
             connection.close();
         }

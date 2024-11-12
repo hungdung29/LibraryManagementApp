@@ -20,12 +20,15 @@ public class SignUpViewController {
 
     private String username;
     private String password;
+    private String cfPw;
 
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
+        HandleUserAccount handleUserAccount = new HandleUserAccount();
+
         extract();
 
-        if (checkValidAccount()) {
-            HandleUserAccount.addAccount(username, password);
+        if (handleUserAccount.checkValidAccount(username, password, cfPw)) {
+            handleUserAccount.addAccount(username, password);
 
             try {
 //                MainApp.navigateToScene("hello-view.fxml");
@@ -39,6 +42,11 @@ public class SignUpViewController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            messageLabel.setText("Invalid username or password");
+            usernameText.setText("");
+            pwText.setText("");
+            cfPwText.setText("");
         }
     }
 
@@ -51,34 +59,6 @@ public class SignUpViewController {
     private void extract() {
         username = usernameText.getText();
         password = pwText.getText();
-    }
-
-    private boolean checkValidAccount() {
-        if (HandleUserAccount.isUsernameExist(username)) {
-            messageLabel.setText("Username already exist");
-
-            pwText.clear();
-            cfPwText.clear();
-
-            return false;
-        }
-
-        if (password == null || password.isEmpty()) {
-            messageLabel.setText("Please enter a password");
-            return false;
-        }
-
-        if ( !password.equals(cfPwText.getText()) ) {
-                messageLabel.setText("Passwords do not match");
-
-                pwText.clear();
-                cfPwText.clear();
-
-                return false;
-            }
-
-
-        // check valid and strong password
-        return true;
+        cfPw = cfPwText.getText();
     }
 }

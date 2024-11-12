@@ -1,5 +1,6 @@
 package org.app.Controller;
 
+import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,7 +34,8 @@ public class SignInViewController {
     public void onLogInButtonClicked(ActionEvent actionEvent) {
         extractData();
 
-        int check = checkLogin();
+        HandleUserAccount handleUserAccount = new HandleUserAccount();
+        int check = handleUserAccount.checkLogIn(username, password);
 
         navigate(check);
     }
@@ -52,11 +54,16 @@ public class SignInViewController {
         } else if (check == HandleUserAccount.WRONG_PASSWORD) {
             messageLabel.setText("Wrong password");
             passwordTextField.setText("");
-        } else {
+        } else if (check == HandleUserAccount.LOG_IN_SUCCESS){
             // login success
             messageLabel.setText("Login successful!");
             try {
                 switchToUserPanel();
+            } catch (IOException e) { e.printStackTrace(); }
+        } else if (check == HandleUserAccount.ADMIN) {
+            messageLabel.setText("Admin logged in");
+            try {
+                MainApp.navigateToScene("admin-view.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
@@ -69,10 +76,6 @@ public class SignInViewController {
         controller.setLabel(username);
 
         MainApp.setScene(root);
-    }
-
-    private int checkLogin() {
-        return HandleUserAccount.checkLogIn(username, password);
     }
 
     private void extractData() {
