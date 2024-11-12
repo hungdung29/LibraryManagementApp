@@ -69,13 +69,15 @@ public class SignInViewController {
     }
 
     private void switchToUserPanel() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("hello-user-view.fxml"));
-        Parent root = fxmlLoader.load();
+//        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("user-view.fxml"));
+//        Parent root = fxmlLoader.load();
+//
+//        HelloUserController controller = fxmlLoader.getController();
+//        controller.setLabel(username);
+//
+//        MainApp.setScene(root);
 
-        HelloUserController controller = fxmlLoader.getController();
-        controller.setLabel(username);
-
-        MainApp.setScene(root);
+        MainApp.navigateToScene("user-view.fxml");
     }
 
     private void extractData() {
