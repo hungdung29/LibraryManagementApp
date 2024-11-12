@@ -2,6 +2,7 @@ module org.app {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.base;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -16,5 +17,6 @@ module org.app {
     opens org.app to javafx.fxml;
     exports org.app;
     exports org.app.Controller;
+    exports org.app.Object;
     opens org.app.Controller to javafx.fxml;
 }

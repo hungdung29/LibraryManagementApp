@@ -1,7 +1,5 @@
 package org.app.AppNavigator;
 
-import java.util.Scanner;
-
 public class NormUser extends User {
     public NormUser() {
         super();
