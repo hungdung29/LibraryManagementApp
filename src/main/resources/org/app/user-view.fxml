@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<TabPane prefHeight="400.0" prefWidth="600.0" side="LEFT" xmlns="http://javafx.com/javafx/17.0.12"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController">
+<TabPane fx:id="userTabPane" prefHeight="400.0" prefWidth="600.0" side="LEFT" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController">
 
     <Tab fx:id="user_info" text="User information">
-        <fx:include source="user-info-view.fxml"/>
+        <fx:include source="user-info-view.fxml" />
     </Tab>
 
     <Tab fx:id="borrow_book" text="Borrow book">
-        <fx:include source="borrow-book-view.fxml"/>
+        <fx:include source="book-view.fxml" />
     </Tab>
 
     <Tab fx:id="return_book" text="Return book">
-        <fx:include source="return-book-view.fxml"/>
+        <fx:include source="book-view.fxml" />
     </Tab>
 
-    <Tab text="Chatbot"/>
+    <Tab text="Chatbot" />
 </TabPane>
