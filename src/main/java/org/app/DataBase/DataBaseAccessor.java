@@ -20,7 +20,7 @@ abstract public class DataBaseAccessor {
         }
     }
 
-    public static void checkTable(String tableName,String query) {
+    public static void checkTable(String tableName, String query) {
         Statement statement = null;
         Connection connect = null;
         try {

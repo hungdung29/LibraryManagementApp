@@ -26,7 +26,7 @@ public class LoginPanel extends DataBaseAccessor {
 
         userType = USER_NOT_FOUND;
 
-        connect();
+        Connect();
 
         while (!exit && userType == USER_NOT_FOUND)       navigate();
     }

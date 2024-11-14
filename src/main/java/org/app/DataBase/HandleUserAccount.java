@@ -21,7 +21,7 @@ public class HandleUserAccount extends DataBaseAccessor {
      * @return type of user
      */
     public int checkLogIn(String username, String password) {
-        connect();
+        Connect();
         if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
 
         // check user account info in database
@@ -30,7 +30,7 @@ public class HandleUserAccount extends DataBaseAccessor {
     }
 
     public void addAccount(String username, String password) {
-        connect();
+        Connect();
         // add account to database
     }
 
