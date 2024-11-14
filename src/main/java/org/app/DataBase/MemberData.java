@@ -2,10 +2,11 @@ package org.app.DataBase;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.app.Object.Book;
 import org.app.Object.Member;
 
 public class MemberData extends DataBaseAccessor {
-    private final ObservableList<Member> members;
+    private static ObservableList<Member> members;
 
     public MemberData() {
         connect();
@@ -13,15 +14,18 @@ public class MemberData extends DataBaseAccessor {
         getMembersInfo();
     }
 
-    public ObservableList<Member> getMembers() {
+    public static ObservableList<Member> getMembers() {
         return members;
     }
 
     private void getMembersInfo() {
         // sql query
-        members.add(new Member("tho", "00011", "Vinh Phuc", 12));
-        members.add(new Member("phan", "120200254", "Vinh Tuong", 1));
-        members.add(new Member("ba", "35425234", "Ngu Kien", 2));
-        members.add(new Member("test", "1252346", "sfgdfh", 21));
+
+        Book testBook = new Book("De men phieu luu ky", "To Hoai", "123 hihi", "NXB Kim Dong");
+        ObservableList<Book> test = FXCollections.observableArrayList(testBook);
+        members.add(new Member("tho", "00011", "Vinh Phuc", test));
+        members.add(new Member("phan", "120200254", "Vinh Tuong", test));
+        members.add(new Member("ba", "35425234", "Ngu Kien", test));
+        members.add(new Member("test", "1252346", "sfgdfh", test));
     }
 }
