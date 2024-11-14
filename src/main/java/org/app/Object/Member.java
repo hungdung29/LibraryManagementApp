@@ -9,7 +9,7 @@ public class Member {
     private String address;
     ObservableList<Book> listOfBorrowedBooks;
 
-    public Member(String username, String phoneNumber, String address, ObservableList<Book> listOfBorrowedBooks) {
+    public Member(String username, String phoneNumber, String address) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.address = address;

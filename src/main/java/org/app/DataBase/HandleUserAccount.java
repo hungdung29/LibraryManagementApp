@@ -10,7 +10,7 @@ public class HandleUserAccount extends DataBaseAccessor {
      * Check whether username is existed in database
      */
     private boolean isUsernameExist(String username) {
-        connect();
+        Connect();
         return true;
     }
 
