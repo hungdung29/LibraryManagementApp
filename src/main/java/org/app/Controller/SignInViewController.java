@@ -1,6 +1,5 @@
 package org.app.Controller;
 
-import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,13 +53,13 @@ public class SignInViewController {
         } else if (check == HandleUserAccount.WRONG_PASSWORD) {
             messageLabel.setText("Wrong password");
             passwordTextField.setText("");
-        } else if (check == HandleUserAccount.LOG_IN_SUCCESS){
+        } else if (check == HandleUserAccount.NORM_USER_LOG_IN_SUCCESS){
             // login success
             messageLabel.setText("Login successful!");
             try {
                 switchToUserPanel();
             } catch (IOException e) { e.printStackTrace(); }
-        } else if (check == HandleUserAccount.ADMIN) {
+        } else if (check == HandleUserAccount.ADMIN_LOG_IN_SUCCESS) {
             messageLabel.setText("Admin logged in");
             try {
                 MainApp.navigateToScene("admin-view.fxml");
@@ -69,16 +68,14 @@ public class SignInViewController {
     }
 
     private void switchToUserPanel() throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("user-view.fxml"));
-//        Parent root = fxmlLoader.load();
-//
-//        HelloUserController controller = fxmlLoader.getController();
-//        controller.setLabel(username);
-//
-//        MainApp.setScene(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("user-view.fxml"));
+        Parent root = fxmlLoader.load();
 
-        MainApp.navigateToScene("user-view.fxml");
-        //MainApp.navigateToScene("user-view.fxml");
+        UserController controller = fxmlLoader.getController();
+        controller.setUsername(username);
+
+        MainApp.setScene(root);
+//        MainApp.navigateToScene("user-view.fxml");
     }
 
     private void extractData() {
