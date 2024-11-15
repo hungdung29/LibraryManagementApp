@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.app.DataBase.UserData;
 import org.app.MainApp;
+import org.app.Object.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,8 +24,12 @@ public class UserInfoController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usernameLabel.setText("Username: " + SignInViewController.username);
+        User user = UserData.getUserInfo(SignInViewController.username);
 
+        usernameLabel.setText("Username: " + user.getUsername());
+        addressLabel.setText("Address: " + user.getAddress());
+        nameLabel.setText("Name: " + user.getName());
+        phoneLabel.setText("Phone Number: " + user.getPhoneNumber());
     }
 
     public void onChangePassButtonClicked(ActionEvent actionEvent) {

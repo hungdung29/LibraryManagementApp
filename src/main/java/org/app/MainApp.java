@@ -19,12 +19,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         DataBaseAccessor.connect();
-
-        //---------
         CreateDataBase.createDatabase();
-        CreateDataBase.addSample();
-        CreateDataBase.showSample();
-        //----------
 
         currentStage = stage;
         navigateToScene("hello-view.fxml");
