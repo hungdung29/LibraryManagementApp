@@ -1,13 +1,18 @@
 package org.app.DataBase;
 
-// statement to create database in this file.
-// Call 1 time, but it is necessary for put it here.
-
 import org.app.Object.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+// TODO:
+// create database
+// insert sample data
+
+// method
+// createDatabase
+// addSample
 
 public class CreateDataBase extends DataBaseAccessor {
     public static void createDatabase() {
