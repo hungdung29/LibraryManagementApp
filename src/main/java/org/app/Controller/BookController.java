@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import org.app.DataBase.BookData;
 import org.app.Object.Book;
 
 import java.util.function.Predicate;
@@ -28,32 +29,22 @@ abstract public class BookController {
     public TableColumn<Book, Integer> remainingColumn;
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
-//        FilteredList<Book> filteredList = new FilteredList<>(data, p -> true);
-//        searchTextField.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
-//            filteredList.setPredicate((Predicate<? super Book>) book -> {
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                String lowerCaseFilter = newValue.toLowerCase();
-//                if (book.getBookISBN().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true;
-//                }
-//                if (book.getTitle().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true;
-//                }
-//                if (book.getAuthor().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true;
-//                }
-//                if (book.getPublisher().toLowerCase().contains(lowerCaseFilter)) {
-//                    return true;
-//                }
-//                bookTableView.setPlaceholder(new Text("No record match your search"));
-//                return false;
-//            });
-//            SortedList<Book> sortedList = new SortedList<>(filteredList);
-//            sortedList.comparatorProperty().bind(bookTableView.comparatorProperty());
-//            bookTableView.getItems().setAll(sortedList);
-//        });
+        String keyword = searchTextField.getText();
+        BookData.getDataAllBook(books);
+        if (keyword == null || keyword.isEmpty()) {
+            return;
+        }
+        for (Book book : books) {
+            if (book.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                continue;
+            } else if (book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
+                continue;
+            } else if (book.getIsbn().toLowerCase().contains(keyword.toLowerCase())) {
+                continue;
+            } else {
+                books.remove(book);
+            }
+        }
     }
 
     protected void configTable() {

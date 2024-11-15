@@ -24,10 +24,13 @@ public class BorrowBookController extends BookController implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // set up column for table
         configTable();
 
+        // pass data to books
         BookData.getDataAllBook(books);
-        
+
+        // set content of book table
         bookTable.setItems(books);
     }
 
