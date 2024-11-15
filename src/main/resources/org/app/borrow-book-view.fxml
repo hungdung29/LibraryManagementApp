@@ -3,27 +3,27 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.5373790677220757" prefHeight="488.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowBookController">
+<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowBookController">
     <VBox prefHeight="200.0" prefWidth="100.0">
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox prefHeight="15.0" prefWidth="401.0">
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
             <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
         </HBox>
-        <TableView fx:id="bookTable" prefHeight="583.0" prefWidth="363.0">
+        <TableView fx:id="bookTable" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
-                <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
-                <TableColumn fx:id="isbnBorrowColumn" prefWidth="75.0" text="ISBN" />
-                <TableColumn fx:id="remainingColumn" prefWidth="75.0" text="Remaining" />
+                <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
+                <TableColumn fx:id="authorColumn" prefWidth="102.0" text="Author" />
+                <TableColumn fx:id="isbnBorrowColumn" prefWidth="107.0" text="ISBN" />
+                <TableColumn fx:id="remainingColumn" prefWidth="62.0" text="Remaining" />
             </columns>
         </TableView>
     </VBox>
-    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
         <Label fx:id="titleBookDetailLabel" text="Title:" />
         <Label fx:id="publisherDetailLabel" text="Publisher" />
         <Label fx:id="descripDetailLabel" text="Description:" />
         <Label text="Comment:" />
-        <ListView fx:id="commentList" prefHeight="346.0" prefWidth="260.0" />
+        <ListView fx:id="commentList" fixedCellSize="24.0" prefHeight="346.0" prefWidth="260.0" />
         <Button fx:id="borrowButton" mnemonicParsing="false" onAction="#onBorrowButtonClicked" text="Borrow" />
     </VBox>
 </SplitPane>

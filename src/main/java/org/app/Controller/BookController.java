@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.app.DataBase.BookData;
 import org.app.Object.Book;
@@ -20,21 +21,28 @@ abstract public class BookController {
     public TextField searchTextField;
     public Button searchButton;
 
-    protected ObservableList<Book> books = FXCollections.observableArrayList();
-
     public TableView<Book> bookTable;
     public TableColumn<Book, String> titleColumn;
     public TableColumn<Book, String> authorColumn;
     public TableColumn<Book, String> isbnBorrowColumn;
     public TableColumn<Book, Integer> remainingColumn;
 
+    // entire Books. Distinguish from borrow books and borrowed books
+    protected ObservableList<Book> entireBooks = FXCollections.observableArrayList();
+    // showed Books. Books are shown when search
+    protected ObservableList<Book> shownBooks = FXCollections.observableArrayList();
+
+    public VBox infoBookVBox;
+
     public void onSearchButtonClicked(ActionEvent actionEvent) {
         String keyword = searchTextField.getText();
-        BookData.getDataAllBook(books);
+        // restore shown books = entire book
+        cloneListBook();
+
         if (keyword == null || keyword.isEmpty()) {
             return;
         }
-        for (Book book : books) {
+        for (Book book : shownBooks) {
             if (book.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
                 continue;
             } else if (book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
@@ -42,11 +50,29 @@ abstract public class BookController {
             } else if (book.getIsbn().toLowerCase().contains(keyword.toLowerCase())) {
                 continue;
             } else {
-                books.remove(book);
+                shownBooks.remove(book);
             }
         }
     }
 
+    /**
+     * Handle selection book
+     * @param username username
+     * @param book book need to show inform or more
+     */
+    abstract public void handleBookSelection(String username, Book book);
+
+    /**
+     * copy book in entireBooks to shownBooks
+     */
+    protected void cloneListBook() {
+        shownBooks.clear();
+        shownBooks.addAll(entireBooks);
+    }
+
+    /**
+     * config column for table
+     */
     protected void configTable() {
         bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
