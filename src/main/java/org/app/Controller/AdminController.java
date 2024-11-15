@@ -1,33 +1,25 @@
 package org.app.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import org.app.DataBase.MemberData;
-import org.app.Object.Member;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import org.app.Object.User;
 
 public class AdminController
 //        implements Initializable
 {
     public Tab memberTab;
     @FXML
-    private TableView<Member> memberTable;
+    private TableView<User> memberTable;
     @FXML
-    private TableColumn<Member, String> nameColumn;
+    private TableColumn<User, String> nameColumn;
     @FXML
-    private TableColumn<Member, String> phoneNumberColumn;
+    private TableColumn<User, String> phoneNumberColumn;
     @FXML
-    private TableColumn<Member, String> addressColumn;
+    private TableColumn<User, String> addressColumn;
     @FXML
-    private TableColumn<Member, Integer> nBorrowedColumn;
+    private TableColumn<User, Integer> nBorrowedColumn;
 
 //    @Override
 //    public void initialize(URL url, ResourceBundle resourceBundle) {

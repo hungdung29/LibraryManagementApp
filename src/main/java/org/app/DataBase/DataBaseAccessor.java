@@ -5,52 +5,28 @@ import java.sql.*;
 import org.sqlite.SQLiteConfig;
 
 abstract public class DataBaseAccessor {
-    public static Connection Connect(){
+    protected static Connection connection;
+    protected static final String url = "jdbc:sqlite:Library.db";
+
+    // Method to connect to the SQLite database
+    public static void connect() {
         try {
-            Class.forName("org.sqlite.JDBC");
-            SQLiteConfig configuration = new SQLiteConfig();
-            configuration.enforceForeignKeys(true);
-            configuration.setBusyTimeout(Integer.parseInt(String.valueOf(900000)));
-            Connection connect = DriverManager.getConnection("jdbc:sqlite:Library.db",
-                    configuration.toProperties());
-            return connect;
-        } catch (SQLException | ClassNotFoundException e) {
-            System.err.println(e);
-            return null;
+            connection = DriverManager.getConnection(url);
+            System.out.println("Connection to SQLite has been established.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public static void checkTable(String tableName, String query) {
-        Statement statement = null;
-        Connection connect = null;
+    // Method to disconnect from the SQLite database
+    public static void disconnect() {
         try {
-            connect = Connect();
-            DatabaseMetaData metaData = connect.getMetaData();
-            ResultSet rs = metaData.getTables(null, null, tableName, null);
-            if (rs.next()) {
-            } else {
-                statement = connect.createStatement();
-                statement.execute(query);
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("Connection to SQLite has been closed.");
             }
         } catch (SQLException e) {
-            System.err.println(e);
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-
-    public void disconnect() throws SQLException {
-        if (Connect() != null) {
-            Connect().close();
+            System.out.println(e.getMessage());
         }
     }
 }

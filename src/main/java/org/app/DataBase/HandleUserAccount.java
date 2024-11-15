@@ -9,8 +9,10 @@ public class HandleUserAccount extends DataBaseAccessor {
     /**
      * Check whether username is existed in database
      */
-    private boolean isUsernameExist(String username) {
-        Connect();
+    private static boolean isUsernameExist(String username) {
+//        connect();
+
+
         return true;
     }
 
@@ -20,8 +22,8 @@ public class HandleUserAccount extends DataBaseAccessor {
      * @param password pw
      * @return type of user
      */
-    public int checkLogIn(String username, String password) {
-        Connect();
+    public static int checkLogIn(String username, String password) {
+//        connect();
         if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
 
         // check user account info in database
@@ -29,12 +31,12 @@ public class HandleUserAccount extends DataBaseAccessor {
         return NORM_USER_LOG_IN_SUCCESS;
     }
 
-    public void addAccount(String username, String password) {
-        Connect();
+    public static void addAccount(String username, String password) {
+//        connect();
         // add account to database
     }
 
-    public boolean checkValidAccount(String username, String password, String cfPwText) {
+    public static boolean checkValidAccount(String username, String password, String cfPwText) {
         if (isUsernameExist(username)) {
             return false;
         }

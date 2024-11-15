@@ -19,7 +19,8 @@ public class SignInViewController {
     public Label messageLabel;
     public Button backButton;
 
-    private String username;
+    public static String username = "default";
+//    private String username;
     private String password;
 
     /**
@@ -33,8 +34,7 @@ public class SignInViewController {
     public void onLogInButtonClicked(ActionEvent actionEvent) {
         extractData();
 
-        HandleUserAccount handleUserAccount = new HandleUserAccount();
-        int check = handleUserAccount.checkLogIn(username, password);
+        int check = HandleUserAccount.checkLogIn(SignInViewController.username, password);
 
         navigate(check);
     }
@@ -68,18 +68,18 @@ public class SignInViewController {
     }
 
     private void switchToUserPanel() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("user-view.fxml"));
-        Parent root = fxmlLoader.load();
-
-        UserController controller = fxmlLoader.getController();
-        controller.setUsername(username);
-
-        MainApp.setScene(root);
-//        MainApp.navigateToScene("user-view.fxml");
+//        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("user-view.fxml"));
+//        Parent root = fxmlLoader.load();
+//
+//        UserController controller = fxmlLoader.getController();
+//        controller.setUsername(username);
+//
+//        MainApp.setScene(root);
+        MainApp.navigateToScene("user-view.fxml");
     }
 
     private void extractData() {
-        username = usernameTextField.getText();
+        SignInViewController.username = usernameTextField.getText();
         password = passwordTextField.getText();
     }
 

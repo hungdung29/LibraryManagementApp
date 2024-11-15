@@ -3,19 +3,26 @@ package org.app.Object;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Member {
+public class User {
     private String username;
     private String name;
     private String phoneNumber;
     private String address;
-    ObservableList<Book> listOfBorrowedBooks;
+//    ObservableList<Book> listOfBorrowedBooks;
 
-    public Member(String username, String name, String phoneNumber, String address) {
+    public User(String username, String name, String phoneNumber, String address) {
         this.username = username;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.listOfBorrowedBooks = FXCollections.observableArrayList();
+//        this.listOfBorrowedBooks = FXCollections.observableArrayList();
+    }
+
+    public User() {
+        this.username = "nan";
+        this.name = "nan";
+        this.phoneNumber = "nan";
+        this.address = "nan";
     }
 
     public String getUsername() {
@@ -34,7 +41,7 @@ public class Member {
         return address;
     }
 
-    public ObservableList<Book> getListOfBorrowedBooks() {
-        return listOfBorrowedBooks;
-    }
+//    public ObservableList<Book> getListOfBorrowedBooks() {
+//        return listOfBorrowedBooks;
+//    }
 }
