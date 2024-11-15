@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.app.DataBase.CreateDataBase;
+import org.app.DataBase.DataBaseAccessor;
 
 import java.io.IOException;
 
@@ -16,6 +18,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        DataBaseAccessor.connect();
+        CreateDataBase.createDatabase();
+
         currentStage = stage;
         navigateToScene("hello-view.fxml");
         stage.show();

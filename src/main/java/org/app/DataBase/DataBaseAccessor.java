@@ -4,18 +4,28 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 abstract public class DataBaseAccessor {
-    public Connection connection;
+    protected static Connection connection;
+    protected static final String url = "jdbc:sqlite:Library.db";
 
-    /**
-     * Connect to database
-     */
-    public void connect() {
-        return;
+    // Method to connect to the SQLite database
+    public static void connect() {
+        try {
+            connection = DriverManager.getConnection(url);
+            System.out.println("Connection to SQLite has been established.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void disconnect() throws SQLException {
-        if (connection != null) {
-            connection.close();
+    // Method to disconnect from the SQLite database
+    public static void disconnect() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("Connection to SQLite has been closed.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
