@@ -36,7 +36,7 @@
    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <children>
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " />
-         <TextField />
+         <TextField fx:id="nameText"/>
       </children>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

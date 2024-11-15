@@ -14,14 +14,11 @@ import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 
 public class SignUpViewController {
-    public PasswordField pwText;
     @FXML
-    private TextField usernameText;
-    private PasswordField passwordField;
-    private PasswordField confirmPasswordField;
-    private TextField nameField;
-    private TextField phoneNumber;
-    private TextField address;
+    public TextField usernameText;
+    public PasswordField pwText;
+    public PasswordField cfPwText;
+    public TextField nameText;
     public Button signUpButton;
     public Label messageLabel;
     public Button backButton;
@@ -29,17 +26,7 @@ public class SignUpViewController {
     private String username;
     private String password;
     private String confirmPassword;
-
-    public void initialize() {
-        usernameText.setUserData("username");
-        passwordField.setUserData("password");
-        confirmPasswordField.setUserData("confirmPassword");
-        nameField.setUserData("name");
-        phoneNumber.setUserData("phoneNumber");
-        address.setUserData("address");
-
-
-    }
+    private String name;
 
     private void requestFocus(TextField field) {
         field.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -56,7 +43,7 @@ public class SignUpViewController {
         extract();
 
         if (handleUserAccount.checkValidAccount(username, password, confirmPassword)) {
-            handleUserAccount.addAccount(username, password);
+            handleUserAccount.addAccount(username, password, name);
 
             try {
 //                MainApp.navigateToScene("hello-view.fxml");
@@ -73,8 +60,8 @@ public class SignUpViewController {
         } else {
             messageLabel.setText("Invalid username or password");
             usernameText.setText("");
-            passwordField.setText("");
-            confirmPasswordField.setText("");
+            pwText.setText("");
+            cfPwText.setText("");
         }
     }
 
@@ -86,7 +73,8 @@ public class SignUpViewController {
 
     private void extract() {
         username = usernameText.getText();
-        password = passwordField.getText();
-        confirmPassword = confirmPasswordField.getText();
+        password = pwText.getText();
+        confirmPassword = cfPwText.getText();
+        name = nameText.getText();
     }
 }

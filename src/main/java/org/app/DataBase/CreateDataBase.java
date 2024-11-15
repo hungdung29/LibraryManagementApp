@@ -9,10 +9,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// TODO:
+// create database
+// insert sample data
+// method
+// createDatabase
+// addSample
+
 public class CreateDataBase extends DataBaseAccessor {
     public static void createDatabase() {
-        String sql = """
-            CREATE TABLE IF NOT EXISTS book (
+        String query1 = """
+            CREATE TABLE IF NOT EXISTS books (
                 idBook INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
                 author TEXT,
@@ -20,12 +27,14 @@ public class CreateDataBase extends DataBaseAccessor {
                 price REAL,
                 content TEXT,
                 catalog TEXT,
-                IBNS INTEGER NOT NULL UNIQUE,
+                ISBN INTEGER NOT NULL UNIQUE,
                 publisher TEXT DEFAULT 'NXB GD',
                 remaining INTEGER NOT NULL,
                 image_path TEXT
             );
-            CREATE TABLE IF NOT EXISTS user (
+            """;
+        String query2 = """
+            CREATE TABLE IF NOT EXISTS users (
                 id_user INTEGER PRIMARY KEY AUTOINCREMENT,
                 Name TEXT NOT NULL,
                 accountName TEXT NOT NULL UNIQUE,
@@ -35,6 +44,8 @@ public class CreateDataBase extends DataBaseAccessor {
                 gmail TEXT,
                 birthday TEXT
             );
+            """;
+        String query3 = """        
             CREATE TABLE IF NOT EXISTS borrows (
                id_borrow INTEGER PRIMARY KEY AUTOINCREMENT,
                date_borrow DATE NOT NULL,
@@ -49,16 +60,17 @@ public class CreateDataBase extends DataBaseAccessor {
 
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
-            stmt.execute(sql);
+            stmt.execute(query2);
             System.out.println("Database has been created.");
+            addSample();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public static void addSample() {
-        String sql = """
-            INSERT INTO book (title, author, description, price, content, catalog, IBNS, publisher, remaining) VALUES
+        String query1 = """
+            INSERT INTO books (title, author, description, price, content, catalog, ISBN, publisher, remaining) VALUES
             ('The Lord of the Rings', 'J.R.R. Tolkien', 'An epic fantasy adventure', 29.99, '...', 'Fantasy', '9780547991000', 'HarperCollins', 10),
             ('Pride and Prejudice', 'Jane Austen', 'A timeless love story', 14.99, '...', 'Romance', '9780141439501', 'Penguin Books', 15),
             ('To Kill a Mockingbird', 'Harper Lee', 'A classic tale of injustice', 12.99, '...', 'Fiction', '9780061120002', 'HarperCollins', 8),
@@ -79,7 +91,9 @@ public class CreateDataBase extends DataBaseAccessor {
             ('The 48 Laws of Power', 'Robert Greene', 'A book on power and manipulation', 15.99, '...', 'Non-Fiction', '9780140280117', 'Viking', 14),
             ('The Prince', 'Niccolò Machiavelli', 'A political philosophy book', 12.99, '...', 'Non-Fiction', '9780140444218', 'Penguin Books', 16),
             ('The Art of Seduction', 'Robert Greene', 'A book on seduction and persuasion', 15.99, '...', 'Non-Fiction', '9780140280119', 'Viking', 11);
-            INSERT INTO user (Name, accountName, password, phoneNumber, address, gmail, birthday) VALUES
+            """;
+        String query2 = """
+            INSERT INTO users (Name, accountName, password, phoneNumber, address, gmail, birthday) VALUES
             ('John Doe', 'johndoe123', 'password123', '123-456-7890', '123 Main St, Anytown, CA 12345', 'johndoe@example.com', '1990-01-01'),
             ('Jane Smith', 'janesmith456', 'password456', '456-789-0123', '456 Elm St, Anytown, CA 12345', 'janesmith@example.com', '1992-02-02'),
             ('Michael Johnson', 'michaeljohnson789', 'password789', '789-012-3456', '789 Oak St, Anytown, CA 12345', 'michaeljohnson@example.com', '1988-03-03'),
@@ -90,6 +104,8 @@ public class CreateDataBase extends DataBaseAccessor {
             ('Olivia Taylor', 'oliviataylor234', 'password234', '234-567-8901', '234 Maple St, Anytown, CA 12345', 'oliviataylor@example.com', '1993-08-08'),
             ('Ethan Nguyen', 'ethannnguyen567', 'password567', '567-890-1234', '567 Birch St, Anytown, CA 12345', 'ethannnguyen@example.com', '1996-09-09'),
             ('Sophia Rodriguez', 'sophiarodriguez890', 'password890', '890-123-4567', '890 Oak St, Anytown, CA 12345', 'sophiarodriguez@example.com', '1999-10-10');
+            """;
+        String query3 = """
             INSERT INTO borrows (date_borrow, date_give_back, book_idBook, user_id_user, comment) VALUES
             ('2023-11-15', NULL, 1, 1, NULL),
             ('2023-11-16', NULL, 2, 2, NULL),
@@ -115,7 +131,7 @@ public class CreateDataBase extends DataBaseAccessor {
 
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
-            stmt.execute(sql);
+            stmt.execute(query2);
             System.out.println("Insert successful.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
