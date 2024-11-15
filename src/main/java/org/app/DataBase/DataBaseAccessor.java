@@ -1,8 +1,7 @@
 package org.app.DataBase;
 
-import java.sql.*;
-
-import org.sqlite.SQLiteConfig;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 abstract public class DataBaseAccessor {
     protected static Connection connection;

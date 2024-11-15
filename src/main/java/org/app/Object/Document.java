@@ -1,7 +1,7 @@
 package org.app.Object;
 
 public abstract class Document {
-
+    private 
     private String title;
     private String author;
     private String documentID;

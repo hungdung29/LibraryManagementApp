@@ -1,58 +1,33 @@
 package org.app.Controller;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 
 public class SignUpViewController {
-    private TextField usernameText;
-    private PasswordField passwordField;
-    private PasswordField confirmPasswordField;
-    private TextField nameField;
-    private TextField phoneNumber;
-    private TextField address;
+    public TextField usernameText;
+    public PasswordField pwText;
+    public PasswordField cfPwText;
     public Button signUpButton;
     public Label messageLabel;
     public Button backButton;
 
     private String username;
     private String password;
-    private String confirmPassword;
-
-    public void initialize() {
-        usernameText.setUserData("username");
-        passwordField.setUserData("password");
-        confirmPasswordField.setUserData("confirmPassword");
-        nameField.setUserData("name");
-        phoneNumber.setUserData("phoneNumber");
-        address.setUserData("address");
-
-
-    }
-
-    private void requestFocus(TextField field) {
-        field.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-
-            }
-        });
-    }
+    private String cfPw;
 
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
         HandleUserAccount handleUserAccount = new HandleUserAccount();
 
         extract();
 
-        if (handleUserAccount.checkValidAccount(username, password, confirmPassword)) {
+        if (handleUserAccount.checkValidAccount(username, password, cfPw)) {
             handleUserAccount.addAccount(username, password);
 
             try {
@@ -70,8 +45,8 @@ public class SignUpViewController {
         } else {
             messageLabel.setText("Invalid username or password");
             usernameText.setText("");
-            passwordField.setText("");
-            confirmPasswordField.setText("");
+            pwText.setText("");
+            cfPwText.setText("");
         }
     }
 
@@ -83,7 +58,7 @@ public class SignUpViewController {
 
     private void extract() {
         username = usernameText.getText();
-        password = passwordField.getText();
-        confirmPassword = confirmPasswordField.getText();
+        password = pwText.getText();
+        cfPw = cfPwText.getText();
     }
 }
