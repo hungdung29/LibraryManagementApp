@@ -62,3 +62,41 @@ CREATE TABLE IF NOT EXISTS `library`.`borrows` (
     REFERENCES `library`.`user` (`id_user`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
+
+
+
+CREATE TABLE IF NOT EXISTS book (
+                                    idBook INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    title TEXT NOT NULL,
+                                    author TEXT,
+                                    description TEXT,
+                                    price REAL,
+                                    content TEXT,
+                                    catalog TEXT,
+                                    IBNS INTEGER NOT NULL UNIQUE,
+                                    publisher TEXT DEFAULT 'NXB GD',
+                                    remaining INTEGER NOT NULL,
+                                    image_path TEXT
+);
+
+CREATE TABLE IF NOT EXISTS user (
+                                    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    Name TEXT NOT NULL,
+                                    accountName TEXT NOT NULL UNIQUE,
+                                    password TEXT NOT NULL,
+                                    phoneNumber TEXT NOT NULL,
+                                    address TEXT NOT NULL,
+                                    gmail TEXT,
+                                    birthday TEXT
+);
+
+CREATE TABLE IF NOT EXISTS borrows (
+                                       id_borrow INTEGER PRIMARY KEY AUTOINCREMENT,
+                                       date_borrow DATE NOT NULL,
+                                       date_give_back DATE,
+                                       book_idBook INTEGER NOT NULL,
+                                       user_id_user INTEGER NOT NULL,
+                                       comment TEXT,
+                                       FOREIGN KEY (book_idBook) REFERENCES book(idBook),
+    FOREIGN KEY (user_id_user) REFERENCES user(id_user)
+    );

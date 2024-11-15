@@ -1,43 +1,91 @@
 package org.app.Object;
 
-public class Book extends Document {
+public class Book {
+    private String title;
+    private String author;
+    private String isbn;
+    private String description;
+    private String content;
+    private double price;
+    private String image_path;
+    private int remaining;
     private String publisher;
 
-    public Book(String title, String author, String documentID, String publisher) {
-        super(title, author, documentID);
+    public Book(String title, String author, String isbn,
+                String description, String content, double price,
+                String image_path, int remaining, String publisher) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.description = description;
+        this.content = content;
+        this.price = price;
+        this.image_path = image_path;
+        this.remaining = remaining;
         this.publisher = publisher;
+    }
+
+    public Book(String title, String author, String isbn,  int remaining) {
+        this.isbn = isbn;
+        this.author = author;
+        this.title = title;
+        this.remaining = remaining;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public String getTitle() {
-        return super.getTitle();
+        return title;
     }
 
     public void setTitle(String title) {
-        super.setTitle(title);
+        this.title = title;
     }
 
     public String getAuthor() {
-        return super.getAuthor();
+        return author;
     }
 
-    public void setBookAuthor(String author) {
-        super.setAuthor(author);
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    public String getBookISBN() {
-        return super.getDocumentID();
+    public String getDescription() {
+        return description;
     }
 
-    public void setBookISBN(String isbn) {
-        super.setDocumentID(isbn);
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
     }
 
     public int getRemaining() {
@@ -46,5 +94,13 @@ public class Book extends Document {
 
     public void setRemaining(int remaining) {
         this.remaining = remaining;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

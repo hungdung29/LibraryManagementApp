@@ -2,6 +2,7 @@ package org.app.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -13,6 +14,8 @@ import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 
 public class SignUpViewController {
+    public PasswordField pwText;
+    @FXML
     private TextField usernameText;
     private PasswordField passwordField;
     private PasswordField confirmPasswordField;
