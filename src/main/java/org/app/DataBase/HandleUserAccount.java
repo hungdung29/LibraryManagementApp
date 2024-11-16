@@ -108,4 +108,18 @@ public class HandleUserAccount extends DataBaseAccessor {
 
         return true;
     }
+
+    public static void changePassword(String username, String newPassword) {
+        PreparedStatement preparedStatement;
+        String query = "UPDATE users SET password = ? WHERE accountName = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, username);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -18,6 +18,7 @@ public class UserData extends DataBaseAccessor {
             if (resultSet.next()) {
                 user.setName(resultSet.getString("Name"));
                 user.setUsername(resultSet.getString("accountName"));
+                user.setPassword(resultSet.getString("password"));
                 user.setAddress(resultSet.getString("address"));
                 user.setPhoneNumber(resultSet.getString("phoneNumber"));
             }
