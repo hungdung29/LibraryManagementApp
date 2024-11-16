@@ -60,9 +60,11 @@ public class CreateDataBase extends DataBaseAccessor {
 
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
+            stmt.execute(query1);
             stmt.execute(query2);
+            stmt.execute(query3);
+
             System.out.println("Database has been created.");
-            addSample();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -131,7 +133,10 @@ public class CreateDataBase extends DataBaseAccessor {
 
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
+            stmt.execute(query1);
             stmt.execute(query2);
+            stmt.execute(query3);
+
             System.out.println("Insert successful.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());

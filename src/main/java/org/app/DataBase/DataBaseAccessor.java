@@ -9,14 +9,12 @@ abstract public class DataBaseAccessor {
     protected static final String url = "jdbc:sqlite:Library.db";
 
     // Method to connect to the SQLite database
-    public static Connection connect() {
+    public static void connect() {
         try {
             connection = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
-            return connection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
         }
     }
 

@@ -2,6 +2,7 @@ package org.app.DataBase;
 
 import org.app.Object.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,27 +10,26 @@ public class UserData extends DataBaseAccessor {
     public static User getUserInfo(String username) {
         User user = new User();
 
-//        String sql = """
-//            CREATE TABLE IF NOT EXISTS example_table (
-//                id INTEGER PRIMARY KEY AUTOINCREMENT,
-//                name TEXT NOT NULL,
-//                age INTEGER
-//            );
-//        """;
-//
-//        try (Statement stmt = connection.createStatement()) {
-//            // Execute the SQL statement
-//            stmt.execute(sql);
-//            System.out.println("Table 'example_table' has been created.");
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM users WHERE accountName = '" + username + "'";
+            ResultSet resultSet = statement.executeQuery(query);
 
-        user.setName("Tho");
-        user.setUsername(username);
-        user.setAddress("Vinh Phuc");
-        user.setPhoneNumber("124123");
+            if (resultSet.next()) {
+                user.setName(resultSet.getString("Name"));
+                user.setUsername(resultSet.getString("accountName"));
+                user.setAddress(resultSet.getString("address"));
+                user.setPhoneNumber(resultSet.getString("phoneNumber"));
+            }
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-        return user;
+//        user.setName("Tho");
+//        user.setUsername(username);
+//        user.setAddress("Vinh Phuc");
+//        user.setPhoneNumber("124123");
     }
 }
