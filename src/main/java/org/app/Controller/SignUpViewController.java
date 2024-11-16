@@ -2,7 +2,6 @@ package org.app.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -12,41 +11,39 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
+import org.app.Object.User;
 
 public class SignUpViewController {
-    @FXML
-    public TextField usernameText;
-    public PasswordField pwText;
-    public PasswordField cfPwText;
-    public TextField nameText;
-    public Button signUpButton;
     public Label messageLabel;
+
+    public TextField usernameTextField;
+    public PasswordField passwordTextField;
+    public PasswordField confirmPasswordTextField;
+    public TextField nameTextField;
+    public TextField addressTextField;
+    public TextField phoneNumberTextField;
+
+    public Button signUpButton;
     public Button backButton;
 
     private String username;
     private String password;
     private String confirmPassword;
     private String name;
-
-    private void requestFocus(TextField field) {
-        field.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-
-            }
-        });
-    }
+    private String address;
+    private String phoneNumber;
 
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
-        HandleUserAccount handleUserAccount = new HandleUserAccount();
+        if ( !extractData() ) {
+            messageLabel.setText("Please type in all cell");
+        }
 
-        extract();
+        if (HandleUserAccount.checkValidAccount(username, password, confirmPassword)) {
+            User user = new User(username, password, name, phoneNumber, address);
 
-        if (handleUserAccount.checkValidAccount(username, password, confirmPassword)) {
-            handleUserAccount.addAccount(username, password, name);
+            HandleUserAccount.addAccount(user);
 
             try {
-//                MainApp.navigateToScene("hello-view.fxml");
                 FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("sign-in-view.fxml"));
                 Parent root = fxmlLoader.load();
 
@@ -59,9 +56,9 @@ public class SignUpViewController {
             }
         } else {
             messageLabel.setText("Invalid username or password");
-            usernameText.setText("");
-            pwText.setText("");
-            cfPwText.setText("");
+            usernameTextField.setText("");
+            passwordTextField.setText("");
+            confirmPasswordTextField.setText("");
         }
     }
 
@@ -71,10 +68,22 @@ public class SignUpViewController {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-    private void extract() {
-        username = usernameText.getText();
-        password = pwText.getText();
-        confirmPassword = cfPwText.getText();
-        name = nameText.getText();
+    /**
+     * extract user data
+     * @return true if user have typed in enough data. Otherwise, return false
+     */
+    private boolean extractData() {
+        username = usernameTextField.getText();
+        password = passwordTextField.getText();
+        confirmPassword = confirmPasswordTextField.getText();
+        name = nameTextField.getText();
+        address = addressTextField.getText();
+        phoneNumber = phoneNumberTextField.getText();
+
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() ||
+                name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

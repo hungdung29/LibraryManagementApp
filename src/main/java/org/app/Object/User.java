@@ -5,13 +5,15 @@ import javafx.collections.ObservableList;
 
 public class User {
     private String username;
+    private String password;
     private String name;
     private String phoneNumber;
     private String address;
 //    ObservableList<Book> listOfBorrowedBooks;
 
-    public User(String username, String name, String phoneNumber, String address) {
+    public User(String username, String password, String name, String phoneNumber, String address) {
         this.username = username;
+        this.password = password;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -23,6 +25,14 @@ public class User {
         this.name = "nan";
         this.phoneNumber = "nan";
         this.address = "nan";
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {

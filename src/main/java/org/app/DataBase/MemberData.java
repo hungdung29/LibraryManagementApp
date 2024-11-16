@@ -19,9 +19,9 @@ public class MemberData extends DataBaseAccessor {
 
     private void getMembersInfo() {
         // sql query
-        members.add(new User("tho", "Thọ" ,"00011", "Vinh Phuc"));
-        members.add(new User("phan", "Phan" ,"120200254", "Vinh Tuong"));
-        members.add(new User("ba", "Bá" ,"35425234", "Ngu Kien"));
-        members.add(new User("test", "Test","1252346", "sfgdfh"));
+        members.add(new User("tho", "ttt", "Thọ" ,"00011", "Vinh Phuc"));
+        members.add(new User("phan", "ttt", "Phan" ,"120200254", "Vinh Tuong"));
+        members.add(new User("ba", "dd", "Bá" ,"35425234", "Ngu Kien"));
+        members.add(new User("test", "Test","1252346", "sfgdfh", "tt"));
     }
 }
