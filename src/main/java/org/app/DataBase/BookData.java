@@ -4,6 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.app.Object.Book;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 // TODO:
 // get book data
 // get all book in database
@@ -19,19 +22,50 @@ public class BookData extends DataBaseAccessor {
     public static void getDataAllBook(ObservableList<Book> books) {
         books.clear();
 
-        // dummy data
-        books.add(
-                new Book("book 1", "phan tho", "1111", 5)
-        );
-        //--------
+        String query = "SELECT * FROM books";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Book book = new Book(
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("ISBN"),
+                        resultSet.getString("description"),
+                        resultSet.getString("content"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("catalog"),
+                        resultSet.getString("publisher"),
+                        resultSet.getInt("remaining"),
+                        resultSet.getString("image_path")
+                );
+                books.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static ObservableList<String> getCommentOfBook(String isbn) {
         ObservableList<String> comments = FXCollections.observableArrayList();
+        comments.clear();
 
-        comments.add("nghi comment cho sach kho qua");
-        comments.add("nghi comment cho sach kho qua abc d cho cau comment that dai cho xuong dong check size cua cai list");
-        comments.add("nghi comment cho sach de qua");
+        String query2 = "SELECT * FROM comments WHERE book_ISBN = '" + isbn + "'";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query2);
+
+            while (resultSet.next()) {
+                comments.add(resultSet.getString("comment"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            }
+
+//        comments.add("nghi comment cho sach kho qua");
+//        comments.add("nghi comment cho sach kho qua abc d cho cau comment that dai cho xuong dong check size cua cai list");
+//        comments.add("nghi comment cho sach de qua");
 
         return comments;
     }

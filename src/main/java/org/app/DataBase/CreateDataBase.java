@@ -58,11 +58,22 @@ public class CreateDataBase extends DataBaseAccessor {
             );
         """;
 
+        String query4 = """
+                CREATE TABLE IF NOT EXISTS comments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book_ISBN INTEGER NOT NULL,
+                comment TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (book_ISBN) REFERENCES books (ISBN)
+        );
+        """; // add comments table
+
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
             stmt.execute(query1);
             stmt.execute(query2);
             stmt.execute(query3);
+            stmt.execute(query4);
 
             System.out.println("Database has been created.");
         } catch (SQLException e) {

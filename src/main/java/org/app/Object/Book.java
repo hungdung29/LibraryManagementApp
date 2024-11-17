@@ -6,6 +6,7 @@ public class Book {
     private String isbn;
     private String description;
     private String content;
+    private String catalog;
     private double price;
     private String image_path;
     private int remaining;
@@ -13,7 +14,7 @@ public class Book {
 
     public Book(String title, String author, String isbn,
                 String description, String content, double price,
-                String image_path, int remaining, String publisher) {
+                String image_path, String catalog, int remaining, String publisher) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -21,15 +22,9 @@ public class Book {
         this.content = content;
         this.price = price;
         this.image_path = image_path;
+        this.catalog = catalog;
         this.remaining = remaining;
         this.publisher = publisher;
-    }
-
-    public Book(String title, String author, String isbn,  int remaining) {
-        this.isbn = isbn;
-        this.author = author;
-        this.title = title;
-        this.remaining = remaining;
     }
 
     public void setContent(String content) {
@@ -86,6 +81,14 @@ public class Book {
 
     public void setImage_path(String image_path) {
         this.image_path = image_path;
+    }
+
+    public String getCatalog() {
+        return catalog;
+    }
+
+    public void setCatalog(String catalog) {
+        this.catalog = catalog;
     }
 
     public int getRemaining() {
