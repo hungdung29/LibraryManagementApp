@@ -31,14 +31,15 @@ public class BookData extends DataBaseAccessor {
                 Book book = new Book(
                         resultSet.getString("title"),
                         resultSet.getString("author"),
+                        resultSet.getInt("idBook"),
                         resultSet.getString("ISBN"),
                         resultSet.getString("description"),
                         resultSet.getString("content"),
                         resultSet.getDouble("price"),
+                        resultSet.getString("image_path"),
                         resultSet.getString("catalog"),
-                        resultSet.getString("publisher"),
                         resultSet.getInt("remaining"),
-                        resultSet.getString("image_path")
+                        resultSet.getString("publisher")
                 );
                 books.add(book);
             }
@@ -51,10 +52,13 @@ public class BookData extends DataBaseAccessor {
         ObservableList<String> comments = FXCollections.observableArrayList();
         comments.clear();
 
-        String query2 = "SELECT * FROM comments WHERE book_ISBN = '" + isbn + "'";
+//        System.out.println("id of book " + idBook);
+
+//        String query2 = "SELECT * FROM comments WHERE book_ISBN = '" + isbn + "'";
+        String query = "select * from comments where book_ISBN = " + isbn;
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query2);
+            ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
                 comments.add(resultSet.getString("comment"));

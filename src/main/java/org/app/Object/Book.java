@@ -1,6 +1,7 @@
 package org.app.Object;
 
 public class Book {
+    private int idBook;
     private String title;
     private String author;
     private String isbn;
@@ -12,11 +13,12 @@ public class Book {
     private int remaining;
     private String publisher;
 
-    public Book(String title, String author, String isbn,
+    public Book(String title, String author, int idBook, String isbn,
                 String description, String content, double price,
                 String image_path, String catalog, int remaining, String publisher) {
         this.title = title;
         this.author = author;
+        this.idBook = idBook;
         this.isbn = isbn;
         this.description = description;
         this.content = content;
@@ -25,6 +27,14 @@ public class Book {
         this.catalog = catalog;
         this.remaining = remaining;
         this.publisher = publisher;
+    }
+
+    public int getIdBook() {
+        return idBook;
+    }
+
+    public void setIdBook(int idBook) {
+        this.idBook = idBook;
     }
 
     public void setContent(String content) {

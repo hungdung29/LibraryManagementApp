@@ -69,7 +69,7 @@ public class CreateDataBase extends DataBaseAccessor {
         """; // add comments table
 
         try (Statement stmt = connection.createStatement()) {
-            // Execute the SQL statement
+//            // Execute the SQL statement
             stmt.execute(query1);
             stmt.execute(query2);
             stmt.execute(query3);
@@ -142,11 +142,26 @@ public class CreateDataBase extends DataBaseAccessor {
             ('2023-11-24', '2023-11-29', 20, 20, 'Book was returned with a stain on the cover');
         """;
 
+        String query4 = """
+            INSERT INTO comments (book_ISBN, comment, created_at) VALUES
+            ('9745391806', 'This book is a hilarious and thought-provoking sci-fi adventure.', '2023-11-19'),
+            ('9780060144115', 'A classic investment guide that has stood the test of time.', '2023-11-20'),
+            ('9780061120002', 'A powerful story about racial injustice and the human spirit.', '2023-11-21'),
+            ('9780062316807', 'A beautiful and inspiring tale of self-discovery and following your dreams.', '2023-11-22'),
+            ('9780140171509', 'A timeless classic on military strategy and tactics.', '2023-11-23'),
+            ('9780140280117', 'A fascinating exploration of power, manipulation, and seduction.', '2023-11-24'),
+            ('9780140280119', 'A deep dive into the psychology of human behavior and influence.', '2023-11-25'),
+            ('9780140444218', 'A controversial but insightful look at political power and leadership.', '2023-11-26'),
+            ('9780141439501', 'A romantic masterpiece that explores themes of love, class, and societal expectations.', '2023-11-27'),
+            ('9780307887816', 'A groundbreaking book on entrepreneurship and innovation.', '2023-11-28');
+        """;
+
         try (Statement stmt = connection.createStatement()) {
             // Execute the SQL statement
             stmt.execute(query1);
             stmt.execute(query2);
             stmt.execute(query3);
+            stmt.execute(query4);
 
             System.out.println("Insert successful.");
         } catch (SQLException e) {
