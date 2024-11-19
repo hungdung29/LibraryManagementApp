@@ -6,14 +6,27 @@ package org.app.DataBase;
 // method
 // addBorrowInfo
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class BorrowData extends DataBaseAccessor {
 
     /**
      * add borrow inform to borrow table
      * @param username user borrow
-     * @param isbn isbn of borrowed book
+     * @param idBok isbn of borrowed book
      */
-    public static void addBorrowInfo(String username, String isbn) {
+    public static void addBorrowInfo(String username, int idBok) {
+        PreparedStatement preparedStatement;
+        String query = "insert into borrows(date_borrow, book_idBook, user_username) values (date('now'), ?, ?)";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, idBok);
+            preparedStatement.setString(2, username);
 
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

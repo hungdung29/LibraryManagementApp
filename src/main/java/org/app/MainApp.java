@@ -20,6 +20,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         DataBaseAccessor.connect();
         CreateDataBase.createDatabase();
+        CreateDataBase.addSample();
 
         currentStage = stage;
         navigateToScene("hello-view.fxml");

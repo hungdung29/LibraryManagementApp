@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
@@ -76,6 +75,6 @@ public class BorrowBookController extends BookController implements Initializabl
         borrowButton.setDisable(true);
 
         // add borrow inform to database
-        BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIsbn());
+        BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
     }
 }

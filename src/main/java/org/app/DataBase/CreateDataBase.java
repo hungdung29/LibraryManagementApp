@@ -51,20 +51,22 @@ public class CreateDataBase extends DataBaseAccessor {
                date_borrow DATE NOT NULL,
                date_give_back DATE,
                book_idBook INTEGER NOT NULL,
-               user_id_user INTEGER NOT NULL,
+               user_username INTEGER NOT NULL,
                comment TEXT,
                FOREIGN KEY (book_idBook) REFERENCES book(idBook),
-               FOREIGN KEY (user_id_user) REFERENCES user(id_user)
+               FOREIGN KEY (user_username) REFERENCES user(accountName)
             );
         """;
 
         String query4 = """
                 CREATE TABLE IF NOT EXISTS comments (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_username TEXT NOT NULL,
                 book_ISBN INTEGER NOT NULL,
                 comment TEXT NOT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (book_ISBN) REFERENCES books (ISBN)
+                FOREIGN KEY (book_ISBN) REFERENCES books (ISBN),
+                FOREIGN KEY (user_username) REFERENCES user(accountName)
         );
         """; // add comments table
 
@@ -119,41 +121,24 @@ public class CreateDataBase extends DataBaseAccessor {
             ('Sophia Rodriguez', 'sophiarodriguez890', 'password890', '890-123-4567', '890 Oak St, Anytown, CA 12345', 'sophiarodriguez@example.com', '1999-10-10');
             """;
         String query3 = """
-            INSERT INTO borrows (date_borrow, date_give_back, book_idBook, user_id_user, comment) VALUES
-            ('2023-11-15', NULL, 1, 1, NULL),
-            ('2023-11-16', NULL, 2, 2, NULL),
-            ('2023-11-17', NULL, 3, 3, NULL),
-            ('2023-11-18', NULL, 4, 4, NULL),
-            ('2023-11-19', NULL, 5, 5, NULL),
-            ('2023-11-20', NULL, 6, 6, NULL),
-            ('2023-11-21', NULL, 7, 7, NULL),
-            ('2023-11-22', NULL, 8, 8, NULL),
-            ('2023-11-23', NULL, 9, 9, NULL),
-            ('2023-11-24', NULL, 10, 10, NULL),
-            ('2023-11-15', '2023-11-20', 11, 11, 'Book was in good condition'),
-            ('2023-11-16', '2023-11-21', 12, 12, NULL),
-            ('2023-11-17', '2023-11-22', 13, 13, 'Book had a few pages torn'),
-            ('2023-11-18', '2023-11-23', 14, 14, NULL),
-            ('2023-11-19', '2023-11-24', 15, 15, 'Book was returned late'),
-            ('2023-11-20', '2023-11-25', 16, 16, 'Book was in excellent condition'),
-            ('2023-11-21', '2023-11-26', 17, 17, NULL),
-            ('2023-11-22', '2023-11-27', 18, 18, 'Book was returned with a missing page'),
-            ('2023-11-23', '2023-11-28', 19, 19, 'Book was returned on time'),
-            ('2023-11-24', '2023-11-29', 20, 20, 'Book was returned with a stain on the cover');
+            INSERT INTO borrows (date_borrow, date_give_back, book_idBook, user_username, comment) VALUES
+            ('2023-11-15', NULL, 1, 'johndoe123', NULL),
+            ('2023-11-16', NULL, 2, 'johndoe123', NULL),
+            ('2023-11-17', NULL, 3, 'johndoe123', NULL)
         """;
 
         String query4 = """
-            INSERT INTO comments (book_ISBN, comment, created_at) VALUES
-            ('9745391806', 'This book is a hilarious and thought-provoking sci-fi adventure.', '2023-11-19'),
-            ('9780060144115', 'A classic investment guide that has stood the test of time.', '2023-11-20'),
-            ('9780061120002', 'A powerful story about racial injustice and the human spirit.', '2023-11-21'),
-            ('9780062316807', 'A beautiful and inspiring tale of self-discovery and following your dreams.', '2023-11-22'),
-            ('9780140171509', 'A timeless classic on military strategy and tactics.', '2023-11-23'),
-            ('9780140280117', 'A fascinating exploration of power, manipulation, and seduction.', '2023-11-24'),
-            ('9780140280119', 'A deep dive into the psychology of human behavior and influence.', '2023-11-25'),
-            ('9780140444218', 'A controversial but insightful look at political power and leadership.', '2023-11-26'),
-            ('9780141439501', 'A romantic masterpiece that explores themes of love, class, and societal expectations.', '2023-11-27'),
-            ('9780307887816', 'A groundbreaking book on entrepreneurship and innovation.', '2023-11-28');
+            INSERT INTO comments (user_username, book_ISBN, comment, created_at) VALUES
+            ('johndoe123', '9745391806', 'This book is a hilarious and thought-provoking sci-fi adventure.', '2023-11-19'),
+            ('johndoe123', '9780060144115', 'A classic investment guide that has stood the test of time.', '2023-11-20'),
+            ('johndoe123', '9780061120002', 'A powerful story about racial injustice and the human spirit.', '2023-11-21'),
+            ('johndoe123', '9780062316807', 'A beautiful and inspiring tale of self-discovery and following your dreams.', '2023-11-22'),
+            ('johndoe123', '9780140171509', 'A timeless classic on military strategy and tactics.', '2023-11-23'),
+            ('johndoe123', '9780140280117', 'A fascinating exploration of power, manipulation, and seduction.', '2023-11-24'),
+            ('johndoe123', '9780140280119', 'A deep dive into the psychology of human behavior and influence.', '2023-11-25'),
+            ('johndoe123', '9780140444218', 'A controversial but insightful look at political power and leadership.', '2023-11-26'),
+            ('johndoe123', '9780141439501', 'A romantic masterpiece that explores themes of love, class, and societal expectations.', '2023-11-27'),
+            ('johndoe123', '9780307887816', 'A groundbreaking book on entrepreneurship and innovation.', '2023-11-28');
         """;
 
         try (Statement stmt = connection.createStatement()) {

@@ -22,6 +22,7 @@ public class UserData extends DataBaseAccessor {
                 user.setAddress(resultSet.getString("address"));
                 user.setPhoneNumber(resultSet.getString("phoneNumber"));
             }
+
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
