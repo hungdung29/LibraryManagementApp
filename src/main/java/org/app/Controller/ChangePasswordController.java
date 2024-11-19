@@ -36,13 +36,23 @@ public class ChangePasswordController implements Initializable {
 
     public void onChangeButtonClicked(ActionEvent actionEvent) {
         if ( !extractData() ) {
-            System.out.println("Please type in all cell");
+            messageLabel.setText("Please type in all cell");
         }  else if (oldPassword.equals(getOldPassword)) {
             if (newPassword.equals(confirmPassword)) {
-                HandleUserAccount.changePassword(SignInViewController.username, newPassword);
-                try {
-                    MainApp.navigateToScene("user-view.fxml");
-                } catch (IOException e) {e.printStackTrace();}
+                if (HandleUserAccount.checkValidAccount("", newPassword,
+                        confirmPassword)) {
+                    HandleUserAccount.changePassword(SignInViewController.username, newPassword);
+                    messageLabel.setText("Change password successfully");
+                    oldPasswordTextField.setText("");
+                    newPasswordTextField.setText("");
+                    confirmPassWordTextField.setText("");
+                }
+                else {
+                    messageLabel.setText("Invalid new password");
+                    oldPasswordTextField.setText("");
+                    newPasswordTextField.setText("");
+                    confirmPassWordTextField.setText("");
+                }
             }
             else {
                 messageLabel.setText("New password and confirm password do not match");
