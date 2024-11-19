@@ -30,4 +30,27 @@ public class BorrowData extends DataBaseAccessor {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Check whether username has borrowed specified book
+     * @param username username
+     * @param idBook id book
+     * @return true if borrowed
+     */
+    public static boolean isBorrowedBook(String username, int idBook) {
+        PreparedStatement preparedStatement;
+        String query = "select * from borrows where user_username = ? and book_idBook = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setInt(2, idBook);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }
