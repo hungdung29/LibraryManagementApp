@@ -37,7 +37,7 @@ public class HandleUserAccount extends DataBaseAccessor {
      * @return type of user
      */
     public static int checkLogIn(String username, String password) {
-//        if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
+        if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
         if (username.equals("admin")) {
             return ADMIN_LOG_IN_SUCCESS;
         }
@@ -54,7 +54,7 @@ public class HandleUserAccount extends DataBaseAccessor {
             if (resultSet.next()) {
                 return  NORM_USER_LOG_IN_SUCCESS;
             } else {
-                return  ACCOUNT_NOT_FOUND;
+                return  WRONG_PASSWORD;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

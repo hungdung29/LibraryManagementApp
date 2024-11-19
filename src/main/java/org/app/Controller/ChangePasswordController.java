@@ -3,6 +3,7 @@ package org.app.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import org.app.DataBase.HandleUserAccount;
 import org.app.DataBase.UserData;
@@ -14,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChangePasswordController implements Initializable {
+    public Label messageLabel;
     public PasswordField oldPasswordTextField;
     public PasswordField newPasswordTextField;
     public PasswordField confirmPassWordTextField;
@@ -43,11 +45,17 @@ public class ChangePasswordController implements Initializable {
                 } catch (IOException e) {e.printStackTrace();}
             }
             else {
-                System.out.println("New password and confirm password do not match");
+                messageLabel.setText("New password and confirm password do not match");
+                oldPasswordTextField.setText("");
+                newPasswordTextField.setText("");
+                confirmPassWordTextField.setText("");
             }
         }
         else {
-            System.out.println("Old password is incorrect ");
+            messageLabel.setText("Old password is incorrect ");
+            oldPasswordTextField.setText("");
+            newPasswordTextField.setText("");
+            confirmPassWordTextField.setText("");
         }
     }
 
