@@ -42,8 +42,8 @@ public class BorrowBookController extends BookController implements Initializabl
             if (newValue != null) {
                 infoBookVBox.setVisible(true);
 
-                borrowButton.setText("Borrow");
-                borrowButton.setDisable(false);
+//                borrowButton.setText("Borrow");
+//                borrowButton.setDisable(false);
 
                 selectedBook = newValue;
                 handleBookSelection(SignInViewController.username, selectedBook);
@@ -66,15 +66,38 @@ public class BorrowBookController extends BookController implements Initializabl
         ObservableList<String> comments = BookData.getCommentOfBook(book.getIsbn());
         commentList.setItems(comments);
 
-        System.out.println(comments.size());
+        if (book.getRemaining() == 0) {
+            borrowButton.setText("All been borrowed");
+            borrowButton.setDisable(true);
+        } else {
+            borrowButton.setText("Borrow");
+            borrowButton.setDisable(false);
+        }
+        if (BorrowData.isBorrowedBook(username, book.getIdBook())) {
+            // book is borrowed by this user
+            borrowButton.setText("Borrowed");
+            borrowButton.setDisable(true);
+        }
+
         commentList.setPrefHeight( commentList.getFixedCellSize() * Math.min(comments.size() + 2, 10) );
     }
 
     public void onBorrowButtonClicked(ActionEvent actionEvent) {
-        borrowButton.setText("Borrow success");
+        borrowButton.setText("Borrowed");
         borrowButton.setDisable(true);
 
         // add borrow inform to database
         BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
+
+//        System.out.println("trc khi muon " + selectedBook.getRemaining());
+
+        BookData.updateRemainingBook(selectedBook.getIdBook());
+
+        // pass data to books
+        BookData.getDataAllBook(entireBooks);
+        cloneListBook();
+
+        // set content of book table
+        bookTable.setItems(shownBooks);
     }
 }

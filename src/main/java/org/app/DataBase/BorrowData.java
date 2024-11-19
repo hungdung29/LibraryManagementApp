@@ -7,6 +7,7 @@ package org.app.DataBase;
 // addBorrowInfo
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BorrowData extends DataBaseAccessor {

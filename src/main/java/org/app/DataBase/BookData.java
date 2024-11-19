@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import org.app.Object.Book;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 // TODO:
@@ -52,10 +53,8 @@ public class BookData extends DataBaseAccessor {
         ObservableList<String> comments = FXCollections.observableArrayList();
         comments.clear();
 
-//        System.out.println("id of book " + idBook);
-
-//        String query2 = "SELECT * FROM comments WHERE book_ISBN = '" + isbn + "'";
         String query = "select * from comments where book_ISBN = " + isbn;
+
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -67,10 +66,29 @@ public class BookData extends DataBaseAccessor {
             e.printStackTrace();
             }
 
-//        comments.add("nghi comment cho sach kho qua");
-//        comments.add("nghi comment cho sach kho qua abc d cho cau comment that dai cho xuong dong check size cua cai list");
-//        comments.add("nghi comment cho sach de qua");
-
         return comments;
+    }
+
+    public static void updateRemainingBook(int idBook) {
+        String query = "UPDATE books SET remaining = remaining - 1 WHERE idBook = " + idBook;
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getRemainingBook(int idBook) {
+        String query = "SELECT remaining FROM books WHERE idBook = " + idBook;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            return resultSet.getInt("remaining");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
