@@ -19,7 +19,7 @@
             </columns>
         </TableView>
     </VBox>
-    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
         <Label fx:id="titleReturnBookLabel" text="Name:" />
         <Label fx:id="borrowDateLabel" text="Borrow date:" />
         <Text text="Comment:" />

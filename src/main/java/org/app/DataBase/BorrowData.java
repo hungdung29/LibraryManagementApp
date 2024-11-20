@@ -6,9 +6,13 @@ package org.app.DataBase;
 // method
 // addBorrowInfo
 
+import javafx.collections.ObservableList;
+import org.app.Object.Book;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class BorrowData extends DataBaseAccessor {
 
@@ -52,5 +56,63 @@ public class BorrowData extends DataBaseAccessor {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+    public static void getDataBorrowedBook(String username, ObservableList<Book> books) {
+        books.clear();
+
+        String query = "SELECT * FROM books WHERE idBook IN (SELECT book_idBook FROM borrows " +
+                "WHERE user_username = '" + username + "')";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                Book book = new Book(
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getInt("idBook"),
+                        resultSet.getString("ISBN"),
+                        resultSet.getString("description"),
+                        resultSet.getString("content"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("image_path"),
+                        resultSet.getString("catalog"),
+                        resultSet.getInt("remaining"),
+                        resultSet.getString("publisher")
+                );
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getBorrowDate(String username, Book book) {
+        String query = "select date_borrow from borrows where user_username = ? and book_idBook = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setInt(2, book.getIdBook());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("date_borrow");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static void removeBorrowedBook(String username, Book selectedBook) {
+        String query = "delete from borrows where user_username = ? and book_idBook = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setInt(2, selectedBook.getIdBook());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
