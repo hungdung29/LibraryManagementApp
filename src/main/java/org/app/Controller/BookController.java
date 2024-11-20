@@ -29,7 +29,7 @@ abstract public class BookController {
 
     // entire Books. Distinguish from borrow books and borrowed books
     protected ObservableList<Book> entireBooks = FXCollections.observableArrayList();
-    // showed Books. Books are shown when search
+    // showed Books. Books are shown when searching
     protected ObservableList<Book> shownBooks = FXCollections.observableArrayList();
 
     public VBox infoBookVBox;
@@ -42,17 +42,13 @@ abstract public class BookController {
         if (keyword == null || keyword.isEmpty()) {
             return;
         }
-        for (Book book : shownBooks) {
-            if (book.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                continue;
-            } else if (book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
-                continue;
-            } else if (book.getIsbn().toLowerCase().contains(keyword.toLowerCase())) {
-                continue;
-            } else {
-                shownBooks.remove(book);
-            }
-        }
+        FilteredList<Book> filteredBooks = new FilteredList<>(entireBooks, book ->
+                book.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                        book.getAuthor().toLowerCase().contains(keyword.toLowerCase()) ||
+                        book.getIsbn().toLowerCase().contains(keyword.toLowerCase())
+        );
+
+        shownBooks.setAll(filteredBooks);
     }
 
     /**
