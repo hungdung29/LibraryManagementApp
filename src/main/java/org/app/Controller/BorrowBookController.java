@@ -31,8 +31,7 @@ public class BorrowBookController extends BookController implements Initializabl
         infoBookVBox.setVisible(false);
 
         // pass data to books
-        BookData.getDataAllBook(entireBooks);
-        cloneListBook();
+        getDataEntireBook();
 
         // set content of book table
         bookTable.setItems(shownBooks);
@@ -48,6 +47,11 @@ public class BorrowBookController extends BookController implements Initializabl
                 infoBookVBox.setVisible(false);
             }
         });
+    }
+
+    public void getDataEntireBook() {
+        BookData.getDataAllBook(entireBooks);
+        cloneListBook();
     }
 
     /**
@@ -71,7 +75,7 @@ public class BorrowBookController extends BookController implements Initializabl
             borrowButton.setText("Borrow");
             borrowButton.setDisable(false);
         }
-        if (BorrowData.isBorrowedBook(username, book.getIdBook())) {
+        if (BorrowData.isBorrowingBook(username, book.getIdBook())) {
             // book is borrowed by this user
             borrowButton.setText("Borrowed");
             borrowButton.setDisable(true);

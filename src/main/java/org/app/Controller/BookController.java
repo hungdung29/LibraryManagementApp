@@ -37,7 +37,7 @@ abstract public class BookController {
     public void onSearchButtonClicked(ActionEvent actionEvent) {
         String keyword = searchTextField.getText();
         // restore shown books = entire book
-        cloneListBook();
+        getDataEntireBook();
 
         if (keyword == null || keyword.isEmpty()) {
             return;
@@ -57,6 +57,8 @@ abstract public class BookController {
      * @param book book need to show inform or more
      */
     abstract public void handleBookSelection(String username, Book book);
+
+    abstract public void getDataEntireBook();
 
     /**
      * copy book in entireBooks to shownBooks

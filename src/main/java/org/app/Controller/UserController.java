@@ -6,4 +6,5 @@ public class UserController {
     public Tab user_info;
     public Tab borrow_book;
     public Tab return_book;
+    public Tab history;
 }

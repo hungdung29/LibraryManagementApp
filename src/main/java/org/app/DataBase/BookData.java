@@ -3,6 +3,7 @@ package org.app.DataBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.app.Object.Book;
+import org.app.Object.BorrowInfo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +72,12 @@ public class BookData extends DataBaseAccessor {
         return comments;
     }
 
+    /**
+     * add comment to specific book by user
+     * @param username username
+     * @param isbn isbn of book
+     * @param comment comment
+     */
     public static void addCommentOfBook(String username, String isbn, String comment) {
         String query = "insert into comments (user_username, book_ISBN, comment, created_at) " +
                 "VALUES (?, ?, ?, date('now'))";
@@ -84,7 +91,20 @@ public class BookData extends DataBaseAccessor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    public static void setCommentOfBook(String username, String isbn, String comment) {
+        String query = "update comments set comment = ? where book_ISBN = ? and user_username= ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, comment);
+            preparedStatement.setString(2, isbn);
+            preparedStatement.setString(3, username);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void updateRemainingBook(int idBook, int quantity) {

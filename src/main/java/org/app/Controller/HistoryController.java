@@ -5,23 +5,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
 import org.app.Object.Book;
+import org.app.Object.BorrowInfo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ReturnBookController extends BookController implements Initializable {
-    public Label titleReturnBookLabel;
+public class HistoryController extends BookController implements Initializable {
+    public Label titleBookLabel;
     public Label borrowDateLabel;
+    public Label returnDateLabel;
 
     public TextField commentTextField;
 
-    public VBox infoBookVBox;
-
-    public Button returnButton;
+    public Button changeCommentButton;
+    // if isChange is true. Allow user change comment
+    private boolean isChange;
 
     private Book selectedBook;
 
@@ -29,6 +30,7 @@ public class ReturnBookController extends BookController implements Initializabl
         // set up column for table
         configTable();
         infoBookVBox.setVisible(false);
+        isChange = false;
 
         // pass data to books
         getDataEntireBook();
@@ -40,6 +42,7 @@ public class ReturnBookController extends BookController implements Initializabl
         bookTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 infoBookVBox.setVisible(true);
+                commentTextField.setDisable(true);
 
                 selectedBook = newValue;
                 handleBookSelection(SignInViewController.username, selectedBook);
@@ -50,24 +53,24 @@ public class ReturnBookController extends BookController implements Initializabl
     }
 
     public void getDataEntireBook() {
-        BorrowData.getDataBorrowingBook(SignInViewController.username, entireBooks);
+        BorrowData.getDataReturnedBook(SignInViewController.username, entireBooks);
         cloneListBook();
     }
 
-    public void onReturnButtonClicked(ActionEvent actionEvent) {
-        // add comment
-        if ( !commentTextField.getText().isEmpty() ) {
-            BookData.addCommentOfBook(SignInViewController.username, selectedBook.getIsbn(), commentTextField.getText());
+    public void onChangeCommentButtonClicked(ActionEvent actionEvent) {
+        // Save changed comment
+        if (isChange) {
+            changeCommentButton.setText("Change Comment");
+            commentTextField.setDisable(true);
+            // save new comment to database
+
+            BookData.setCommentOfBook(SignInViewController.username, selectedBook.getIsbn(), commentTextField.getText());
+        } else {
+            changeCommentButton.setText("Save");
+            commentTextField.setDisable(false);
         }
 
-        // Remove book on borrowed list
-        BorrowData.updateReturnDate(SignInViewController.username, selectedBook);
-        BookData.updateRemainingBook(selectedBook.getIdBook(), 1);
-        shownBooks.remove(selectedBook);
-
-        // set content of book table
-        bookTable.setItems(shownBooks);
-        infoBookVBox.setVisible(false);
+        isChange = !isChange;
     }
 
     /**
@@ -76,8 +79,15 @@ public class ReturnBookController extends BookController implements Initializabl
      * @param book book need to handle inform or more
      */
     public void handleBookSelection(String username, Book book) {
-        commentTextField.setText("");
-        titleReturnBookLabel.setText("Book title: " + book.getTitle());
-        borrowDateLabel.setText("Borrow Date: " + BorrowData.getBorrowDate(username, book));
+        titleBookLabel.setText("Book title: " + book.getTitle());
+        BorrowInfo borrowInfo = BorrowData.getBorrowInfo(username, book);
+        if (borrowInfo == null) {
+            infoBookVBox.setVisible(false);
+            return;
+        }
+
+        borrowDateLabel.setText("Borrow Date: " + borrowInfo.getBorrowDate());
+        returnDateLabel.setText("Return Date: " + borrowInfo.getReturnDate());
+        commentTextField.setText(borrowInfo.getComment());
     }
 }
