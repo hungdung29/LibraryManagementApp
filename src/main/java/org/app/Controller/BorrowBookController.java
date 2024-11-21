@@ -62,6 +62,7 @@ public class BorrowBookController extends BookController implements Initializabl
 
         ObservableList<String> comments = BookData.getCommentOfBook(book.getIsbn());
         commentList.setItems(comments);
+        commentList.setPrefHeight( commentList.getFixedCellSize() * Math.min(comments.size() + 2, 10) );
 
         if (book.getRemaining() == 0) {
             borrowButton.setText("All been borrowed");
@@ -75,8 +76,6 @@ public class BorrowBookController extends BookController implements Initializabl
             borrowButton.setText("Borrowed");
             borrowButton.setDisable(true);
         }
-
-        commentList.setPrefHeight( commentList.getFixedCellSize() * Math.min(comments.size() + 2, 10) );
     }
 
     public void onBorrowButtonClicked(ActionEvent actionEvent) {
@@ -85,8 +84,6 @@ public class BorrowBookController extends BookController implements Initializabl
 
         // add borrow inform to database
         BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
-
-//        System.out.println("trc khi muon " + selectedBook.getRemaining());
 
         BookData.updateRemainingBook(selectedBook.getIdBook(), -1);
 

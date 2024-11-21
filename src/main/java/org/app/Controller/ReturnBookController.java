@@ -28,6 +28,7 @@ public class ReturnBookController extends BookController implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // set up column for table
         configTable();
+        infoBookVBox.setVisible(false);
 
         // pass data to books
         BorrowData.getDataBorrowedBook(SignInViewController.username, entireBooks);
@@ -41,6 +42,7 @@ public class ReturnBookController extends BookController implements Initializabl
             if (newValue != null) {
                 infoBookVBox.setVisible(true);
 
+                commentTextField.setText("");
                 selectedBook = newValue;
                 handleBookSelection(SignInViewController.username, selectedBook);
             } else {
@@ -51,14 +53,18 @@ public class ReturnBookController extends BookController implements Initializabl
 
     public void onReturnButtonClicked(ActionEvent actionEvent) {
         // add comment
+        if ( !commentTextField.getText().isEmpty() ) {
+            BookData.addCommentOfBook(SignInViewController.username, selectedBook.getIsbn(), commentTextField.getText());
+        }
 
         // Remove book on borrowed list
-        BorrowData.removeBorrowedBook(SignInViewController.username, selectedBook);
+        BorrowData.updateReturnDate(SignInViewController.username, selectedBook);
         BookData.updateRemainingBook(selectedBook.getIdBook(), 1);
         shownBooks.remove(selectedBook);
 
         // set content of book table
         bookTable.setItems(shownBooks);
+        infoBookVBox.setVisible(false);
     }
 
     /**

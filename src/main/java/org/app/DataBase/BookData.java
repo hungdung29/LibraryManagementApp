@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.app.Object.Book;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,7 @@ import java.sql.Statement;
 // getDataAllBook(books) ==> insert directly list of books
 // getDataBorrowedBook(username, books)
 // getCommentOfBook(isbn)
+// addCommentOfBook
 
 public class BookData extends DataBaseAccessor {
     public static void getDataAllBook(ObservableList<Book> books) {
@@ -67,6 +69,22 @@ public class BookData extends DataBaseAccessor {
             }
 
         return comments;
+    }
+
+    public static void addCommentOfBook(String username, String isbn, String comment) {
+        String query = "insert into comments (user_username, book_ISBN, comment, created_at) " +
+                "VALUES (?, ?, ?, date('now'))";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, isbn);
+            preparedStatement.setString(3, comment);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public static void updateRemainingBook(int idBook, int quantity) {

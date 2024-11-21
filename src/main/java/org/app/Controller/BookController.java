@@ -77,6 +77,4 @@ abstract public class BookController {
         isbnBorrowColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("isbn"));
         remainingColumn.setCellValueFactory(new PropertyValueFactory<Book, Integer>("remaining"));
     }
-
-
 }

@@ -43,7 +43,7 @@ public class BorrowData extends DataBaseAccessor {
      */
     public static boolean isBorrowedBook(String username, int idBook) {
         PreparedStatement preparedStatement;
-        String query = "select * from borrows where user_username = ? and book_idBook = ?";
+        String query = "select * from borrows where user_username = ? and book_idBook = ? and date_give_back is null";
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -103,8 +103,9 @@ public class BorrowData extends DataBaseAccessor {
         return null;
     }
 
-    public static void removeBorrowedBook(String username, Book selectedBook) {
-        String query = "delete from borrows where user_username = ? and book_idBook = ?";
+    public static void updateReturnDate(String username, Book selectedBook) {
+//        String query = "delete from borrows where user_username = ? and book_idBook = ?";
+        String query = "update borrows set date_give_back = date('now') where user_username = ? and book_idBook = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
