@@ -179,6 +179,7 @@ public class BorrowData extends DataBaseAccessor {
     }
 
     public static void updateReturnDate(String username, Book selectedBook) {
+//        String query = "delete from borrows where user_username = ? and book_idBook = ?";
         String query = "update borrows set date_give_back = date('now') where user_username = ? and book_idBook = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -218,5 +219,20 @@ public class BorrowData extends DataBaseAccessor {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static int getTotalBorrowedBooks() {
+        String query = "SELECT COUNT(*) AS totalBorrowedBooks FROM borrows";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("totalBorrowedBooks");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -3,7 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowBookController">
+<SplitPane dividerPositions="0.5" prefHeight="488.0" prefWidth="684.0"
+           xmlns="http://javafx.com/javafx/17.0.12"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.app.Controller.BookManagementController">
     <VBox prefHeight="200.0" prefWidth="100.0">
         <HBox prefHeight="15.0" prefWidth="401.0">
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
@@ -14,7 +17,7 @@
                 <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="102.0" text="Author" />
                 <TableColumn fx:id="isbnBorrowColumn" prefWidth="107.0" text="ISBN" />
-                <TableColumn fx:id="remainingColumn" prefWidth="62.0" text="Remaining" />
+                <TableColumn fx:id="quantityColumn" prefWidth="62.0" text="Quantity" />
             </columns>
         </TableView>
     </VBox>
@@ -24,6 +27,6 @@
         <Label fx:id="descriptionDetailLabel" text="Description:" />
         <Label text="Comment:" />
         <ListView fx:id="commentList" fixedCellSize="24.0" prefHeight="346.0" prefWidth="260.0" />
-        <Button fx:id="borrowButton" mnemonicParsing="false" onAction="#onBorrowButtonClicked" text="Borrow" />
+        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" text="Borrow" />
     </VBox>
 </SplitPane>

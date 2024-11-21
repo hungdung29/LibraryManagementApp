@@ -12,6 +12,7 @@ public class Book {
     private String image_path;
     private int remaining;
     private String publisher;
+    private int quantity;
 
     public Book(String title, String author, int idBook, String isbn,
                 String description, String content, double price,
@@ -27,6 +28,7 @@ public class Book {
         this.catalog = catalog;
         this.remaining = remaining;
         this.publisher = publisher;
+        this.quantity = remaining;
     }
 
     public int getIdBook() {

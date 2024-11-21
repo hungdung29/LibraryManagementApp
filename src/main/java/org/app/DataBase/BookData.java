@@ -129,4 +129,17 @@ public class BookData extends DataBaseAccessor {
         }
         return 0;
     }
+
+    public static int getTotalRemainingBooks() {
+        String query = "SELECT SUM(remaining) AS totalRemainingBooks FROM books";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            return resultSet.getInt("totalRemainingBooks");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

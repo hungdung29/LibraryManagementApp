@@ -32,7 +32,7 @@ public class UserData extends DataBaseAccessor {
         }
     }
 
-    public ObservableList<User> getAllUsers() {
+    public static ObservableList<User> getAllUsers() {
         ObservableList<User> users = FXCollections.observableArrayList();
         users.clear();
 

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class BorrowBookController extends BookController implements Initializable {
     public Label titleBookDetailLabel;
     public Label publisherDetailLabel;
-    public Label descripDetailLabel;
+    public Label descriptionDetailLabel;
 
     public ListView<String> commentList;
 
@@ -62,7 +62,7 @@ public class BorrowBookController extends BookController implements Initializabl
     public void handleBookSelection(String username, Book book){
         titleBookDetailLabel.setText("Title: " + book.getTitle());
         publisherDetailLabel.setText("Publisher: " + book.getPublisher());
-        descripDetailLabel.setText("Description: " + book.getDescription());
+        descriptionDetailLabel.setText("Description: " + book.getDescription());
 
         ObservableList<String> comments = BookData.getCommentOfBook(book.getIsbn());
         commentList.setItems(comments);
