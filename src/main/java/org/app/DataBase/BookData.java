@@ -69,8 +69,8 @@ public class BookData extends DataBaseAccessor {
         return comments;
     }
 
-    public static void updateRemainingBook(int idBook) {
-        String query = "UPDATE books SET remaining = remaining - 1 WHERE idBook = " + idBook;
+    public static void updateRemainingBook(int idBook, int quantity) {
+        String query = "UPDATE books SET remaining = remaining + " + quantity + " WHERE idBook = " + idBook;
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);

@@ -42,9 +42,6 @@ public class BorrowBookController extends BookController implements Initializabl
             if (newValue != null) {
                 infoBookVBox.setVisible(true);
 
-//                borrowButton.setText("Borrow");
-//                borrowButton.setDisable(false);
-
                 selectedBook = newValue;
                 handleBookSelection(SignInViewController.username, selectedBook);
             } else {
@@ -91,7 +88,7 @@ public class BorrowBookController extends BookController implements Initializabl
 
 //        System.out.println("trc khi muon " + selectedBook.getRemaining());
 
-        BookData.updateRemainingBook(selectedBook.getIdBook());
+        BookData.updateRemainingBook(selectedBook.getIdBook(), -1);
 
         // pass data to books
         BookData.getDataAllBook(entireBooks);

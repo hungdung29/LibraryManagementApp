@@ -35,38 +35,36 @@ public class ChangePasswordController implements Initializable {
     }
 
     public void onChangeButtonClicked(ActionEvent actionEvent) {
+        // check data have been typed in
         if ( !extractData() ) {
             messageLabel.setText("Please type in all cell");
-        }  else if (oldPassword.equals(getOldPassword)) {
-            if (newPassword.equals(confirmPassword)) {
-                if (HandleUserAccount.checkValidAccount("", newPassword,
-                        confirmPassword)) {
-                    HandleUserAccount.changePassword(SignInViewController.username, newPassword);
-                    messageLabel.setText("Change password successfully");
-                    oldPasswordTextField.setText("");
-                    newPasswordTextField.setText("");
-                    confirmPassWordTextField.setText("");
-                }
-                else {
-                    messageLabel.setText("Invalid new password");
-                    oldPasswordTextField.setText("");
-                    newPasswordTextField.setText("");
-                    confirmPassWordTextField.setText("");
-                }
-            }
-            else {
-                messageLabel.setText("New password and confirm password do not match");
-                oldPasswordTextField.setText("");
-                newPasswordTextField.setText("");
-                confirmPassWordTextField.setText("");
-            }
+            return;
         }
-        else {
+
+        // verify old password
+        if ( !oldPassword.equals(getOldPassword) ) {
             messageLabel.setText("Old password is incorrect ");
-            oldPasswordTextField.setText("");
-            newPasswordTextField.setText("");
-            confirmPassWordTextField.setText("");
+            cleanTextFields();
+            return;
         }
+
+        // check valid password
+        if ( !HandleUserAccount.checkValidPassword(newPassword, confirmPassword) ) {
+            messageLabel.setText("Invalid password ");
+            cleanTextFields();
+            return;
+        }
+
+        // change password
+        HandleUserAccount.changePassword(SignInViewController.username, newPassword);
+        messageLabel.setText("Change password successfully");
+        cleanTextFields();
+    }
+
+    private void cleanTextFields() {
+        oldPasswordTextField.setText("");
+        newPasswordTextField.setText("");
+        confirmPassWordTextField.setText("");
     }
 
     public void onBackButtonClicked(ActionEvent actionEvent) {

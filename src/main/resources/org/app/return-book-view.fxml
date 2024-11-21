@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <SplitPane dividerPositions="0.5579608938547486" prefHeight="481.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.ReturnBookController">
     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -19,11 +18,10 @@
             </columns>
         </TableView>
     </VBox>
-    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
-        <Label fx:id="titleReturnBookLabel" text="Name:" />
+    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0" spacing="8.0">
+        <Label fx:id="titleReturnBookLabel" text="Book Title:" />
         <Label fx:id="borrowDateLabel" text="Borrow date:" />
-        <Text text="Comment:" />
-        <TextField fx:id="commentTextField" />
+        <TextField fx:id="commentTextField" prefHeight="56.0" prefWidth="313.0" promptText="Comment" />
         <Button fx:id="returnButton" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Return" />
     </VBox>
 </SplitPane>

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 public class ReturnBookController extends BookController implements Initializable {
     public Label titleReturnBookLabel;
     public Label borrowDateLabel;
+
     public TextField commentTextField;
 
     public VBox infoBookVBox;
@@ -49,27 +50,24 @@ public class ReturnBookController extends BookController implements Initializabl
     }
 
     public void onReturnButtonClicked(ActionEvent actionEvent) {
+        // add comment
+
         // Remove book on borrowed list
         BorrowData.removeBorrowedBook(SignInViewController.username, selectedBook);
+        BookData.updateRemainingBook(selectedBook.getIdBook(), 1);
         shownBooks.remove(selectedBook);
-
-        // pass data to books
-        BorrowData.getDataBorrowedBook(SignInViewController.username, entireBooks);
-        cloneListBook();
 
         // set content of book table
         bookTable.setItems(shownBooks);
     }
 
-    @Override
     /**
-     * Handle selection book
+     * Handle selection book.
      * @param username username
      * @param book book need to handle inform or more
      */
     public void handleBookSelection(String username, Book book) {
-        titleReturnBookLabel.setText(book.getTitle());
-        borrowDateLabel.setText(BorrowData.getBorrowDate(username, book));
-
+        titleReturnBookLabel.setText("Book title: " + book.getTitle());
+        borrowDateLabel.setText("Borrow Date: " + BorrowData.getBorrowDate(username, book));
     }
 }

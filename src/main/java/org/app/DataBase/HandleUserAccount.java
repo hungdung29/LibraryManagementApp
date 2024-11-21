@@ -93,6 +93,10 @@ public class HandleUserAccount extends DataBaseAccessor {
             return false;
         }
 
+        return checkValidPassword(password, confirmpasswordText);
+    }
+
+    public static boolean checkValidPassword(String password, String confirmpasswordText) {
         if (password == null || password.isEmpty()) {
             return false;
         }
