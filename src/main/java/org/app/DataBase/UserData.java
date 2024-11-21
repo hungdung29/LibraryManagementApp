@@ -1,5 +1,7 @@
 package org.app.DataBase;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.app.Object.User;
 
 import java.sql.ResultSet;
@@ -28,10 +30,31 @@ public class UserData extends DataBaseAccessor {
             e.printStackTrace();
             return null;
         }
+    }
 
-//        user.setName("Tho");
-//        user.setUsername(username);
-//        user.setAddress("Vinh Phuc");
-//        user.setPhoneNumber("124123");
+    public ObservableList<User> getAllUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
+        users.clear();
+
+        String query = "SELECT * FROM users";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getString("accountName"),
+                        resultSet.getString("password"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("phoneNumber"),
+                        resultSet.getString("address")
+                );
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
