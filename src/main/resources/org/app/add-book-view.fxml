@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="177.0" layoutY="100.0" prefHeight="200.0" prefWidth="247.0">
+      <VBox alignment="CENTER" layoutX="177.0" layoutY="100.0" prefHeight="200.0" prefWidth="247.0" spacing="10.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="100.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book name:" />
-                  <TextField promptText="bookname" />
+                  <TextField prefHeight="26.0" prefWidth="183.0" promptText="bookname" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
-                  <TextField promptText="author" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author: " />
+                  <TextField prefHeight="26.0" prefWidth="209.0" promptText="author" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:" />
-                  <TextField promptText="publisher" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher: " />
+                  <TextField prefHeight="26.0" prefWidth="201.0" promptText="publisher" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN: " />
-                  <TextField promptText="author" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:  " />
+                  <TextField prefHeight="26.0" prefWidth="234.0" promptText="ISBN" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
-                  <TextField promptText="quantity" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity: " />
+                  <TextField prefHeight="26.0" prefWidth="208.0" promptText="quantity" />
                </children>
             </HBox>
+            <Button fx:id="addBookButton" mnemonicParsing="false" onAction="#onAddBookButtonClicked" text="Add Book" />
          </children>
       </VBox>
    </children>

@@ -37,10 +37,12 @@ public class HandleUserAccount extends DataBaseAccessor {
      * @return type of user
      */
     public static int checkLogIn(String username, String password) {
-        if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
         if (username.equals("admin")) {
             return ADMIN_LOG_IN_SUCCESS;
         }
+
+        if (!isUsernameExist(username)) { return ACCOUNT_NOT_FOUND; }
+
 
         PreparedStatement preparedStatement;
         String query = "SELECT * FROM users WHERE accountName = ? and password = ?";
