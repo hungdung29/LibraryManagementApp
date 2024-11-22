@@ -25,10 +25,10 @@
         </TableView>
     </VBox>
     <VBox fx:id="infoMemberVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
-        <Label fx:id="gmailLabel" text="Gmail: " />
+        <Label fx:id="emailLabel" text="Email: " />
         <Label fx:id="birthdayLabel" text="Birthday: " />
         <Label fx:id="numCommentsLabel" text="Number of Comments: " />
-      <TableView prefHeight="419.0" prefWidth="288.0">
+      <TableView fx:id="memberDetailTable" prefHeight="419.0" prefWidth="288.0">
         <columns>
           <TableColumn fx:id="borrowedBookColumn" prefWidth="168.0" text="Borrowed Book" />
           <TableColumn fx:id="borrowedDateColumn" prefWidth="119.0" text="Borrowed Date" />

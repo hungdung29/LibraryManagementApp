@@ -1,6 +1,7 @@
 package org.app.Object;
 
 public class BorrowInfo {
+    private String bookTitle;
     private String borrowDate;
     private String returnDate;
 
@@ -10,6 +11,19 @@ public class BorrowInfo {
         this.comment = comment;
         this.returnDate = returnDate;
         this.borrowDate = borrowDate;
+    }
+
+    public BorrowInfo(String bookTitle, String borrowDate) {
+        this.bookTitle = bookTitle;
+        this.borrowDate = borrowDate;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 
     public String getBorrowDate() {

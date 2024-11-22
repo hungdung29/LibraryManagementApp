@@ -6,6 +6,7 @@ package org.app.DataBase;
 // method
 // addBorrowInfo
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.app.Object.Book;
 import org.app.Object.BorrowInfo;
@@ -229,6 +230,62 @@ public class BorrowData extends DataBaseAccessor {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("totalBorrowedBooks");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+    public static Integer getNumberOfComments(String username) {
+        String query = "SELECT COUNT(*) FROM comments WHERE user_username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static ObservableList<BorrowInfo> getBorrowedBooks(String username) {
+        ObservableList<BorrowInfo> borrowedBooks = FXCollections.observableArrayList();
+        String query = "SELECT books.title, borrows.date_borrow FROM borrows " +
+                "JOIN books ON borrows.book_idBook = books.idBook " +
+                "WHERE borrows.user_username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                BorrowInfo borrowedBook = new BorrowInfo(
+                        resultSet.getString("title"),
+                        resultSet.getString("date_borrow")
+                );
+                borrowedBooks.add(borrowedBook);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return borrowedBooks;
+    }
+
+    public static Object getNumberOfBorrowedBooks(String username) {
+        String query = "SELECT COUNT(*) FROM borrows WHERE user_username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
             }
         } catch (SQLException e) {
             e.printStackTrace();

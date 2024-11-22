@@ -39,7 +39,13 @@ public class SignUpViewController {
         }
 
         if (HandleUserAccount.checkValidAccount(username, password, confirmPassword)) {
-            User user = new User(username, password, name, phoneNumber, address);
+            User user = new User.Builder()
+                    .setUsername(username)
+                    .setPassword(password)
+                    .setName(name)
+                    .setAddress(address)
+                    .setPhoneNumber(phoneNumber)
+                    .build();
 
             HandleUserAccount.addAccount(user);
 

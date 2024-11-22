@@ -2,15 +2,17 @@ package org.app.DataBase;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.app.Object.BorrowInfo;
 import org.app.Object.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserData extends DataBaseAccessor {
     public static User getUserInfo(String username) {
-        User user = new User();
+        User user = new User.Builder().build();
 
         try {
             Statement statement = connection.createStatement();
@@ -18,11 +20,15 @@ public class UserData extends DataBaseAccessor {
             ResultSet resultSet = statement.executeQuery(query);
 
             if (resultSet.next()) {
-                user.setName(resultSet.getString("Name"));
-                user.setUsername(resultSet.getString("accountName"));
-                user.setPassword(resultSet.getString("password"));
-                user.setAddress(resultSet.getString("address"));
-                user.setPhoneNumber(resultSet.getString("phoneNumber"));
+                user = new User.Builder()
+                        .setUsername(resultSet.getString("accountName"))
+                        .setPassword(resultSet.getString("password"))
+                        .setName(resultSet.getString("Name"))
+                        .setPhoneNumber(resultSet.getString("phoneNumber"))
+                        .setAddress(resultSet.getString("address"))
+                        .setBirthday(resultSet.getString("birthday"))
+                        .setEmail(resultSet.getString("gmail"))
+                        .build();
             }
 
             return user;
@@ -42,13 +48,15 @@ public class UserData extends DataBaseAccessor {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                User user = new User(
-                        resultSet.getString("accountName"),
-                        resultSet.getString("password"),
-                        resultSet.getString("Name"),
-                        resultSet.getString("phoneNumber"),
-                        resultSet.getString("address")
-                );
+                User user = new User.Builder()
+                        .setUsername(resultSet.getString("accountName"))
+                        .setPassword(resultSet.getString("password"))
+                        .setName(resultSet.getString("Name"))
+                        .setPhoneNumber(resultSet.getString("phoneNumber"))
+                        .setAddress(resultSet.getString("address"))
+                        .setBirthday(resultSet.getString("birthday"))
+                        .setEmail(resultSet.getString("gmail"))
+                        .build();
                 users.add(user);
             }
             return users;

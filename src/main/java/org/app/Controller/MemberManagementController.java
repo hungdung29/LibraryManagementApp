@@ -1,5 +1,6 @@
 package org.app.Controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import org.app.DataBase.BorrowData;
 import org.app.DataBase.UserData;
 import org.app.Object.User;
 
@@ -25,12 +27,15 @@ public class MemberManagementController implements Initializable {
     public TableColumn numBorrowedBookColumn;
     
     public VBox infoMemberVBox;
-    public Label gmailLabel;
+    public Label emailLabel;
     public Label birthdayLabel;
     public Label numCommentsLabel;
-    public ListView bookList;
 
     public Button deleteButton;
+    
+    public TableView memberDetailTable;
+    public TableColumn borrowedBookColumn;
+    public TableColumn borrowedDateColumn;
 
     ObservableList<User> users;
 
@@ -43,7 +48,8 @@ public class MemberManagementController implements Initializable {
         users = UserData.getAllUsers();
         memberTable.setItems(users);
 
-        memberTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        memberTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
             if (newValue != null) {
                 infoMemberVBox.setVisible(true);
 
@@ -58,20 +64,32 @@ public class MemberManagementController implements Initializable {
     }
 
     private void handleMemberSelection(User selectedUser) {
-//        gmailLabel.setText("Gmail: " + selectedUser.getEmail());
-//        birthdayLabel.setText("Birthday: " + selectedUser.getBirthday());
-//        numCommentsLabel.setText("Number of comments: " + selectedUser.getNumComments());
-//        bookList.setItems(selectedUser.getComments());
+        configDetailTable();
+        memberDetailTable.setItems(BorrowData.getBorrowedBooks(selectedUser.getUsername()));
+
+        emailLabel.setText("Email: " + selectedUser.getEmail());
+        birthdayLabel.setText("Birthday: " + selectedUser.getBirthday());
+        numCommentsLabel.setText("Number of comments: " +
+                 BorrowData.getNumberOfComments(selectedUser.getUsername()));
+    }
+
+    private void configDetailTable() {
+        memberDetailTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        borrowedBookColumn.setCellValueFactory(new PropertyValueFactory<>("bookTitle"));
+        borrowedDateColumn.setCellValueFactory(new PropertyValueFactory<>("borrowDate"));
     }
 
     private void configTable() {
         memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        numBorrowedBookColumn.setCellValueFactory(new PropertyValueFactory<>("numBorrowedBook"));
+//        numBorrowedBookColumn.setCellValueFactory();
     }
+
+
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
         String keyword = searchTextField.getText();
