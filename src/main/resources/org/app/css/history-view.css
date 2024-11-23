@@ -1,0 +1,80 @@
+SplitPane {
+    -fx-background-color: #F0F4F8;
+}
+
+VBox {
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+}
+
+HBox {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+TextField {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4A6A7D;
+    -fx-background-color: #E7EFF6;
+    -fx-border-color: #A3C3D9;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+TextField:focused {
+    -fx-border-color: #76C7C0;
+    -fx-background-color: #DCE6EE;
+}
+
+Button {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #76C7C0;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #5FA9A4;
+}
+
+Button:pressed {
+    -fx-background-color: #48918B;
+}
+
+TableView {
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 5px;
+}
+
+TableColumn {
+    -fx-text-fill: #4A6A7D;
+}
+
+Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4A6A7D;
+}
+
+#infoBookVBox {
+    -fx-spacing: 8px;
+    -fx-padding: 10px;
+    -fx-background-color: #E7EFF6;
+    -fx-border-radius: 10px;
+}
+
+#commentTextField {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #A3C3D9;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+#commentTextField:focused {
+    -fx-border-color: #76C7C0;
+}

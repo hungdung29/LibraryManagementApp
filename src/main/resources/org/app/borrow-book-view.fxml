@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowBookController">
+<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowBookController"
+stylesheets="@css/borrow-book-view.css">
     <VBox prefHeight="200.0" prefWidth="100.0">
         <HBox prefHeight="15.0" prefWidth="401.0">
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />

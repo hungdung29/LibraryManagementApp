@@ -1,0 +1,44 @@
+VBox {
+    -fx-background-color: #F0F4F8;
+    -fx-padding: 20px;
+    -fx-spacing: 30px;
+}
+
+Label {
+    -fx-font-size: 33px;
+    -fx-text-fill: #2C3E50;
+    -fx-font-weight: bold;
+}
+
+Label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #4A6A7D;
+}
+
+HBox {
+    -fx-spacing: 20px;
+    -fx-alignment: CENTER;
+}
+
+Button {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #76C7C0;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #5FA9A4;
+}
+
+Button:pressed {
+    -fx-background-color: #48918B;
+}
+
+Label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495E;
+}
