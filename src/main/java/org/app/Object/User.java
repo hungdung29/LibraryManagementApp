@@ -1,5 +1,7 @@
 package org.app.Object;
 
+import org.app.DataBase.BorrowData;
+
 public class User {
     private String username;
     private String password;
@@ -95,6 +97,11 @@ public class User {
 
     public String getBirthday() {
         return birthday;
+    }
+
+
+    public int getNumBorrowedBooks() {
+        return BorrowData.getNumberOfBorrowedBooks(username);
     }
 }
 

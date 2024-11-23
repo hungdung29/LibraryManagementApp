@@ -1,5 +1,7 @@
 package org.app.Object;
 
+import org.app.DataBase.BorrowData;
+
 public class Book {
     private int idBook;
     private String title;
@@ -9,113 +11,150 @@ public class Book {
     private String content;
     private String catalog;
     private double price;
-    private String image_path;
+    private String imagePath;
     private int remaining;
     private String publisher;
     private int quantity;
 
-    public Book(String title, String author, int idBook, String isbn,
-                String description, String content, double price,
-                String image_path, String catalog, int remaining, String publisher) {
-        this.title = title;
-        this.author = author;
-        this.idBook = idBook;
-        this.isbn = isbn;
-        this.description = description;
-        this.content = content;
-        this.price = price;
-        this.image_path = image_path;
-        this.catalog = catalog;
-        this.remaining = remaining;
-        this.publisher = publisher;
-        this.quantity = remaining;
+    private Book(Builder builder) {
+        this.idBook = builder.idBook;
+        this.title = builder.title;
+        this.author = builder.author;
+        this.isbn = builder.isbn;
+        this.description = builder.description;
+        this.content = builder.content;
+        this.catalog = builder.catalog;
+        this.price = builder.price;
+        this.imagePath = builder.imagePath;
+        this.remaining = builder.remaining;
+        this.publisher = builder.publisher;
+        this.quantity = builder.quantity;
     }
 
     public int getIdBook() {
         return idBook;
     }
 
-    public void setIdBook(int idBook) {
-        this.idBook = idBook;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getIsbn() {
         return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImage_path() {
-        return image_path;
-    }
-
-    public void setImage_path(String image_path) {
-        this.image_path = image_path;
+    public String getContent() {
+        return content;
     }
 
     public String getCatalog() {
         return catalog;
     }
 
-    public void setCatalog(String catalog) {
-        this.catalog = catalog;
+    public double getPrice() {
+        return price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public int getRemaining() {
         return remaining;
     }
 
-    public void setRemaining(int remaining) {
-        this.remaining = remaining;
-    }
-
     public String getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public static class Builder {
+        private int idBook;
+        private String title;
+        private String author;
+        private String isbn;
+        private String description;
+        private String content;
+        private String catalog;
+        private double price;
+        private String imagePath;
+        private int remaining;
+        private String publisher;
+        private int quantity;
+
+        public Builder setIdBook(int idBook) {
+            this.idBook = idBook;
+            return this;
+        }
+
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder setAuthor(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public Builder setIsbn(String isbn) {
+            this.isbn = isbn;
+            return this;
+        }
+
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder setContent(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public Builder setCatalog(String catalog) {
+            this.catalog = catalog;
+            return this;
+        }
+
+        public Builder setPrice(double price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder setImagePath(String imagePath) {
+            this.imagePath = imagePath;
+            return this;
+        }
+
+        public Builder setRemaining(int remaining) {
+            this.remaining = remaining;
+            return this;
+        }
+
+        public Builder setPublisher(String publisher) {
+            this.publisher = publisher;
+            return this;
+        }
+
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Book build() {
+            return new Book(this);
+        }
+    }
+
+    public int getQuantity() {
+        return BorrowData.getQuantity(isbn);
     }
 }

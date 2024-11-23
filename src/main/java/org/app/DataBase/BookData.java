@@ -32,19 +32,19 @@ public class BookData extends DataBaseAccessor {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Book book = new Book(
-                        resultSet.getString("title"),
-                        resultSet.getString("author"),
-                        resultSet.getInt("idBook"),
-                        resultSet.getString("ISBN"),
-                        resultSet.getString("description"),
-                        resultSet.getString("content"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("image_path"),
-                        resultSet.getString("catalog"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getString("publisher")
-                );
+                Book book = new Book.Builder()
+                        .setIdBook(resultSet.getInt("idBook"))
+                        .setTitle(resultSet.getString("title"))
+                        .setAuthor(resultSet.getString("author"))
+                        .setDescription(resultSet.getString("description"))
+                        .setPrice(resultSet.getDouble("price"))
+                        .setContent(resultSet.getString("content"))
+                        .setCatalog(resultSet.getString("catalog"))
+                        .setIsbn(resultSet.getString("ISBN"))
+                        .setPublisher(resultSet.getString("publisher"))
+                        .setRemaining(resultSet.getInt("remaining"))
+                        .setImagePath(resultSet.getString("image_path"))
+                        .build();
                 books.add(book);
             }
         } catch (Exception e) {

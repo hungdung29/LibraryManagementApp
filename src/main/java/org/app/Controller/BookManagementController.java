@@ -1,20 +1,26 @@
 package org.app.Controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import org.app.DataBase.BookData;
+import org.app.DataBase.BorrowData;
+import org.app.MainApp;
 import org.app.Object.Book;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BookManagementController implements Initializable {
+public class BookManagementController extends BookController implements Initializable {
     public TextField searchTextField;
-    public Button searchButton;
 
     public TableView bookTable;
     public TableColumn titleColumn;
@@ -29,30 +35,67 @@ public class BookManagementController implements Initializable {
     public ListView commentList;
 
     public Button deleteButton;
+    public Button addButton;
 
-    ObservableList<Book> books;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // set up column for table
+        configBookManagementTable();
+        infoBookVBox.setVisible(false);
 
-    public void onSearchButtonClicked(ActionEvent actionEvent) {
+        // pass data to books
+        getDataEntireBook();
+
+        // set content of book table
+        bookTable.setItems(shownBooks);
+
+        bookTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                infoBookVBox.setVisible(true);
+
+                Book selectedBook = (Book) newValue;
+                handleBookSelection("admin", selectedBook);
+            } else {
+                infoBookVBox.setVisible(false);
+            }
+        });
+    }
+
+    @Override
+    public void handleBookSelection(String username, Book selectedBook) {
+        titleBookDetailLabel.setText("Title: " + selectedBook.getTitle());
+        publisherDetailLabel.setText("Publisher: " + selectedBook.getPublisher());
+        descriptionDetailLabel.setText("Description: " + selectedBook.getDescription());
+        commentList.setItems(BookData.getCommentOfBook(selectedBook.getIsbn()));
+    }
+
+    @Override
+    public void getDataEntireBook() {
+        BookData.getDataAllBook(entireBooks);
+        cloneListBook();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
-    private void handleBookSelection(Book selectedBook) {
-    }
-
-    private void configTable() {
+    private void configBookManagementTable() {
         bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        isbnBorrowColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        super.configTable();
+        quantityColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures,
+                ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures cellDataFeatures) {
+                return new SimpleIntegerProperty(((Book)
+                        cellDataFeatures.getValue()).getQuantity()).asObject();
+            }
+        });
     }
 
+    public void onAddButtonClicked(ActionEvent actionEvent) {
+//        try {
+//            MainApp.navigateToScene("add-book-view.fxml");
+//        } catch (Exception e) { e.printStackTrace(); }
+    }
 }

@@ -16,8 +16,6 @@
         <Label fx:id="numTotalBooksLabel" text="Total book(s):"      />
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
             <children>
-                <Button fx:id="addBookButton" mnemonicParsing="false"
-                        onAction="#onAddBookButton" text="Borrow book" />
                 <Button fx:id="logOutButton" mnemonicParsing="false"
                         onAction="#onLogOutButton" text="Log out" />
             </children>

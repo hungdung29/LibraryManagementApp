@@ -77,19 +77,19 @@ public class BorrowData extends DataBaseAccessor {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Book book = new Book(
-                        resultSet.getString("title"),
-                        resultSet.getString("author"),
-                        resultSet.getInt("idBook"),
-                        resultSet.getString("ISBN"),
-                        resultSet.getString("description"),
-                        resultSet.getString("content"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("image_path"),
-                        resultSet.getString("catalog"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getString("publisher")
-                );
+                Book book = new Book.Builder()
+                        .setTitle(resultSet.getString("title"))
+                        .setAuthor(resultSet.getString("author"))
+                        .setIdBook(resultSet.getInt("idBook"))
+                        .setIsbn(resultSet.getString("ISBN"))
+                        .setDescription(resultSet.getString("description"))
+                        .setContent(resultSet.getString("content"))
+                        .setPrice(resultSet.getDouble("price"))
+                        .setImagePath(resultSet.getString("image_path"))
+                        .setCatalog(resultSet.getString("catalog"))
+                        .setRemaining(resultSet.getInt("remaining"))
+                        .setPublisher(resultSet.getString("publisher"))
+                        .build();
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -109,19 +109,19 @@ public class BorrowData extends DataBaseAccessor {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Book book = new Book(
-                        resultSet.getString("title"),
-                        resultSet.getString("author"),
-                        resultSet.getInt("idBook"),
-                        resultSet.getString("ISBN"),
-                        resultSet.getString("description"),
-                        resultSet.getString("content"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("image_path"),
-                        resultSet.getString("catalog"),
-                        resultSet.getInt("remaining"),
-                        resultSet.getString("publisher")
-                );
+                Book book = new Book.Builder()
+                        .setTitle(resultSet.getString("title"))
+                        .setAuthor(resultSet.getString("author"))
+                        .setIdBook(resultSet.getInt("idBook"))
+                        .setIsbn(resultSet.getString("ISBN"))
+                        .setDescription(resultSet.getString("description"))
+                        .setContent(resultSet.getString("content"))
+                        .setPrice(resultSet.getDouble("price"))
+                        .setImagePath(resultSet.getString("image_path"))
+                        .setCatalog(resultSet.getString("catalog"))
+                        .setRemaining(resultSet.getInt("remaining"))
+                        .setPublisher(resultSet.getString("publisher"))
+                        .build();
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -277,8 +277,8 @@ public class BorrowData extends DataBaseAccessor {
         return borrowedBooks;
     }
 
-    public static Object getNumberOfBorrowedBooks(String username) {
-        String query = "SELECT COUNT(*) FROM borrows WHERE user_username = ?";
+    public static int getNumberOfBorrowedBooks(String username) {
+        String query = "SELECT COUNT(id_borrow) FROM borrows WHERE user_username = ? and date_give_back is null";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -286,6 +286,30 @@ public class BorrowData extends DataBaseAccessor {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static int getQuantity(String isbn) {
+        String query1 = "SELECT books.remaining as numRemaining FROM books WHERE books.ISBN = ?";
+        String query2 = "SELECT COUNT(id_borrow) as countBooks FROM borrows " +
+                "WHERE book_idBook = (SELECT idBook FROM books WHERE ISBN = ?) " +
+                "AND date_give_back IS NULL";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query1);
+            PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
+            preparedStatement.setString(1, isbn);
+            preparedStatement2.setString(1, isbn);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+            if (resultSet.next() && resultSet2.next()) {
+                return resultSet.getInt("numRemaining")
+                        + resultSet2.getInt("countBooks");
             }
         } catch (SQLException e) {
             e.printStackTrace();

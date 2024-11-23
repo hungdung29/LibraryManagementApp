@@ -1,6 +1,7 @@
 package org.app.Controller;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import org.app.DataBase.BorrowData;
 import org.app.DataBase.UserData;
 import org.app.Object.User;
@@ -86,7 +88,14 @@ public class MemberManagementController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-//        numBorrowedBookColumn.setCellValueFactory();
+        numBorrowedBookColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures,
+                ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures cellDataFeatures) {
+                return new SimpleIntegerProperty(((User)
+                        cellDataFeatures.getValue()).getNumBorrowedBooks());
+            }
+        });
     }
 
 

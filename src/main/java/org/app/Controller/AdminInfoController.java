@@ -16,7 +16,6 @@ public class AdminInfoController implements Initializable {
     public Label numBorrowedBooksLabel;
     public Label numTotalBooksLabel;
     
-    public Button addBookButton;
     public Button logOutButton;
 
     @Override
@@ -35,8 +34,5 @@ public class AdminInfoController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void onAddBookButton(ActionEvent actionEvent) {
     }
 }
