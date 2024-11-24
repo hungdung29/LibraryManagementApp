@@ -68,17 +68,21 @@ public class BorrowBookController extends BookController implements Initializabl
         commentList.setItems(comments);
         commentList.setPrefHeight( commentList.getFixedCellSize() * Math.min(comments.size() + 2, 10) );
 
+        // check whether this book is borrowed by user
+        if (BorrowData.isBorrowingBook(username, book.getIdBook())) {
+            // book is borrowed by this user
+            borrowButton.setText("Borrowed");
+            borrowButton.setDisable(true);
+            return;
+        }
+
+        // check valid quantity book
         if (book.getRemaining() == 0) {
             borrowButton.setText("All been borrowed");
             borrowButton.setDisable(true);
         } else {
             borrowButton.setText("Borrow");
             borrowButton.setDisable(false);
-        }
-        if (BorrowData.isBorrowingBook(username, book.getIdBook())) {
-            // book is borrowed by this user
-            borrowButton.setText("Borrowed");
-            borrowButton.setDisable(true);
         }
     }
 

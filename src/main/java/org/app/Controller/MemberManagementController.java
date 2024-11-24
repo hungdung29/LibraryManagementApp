@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MemberManagementController implements Initializable {
-
     public TextField searchTextField;
     public Button searchButton;
     
@@ -101,9 +100,11 @@ public class MemberManagementController implements Initializable {
 
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
+        users = UserData.getAllUsers();
         String keyword = searchTextField.getText();
 
         if (keyword == null || keyword.isEmpty()) {
+            memberTable.setItems(users);
             return;
         }
         FilteredList<User> filteredUsers = new FilteredList<>(users, user ->
@@ -117,6 +118,4 @@ public class MemberManagementController implements Initializable {
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
     }
-
-
 }
