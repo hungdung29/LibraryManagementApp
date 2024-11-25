@@ -142,4 +142,27 @@ public class BookData extends DataBaseAccessor {
         }
         return 0;
     }
+
+    public static void addBook (Book book) {
+        String query = "INSERT INTO books (title, author, description, price, content, " +
+                "catalog, ISBN, publisher, remaining, image_path) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setString(3, book.getDescription());
+            preparedStatement.setDouble(4, book.getPrice());
+            preparedStatement.setString(5, book.getContent());
+            preparedStatement.setString(6, book.getCatalog());
+            preparedStatement.setString(7, book.getIsbn());
+            preparedStatement.setString(8, book.getPublisher());
+            preparedStatement.setInt(9, book.getRemaining());
+            preparedStatement.setString(10, book.getImagePath());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

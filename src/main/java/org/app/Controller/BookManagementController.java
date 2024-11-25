@@ -94,8 +94,8 @@ public class BookManagementController extends BookController implements Initiali
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent) {
-//        try {
-//            MainApp.navigateToScene("add-book-view.fxml");
-//        } catch (Exception e) { e.printStackTrace(); }
+        try {
+            MainApp.navigateToScene("add-book-view.fxml");
+        } catch (Exception e) { e.printStackTrace(); }
     }
 }

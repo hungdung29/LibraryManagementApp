@@ -13,6 +13,7 @@ module org.app {
     requires com.almasb.fxgl.all;
     requires jdk.compiler;
     requires org.xerial.sqlitejdbc;
+    requires com.google.gson;
 
     opens org.app to javafx.fxml;
     exports org.app;
