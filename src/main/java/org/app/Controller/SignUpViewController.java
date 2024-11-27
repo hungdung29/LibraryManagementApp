@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
@@ -22,6 +19,8 @@ public class SignUpViewController {
     public TextField nameTextField;
     public TextField addressTextField;
     public TextField phoneNumberTextField;
+    public TextField emailTextField;
+    public DatePicker birthdayPicker;
 
     public Button signUpButton;
     public Button backButton;
@@ -32,6 +31,8 @@ public class SignUpViewController {
     private String name;
     private String address;
     private String phoneNumber;
+    private String email;
+    private String birthday;
 
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
         if ( !extractData() ) {
@@ -45,6 +46,8 @@ public class SignUpViewController {
                     .setName(name)
                     .setAddress(address)
                     .setPhoneNumber(phoneNumber)
+                    .setBirthday(birthday)
+                    .setEmail(email)
                     .build();
 
             HandleUserAccount.addAccount(user);
@@ -85,6 +88,8 @@ public class SignUpViewController {
         name = nameTextField.getText();
         address = addressTextField.getText();
         phoneNumber = phoneNumberTextField.getText();
+        email = emailTextField.getText();
+        birthday = birthdayPicker.getValue().toString();
 
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() ||
                 name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {

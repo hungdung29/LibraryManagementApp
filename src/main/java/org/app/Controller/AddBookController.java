@@ -30,7 +30,7 @@ public class AddBookController {
 
     public void onBackButtonClicked(ActionEvent actionEvent) {
         try {
-            MainApp.navigateToScene("admin-view.fxml#book_management");
+            MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,7 +48,6 @@ public class AddBookController {
     }
 
     public void onImportButtonClicked(ActionEvent actionEvent) {
-        
         BookData.addBook(bookSearched);
     }
 }

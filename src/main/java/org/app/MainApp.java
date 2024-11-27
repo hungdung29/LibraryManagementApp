@@ -44,10 +44,10 @@ public class MainApp extends Application {
         currentStage.setScene(scene);
 
         if (fragment != null) {
-            TabPane tabPane = (TabPane) scene.lookup("#adminTabPane");
+            TabPane tabPane = (TabPane) scene.lookup("#" + fragment);
             if (tabPane != null) {
                 for (Tab tab : tabPane.getTabs()) {
-                    if (tab.getId().equals(fragment)) {
+                    if (tab.getId().equals(parts[2])) {
                         tabPane.getSelectionModel().select(tab);
                         break;
                     }

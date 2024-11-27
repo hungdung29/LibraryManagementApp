@@ -18,6 +18,8 @@ public class UserInfoController implements Initializable {
     public Label usernameLabel;
     public Label addressLabel;
     public Label phoneLabel;
+    public Label emailLabel;
+    public Label birthdayLabel;
 
     public Button changePassButton;
     public Button logOutButton;
@@ -30,6 +32,8 @@ public class UserInfoController implements Initializable {
         addressLabel.setText("Address: " + user.getAddress());
         nameLabel.setText("Name: " + user.getName());
         phoneLabel.setText("Phone Number: " + user.getPhoneNumber());
+        emailLabel.setText("Email: " + user.getEmail());
+        birthdayLabel.setText("Birthday: " + user.getBirthday());
     }
 
     public void onChangePassButtonClicked(ActionEvent actionEvent) {

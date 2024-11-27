@@ -67,7 +67,9 @@ public class HandleUserAccount extends DataBaseAccessor {
     public static void addAccount(User user) {
         // add account to database
         PreparedStatement preparedStatement;
-        String query = "insert into users (Name, accountName, password, phoneNumber, address) VALUES (?,?,?,?,?)";
+        String query = "insert into " +
+                "users (Name, accountName, password, phoneNumber, address, email, birthday) " +
+                "VALUES (?,?,?,?,?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getName());
@@ -75,6 +77,8 @@ public class HandleUserAccount extends DataBaseAccessor {
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, user.getPhoneNumber());
             preparedStatement.setString(5, user.getAddress());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getBirthday());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

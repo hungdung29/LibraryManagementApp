@@ -7,7 +7,7 @@
 <VBox alignment="CENTER" prefHeight="382.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserInfoController"
         stylesheets="@css/user-info-view.css">
-    <Label text="User information">
+    <Label text="USER INFORMATION">
         <font>
             <Font size="33.0"/>
         </font>
@@ -29,6 +29,16 @@
             </font>
         </Label>
         <Label fx:id="phoneLabel" text="Phone number: ">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Label>
+        <Label fx:id="emailLabel" text="Email: ">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Label>
+        <Label fx:id="birthdayLabel" text="Birthday: ">
             <font>
                 <Font size="16.0"/>
             </font>
