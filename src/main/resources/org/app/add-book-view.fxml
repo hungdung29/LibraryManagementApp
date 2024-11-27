@@ -4,69 +4,65 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="400.0" prefWidth="600.0"
-      fx:controller="org.app.Controller.AddBookController"
-      stylesheets="@css/add-book-view.css"
-      xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.AddBookController">
    <children>
-      <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0">
+      <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
+         <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
+         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
+         <Button fx:id="importButton" mnemonicParsing="false" onAction="#onImportButtonClicked" text="Import" />
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
          <children>
-            <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
-               <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
-               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
-               <Button fx:id="importButton" mnemonicParsing="false" onAction="#onImportButtonClicked" text="Import" />
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
-                  <TextField fx:id="bookNameField" prefHeight="26.0" prefWidth="200.0" promptText="title" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
-                  <TextField fx:id="authorField" prefHeight="26.0" prefWidth="200.0" promptText="author" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:" />
-                  <TextField fx:id="publisherField" prefHeight="26.0" prefWidth="200.0" promptText="publisher" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
-                  <TextField fx:id="isbnField" prefHeight="26.0" prefWidth="200.0" promptText="ISBN" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
-                  <TextField fx:id="quantityField" prefHeight="26.0" prefWidth="200.0" promptText="quantity" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0">
-               <children>
-                  <Button fx:id="addBookButton" mnemonicParsing="false" onAction="#onAddBookButtonClicked" prefHeight="40.0" prefWidth="115.0" text="Add Book" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
-               </children>
-            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
+            <TextField fx:id="bookNameField" prefHeight="26.0" prefWidth="200.0" promptText="title" HBox.hgrow="ALWAYS" />
          </children>
-      </VBox>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
+            <TextField fx:id="authorField" prefHeight="26.0" prefWidth="200.0" promptText="author" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:" />
+            <TextField fx:id="publisherField" prefHeight="26.0" prefWidth="200.0" promptText="publisher" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
+            <TextField fx:id="isbnField" prefHeight="26.0" prefWidth="200.0" promptText="ISBN" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+            <TextField fx:id="quantityField" prefHeight="26.0" prefWidth="200.0" promptText="quantity" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="286.0" spacing="10.0">
+         <children>
+            <Button fx:id="addBookButton" mnemonicParsing="false" onAction="#onAddBookButtonClicked" text="Add Book" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
    </children>
-</Pane>
+   <opaqueInsets>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+   </padding>
+</VBox>
