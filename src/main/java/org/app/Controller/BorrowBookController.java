@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
 import org.app.Object.Book;
@@ -17,6 +19,7 @@ public class BorrowBookController extends BookController implements Initializabl
     public Label titleBookDetailLabel;
     public Label publisherDetailLabel;
     public Label descriptionDetailLabel;
+    public ImageView bookImage;
 
     public ListView<String> commentList;
 
@@ -63,6 +66,11 @@ public class BorrowBookController extends BookController implements Initializabl
         titleBookDetailLabel.setText("Title: " + book.getTitle());
         publisherDetailLabel.setText("Publisher: " + book.getPublisher());
         descriptionDetailLabel.setText("Description: " + book.getDescription());
+        if (book.getImagePath() != null) {
+            bookImage.setImage(new Image(book.getImagePath()));
+        } else {
+            bookImage.setImage(new Image("file:image/NoAvailable.jpg"));
+        }
 
         ObservableList<String> comments = BookData.getCommentOfBook(book.getIsbn());
         commentList.setItems(comments);
