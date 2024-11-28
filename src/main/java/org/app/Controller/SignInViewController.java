@@ -2,17 +2,22 @@ package org.app.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SignInViewController {
+public class SignInViewController implements Initializable {
+    public VBox loginForm;
     public TextField usernameTextField;
     public PasswordField passwordTextField;
     public Button logInButton;
@@ -22,6 +27,15 @@ public class SignInViewController {
     public static String username = "default";
 //    private String username;
     private String password;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loginForm.addEventFilter(ActionEvent.ACTION, event -> {
+            onLogInButtonClicked(null);
+            event.consume();
+        });
+    }
 
     /**
      * Handle when button log in is clicked

@@ -6,11 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.converter.IntegerStringConverter;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
 import org.app.MainApp;
@@ -21,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class BookManagementController extends BookController implements Initializable {
     public TextField searchTextField;
+    public SplitPane bookForm;
 
     public TableView bookTable;
     public TableColumn titleColumn;
@@ -36,6 +41,7 @@ public class BookManagementController extends BookController implements Initiali
 
     public Button deleteButton;
     public Button addButton;
+    public Button modifyButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,6 +55,7 @@ public class BookManagementController extends BookController implements Initiali
         // set content of book table
         bookTable.setItems(shownBooks);
 
+        // Add a listener for row selection
         bookTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -60,6 +67,8 @@ public class BookManagementController extends BookController implements Initiali
                 infoBookVBox.setVisible(false);
             }
         });
+        bookTable.setEditable(false);
+        deleteButton.setDisable(true);
     }
 
     @Override
@@ -77,6 +86,13 @@ public class BookManagementController extends BookController implements Initiali
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {
+        Book selectedBook = (Book) bookTable.getSelectionModel().getSelectedItem();
+        if (selectedBook != null) {
+            BorrowData.deleteBook(selectedBook);
+            entireBooks.remove(selectedBook);
+            getDataEntireBook();
+            bookTable.setItems(shownBooks);
+        }
     }
 
     private void configBookManagementTable() {
@@ -91,11 +107,36 @@ public class BookManagementController extends BookController implements Initiali
                         cellDataFeatures.getValue()).getQuantity()).asObject();
             }
         });
+        quantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        quantityColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Book, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Book, Integer> cellEditEvent) {
+                Book book = cellEditEvent.getRowValue();
+                BookData.updateRemainingBook(book.getIdBook(),
+                        cellEditEvent.getNewValue() - cellEditEvent.getOldValue());
+            }
+        });
     }
 
     public void onAddButtonClicked(ActionEvent actionEvent) {
         try {
             MainApp.navigateToScene("add-book-view.fxml");
         } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void onModifyButtonClicked(ActionEvent actionEvent) {
+        if (modifyButton.getText().equals("Modify")) {
+            bookTable.setEditable(true);
+            modifyButton.setText("Save");
+            deleteButton.setDisable(false);
+        } else {
+            bookTable.setEditable(false);
+            modifyButton.setText("Modify");
+            deleteButton.setDisable(true);
+
+            //refresh table
+            getDataEntireBook();
+            bookTable.setItems(shownBooks);
+        }
     }
 }

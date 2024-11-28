@@ -316,4 +316,16 @@ public class BorrowData extends DataBaseAccessor {
         }
         return 0;
     }
+
+    public static void deleteBook(Book selectedBook) {
+        String query = "delete from books where ISBN = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, selectedBook.getIsbn());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

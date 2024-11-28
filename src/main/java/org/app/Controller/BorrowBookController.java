@@ -78,7 +78,7 @@ public class BorrowBookController extends BookController implements Initializabl
 
         // check valid quantity book
         if (book.getRemaining() == 0) {
-            borrowButton.setText("All been borrowed");
+            borrowButton.setText("All have been borrowed");
             borrowButton.setDisable(true);
         } else {
             borrowButton.setText("Borrow");

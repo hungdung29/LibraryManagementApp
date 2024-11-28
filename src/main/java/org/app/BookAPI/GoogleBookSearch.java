@@ -19,6 +19,7 @@ public class GoogleBookSearch {
             JsonArray items = responseJson.getAsJsonArray("items");
 
             if (items == null || items.size() == 0) {
+                System.out.println("No book found");
                 return null;
             }
 
@@ -106,6 +107,6 @@ public class GoogleBookSearch {
                 return identifier.get("identifier").getAsString();
             }
         }
-        return null;
+        return identifiers.get(0).getAsJsonObject().get("identifier").getAsString();
     }
 }
