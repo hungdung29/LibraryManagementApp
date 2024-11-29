@@ -11,10 +11,11 @@ public class BorrowRequest {
     private int bookID;
     private String dateRequested;
 
-    public BorrowRequest(String userName, String bookTitle, String dateRequested) {
+    public BorrowRequest(String userName, int bookID,  String bookTitle, String dateRequested) {
         this.checkBox = new CheckBox();
         this.userName = userName;
         this.bookTitle = bookTitle;
+        this.bookID = bookID;
         this.dateRequested = dateRequested;
     }
 

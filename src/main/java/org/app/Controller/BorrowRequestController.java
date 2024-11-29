@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
+import org.app.DataBase.RequestData;
 import org.app.Object.BorrowRequest;
 
 import java.net.URL;
@@ -35,11 +36,7 @@ public class BorrowRequestController  implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         configTable();
 
-        borrowRequests.add(
-                new BorrowRequest("tho", "tho", "tho")
-        );
-
-
+        RequestData.getDataAllRequest(borrowRequests);
 
         borrowRequestTable.setItems(borrowRequests);
     }
@@ -48,9 +45,12 @@ public class BorrowRequestController  implements Initializable {
     public void onAcceptButtonClicked(ActionEvent actionEvent) {
         for (BorrowRequest borrowRequest : borrowRequests) {
             if (borrowRequest.getCheckBox().isSelected()) {
-                BorrowData.addBorrowInfo(SignInViewController.username, borrowRequest.getBookID());
+                System.out.println(borrowRequest.getBookTitle());
+
+                BorrowData.addBorrowInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
                 BookData.updateRemainingBook(borrowRequest.getBookID(), -1);
 
+                RequestData.deleteRequestInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
                 borrowRequests.remove(borrowRequest);
             }
         }
@@ -62,6 +62,8 @@ public class BorrowRequestController  implements Initializable {
     public void onRejectButtonClicked(ActionEvent actionEvent) {
         for (BorrowRequest borrowRequest : borrowRequests) {
             if (borrowRequest.getCheckBox().isSelected()) {
+                RequestData.deleteRequestInfo(SignInViewController.username, borrowRequest.getBookID());
+
                 borrowRequests.remove(borrowRequest);
             }
         }
