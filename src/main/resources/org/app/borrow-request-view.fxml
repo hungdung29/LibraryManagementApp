@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="492.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowRequestController">
-    <TableView fx:id="borrowRequestTable" prefHeight="488.0" prefWidth="529.0">
+    <TableView fx:id="borrowRequestTable" prefHeight="488.0" prefWidth="529.0" VBox.vgrow="ALWAYS">
       <columns>
           <TableColumn fx:id="selectColumn" prefWidth="69.41229444742203">
             <graphic>
-               <CheckBox fx:id="selectAllCheckBox" mnemonicParsing="false" text="All" />
+               <CheckBox fx:id="selectAllCheckBox" mnemonicParsing="false" onAction="#onAllCheckBoxClicked" text="All" />
             </graphic>
           </TableColumn>
 
@@ -23,8 +23,8 @@
       </columns>
     </TableView>
     <HBox alignment="CENTER" prefHeight="103.0" prefWidth="549.0" spacing="10.0">
-        <Button fx:id="acceptButton" mnemonicParsing="false" text="Accept" />
-        <Button fx:id="RejectButton" mnemonicParsing="false" text="Reject" />
+        <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#onAcceptButtonClicked" text="Accept" />
+        <Button fx:id="RejectButton" mnemonicParsing="false" onAction="#onRejectButtonClicked" text="Reject" />
     </HBox>
    <padding>
       <Insets left="10.0" right="10.0" top="10.0" />

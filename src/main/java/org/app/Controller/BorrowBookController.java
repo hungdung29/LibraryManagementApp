@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
+import org.app.DataBase.RequestData;
 import org.app.Object.Book;
 
 import java.net.URL;
@@ -85,7 +86,7 @@ public class BorrowBookController extends BookController implements Initializabl
         }
 
         // check whether this book already request to borrow
-        if (BorrowData.isPending(username, book.getIdBook())) {
+        if (RequestData.isPending(username, book.getIdBook())) {
             borrowButton.setText("Pending");
             borrowButton.setDisable(true);
             return;
@@ -109,7 +110,7 @@ public class BorrowBookController extends BookController implements Initializabl
 //        BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
 //
 //        BookData.updateRemainingBook(selectedBook.getIdBook(), -1);
-        BorrowData.addRequestInfo(SignInViewController.username, selectedBook.getIdBook());
+        RequestData.addRequestInfo(SignInViewController.username, selectedBook.getIdBook());
 
         // pass data to books
         BookData.getDataAllBook(entireBooks);

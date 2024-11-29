@@ -37,41 +37,6 @@ public class BorrowData extends DataBaseAccessor {
         }
     }
 
-
-    // add borrow request info
-    public static void addRequestInfo(String username, int idBok) {
-        PreparedStatement preparedStatement;
-        String query = "insert into borrows_request(date_request, book_idBook, user_username) values (datetime('now'), ?, ?)";
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, idBok);
-            preparedStatement.setString(2, username);
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    // check whether this book already request to borrow
-    public static boolean isPending(String username, int idBook) {
-        PreparedStatement preparedStatement;
-        String query = "select * from borrows_request where user_username = ? and book_idBook = ?";
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, username);
-            preparedStatement.setInt(2, idBook);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return resultSet.next();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
-    }
-
     /**
      * Check whether username has borrowing specified book
      * @param username username
@@ -164,39 +129,6 @@ public class BorrowData extends DataBaseAccessor {
         }
     }
 
-//    private static void getDataBook(String username,
-//                                    boolean isReturned, ObservableList<Book> books) {
-//        books.clear();
-//        String query = "SELECT * FROM books WHERE idBook IN " +
-//                "(SELECT book_idBook FROM borrows " +
-//                "WHERE user_username = ? and date_give_back is? null)";
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(query);
-//            preparedStatement.setString(1, username);
-//            preparedStatement.setString(2, isReturned ? " not" : "");
-//
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                Book book = new Book(
-//                        resultSet.getString("title"),
-//                        resultSet.getString("author"),
-//                        resultSet.getInt("idBook"),
-//                        resultSet.getString("ISBN"),
-//                        resultSet.getString("description"),
-//                        resultSet.getString("content"),
-//                        resultSet.getDouble("price"),
-//                        resultSet.getString("image_path"),
-//                        resultSet.getString("catalog"),
-//                        resultSet.getInt("remaining"),
-//                        resultSet.getString("publisher")
-//                );
-//                books.add(book);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public static String getBorrowDate(String username, Book book) {
         String query = "select date_borrow from borrows where user_username = ? and book_idBook = ?";
         try {
@@ -215,7 +147,6 @@ public class BorrowData extends DataBaseAccessor {
     }
 
     public static void updateReturnDate(String username, Book selectedBook) {
-//        String query = "delete from borrows where user_username = ? and book_idBook = ?";
         String query = "update borrows set date_give_back = date('now') where user_username = ? and book_idBook = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
