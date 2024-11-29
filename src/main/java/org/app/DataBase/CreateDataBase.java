@@ -53,8 +53,8 @@ public class CreateDataBase extends DataBaseAccessor {
                book_idBook INTEGER NOT NULL,
                user_username INTEGER NOT NULL,
                comment TEXT,
-               FOREIGN KEY (book_idBook) REFERENCES book(idBook),
-               FOREIGN KEY (user_username) REFERENCES user(accountName)
+               FOREIGN KEY (book_idBook) REFERENCES books(idBook),
+               FOREIGN KEY (user_username) REFERENCES users(accountName)
             );
         """;
 
@@ -65,10 +65,21 @@ public class CreateDataBase extends DataBaseAccessor {
                 book_ISBN INTEGER NOT NULL,
                 comment TEXT NOT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (book_ISBN) REFERENCES books (ISBN),
-                FOREIGN KEY (user_username) REFERENCES user(accountName)
+                FOREIGN KEY (book_ISBN) REFERENCES books(ISBN),
+                FOREIGN KEY (user_username) REFERENCES users(accountName)
         );
-        """; // add comments table
+        """;
+
+        String query5 = """
+                CREATE TABLE IF NOT EXISTS borrows_request (
+                   id_borrow_request INTEGER PRIMARY KEY AUTOINCREMENT,
+                   date_request DATE NOT NULL,
+                   book_idBook INTEGER NOT NULL,
+                   user_username INTEGER NOT NULL,
+                   FOREIGN KEY (book_idBook) REFERENCES books(idBook),
+                   FOREIGN KEY (user_username) REFERENCES users(accountName)
+                );
+               """;
 
         try (Statement stmt = connection.createStatement()) {
 //            // Execute the SQL statement
@@ -76,6 +87,7 @@ public class CreateDataBase extends DataBaseAccessor {
             stmt.execute(query2);
             stmt.execute(query3);
             stmt.execute(query4);
+            stmt.execute(query5);
 
             System.out.println("Database has been created.");
         } catch (SQLException e) {

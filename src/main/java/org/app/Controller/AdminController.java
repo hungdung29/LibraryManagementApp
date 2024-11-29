@@ -8,4 +8,5 @@ public class AdminController {
     public Tab member_management;
     public Tab book_management;
     public TabPane adminTabPane;
+    public Tab borrow_request_tab;
 }

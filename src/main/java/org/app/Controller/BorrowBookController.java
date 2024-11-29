@@ -84,6 +84,13 @@ public class BorrowBookController extends BookController implements Initializabl
             return;
         }
 
+        // check whether this book already request to borrow
+        if (BorrowData.isPending(username, book.getIdBook())) {
+            borrowButton.setText("Pending");
+            borrowButton.setDisable(true);
+            return;
+        }
+
         // check valid quantity book
         if (book.getRemaining() == 0) {
             borrowButton.setText("All have been borrowed");
@@ -95,13 +102,14 @@ public class BorrowBookController extends BookController implements Initializabl
     }
 
     public void onBorrowButtonClicked(ActionEvent actionEvent) {
-        borrowButton.setText("Borrowed");
+        borrowButton.setText("Pending");
         borrowButton.setDisable(true);
 
         // add borrow inform to database
-        BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
-
-        BookData.updateRemainingBook(selectedBook.getIdBook(), -1);
+//        BorrowData.addBorrowInfo(SignInViewController.username, selectedBook.getIdBook());
+//
+//        BookData.updateRemainingBook(selectedBook.getIdBook(), -1);
+        BorrowData.addRequestInfo(SignInViewController.username, selectedBook.getIdBook());
 
         // pass data to books
         BookData.getDataAllBook(entireBooks);
