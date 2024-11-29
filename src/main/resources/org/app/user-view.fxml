@@ -4,19 +4,19 @@
 
 <TabPane prefHeight="400.0" prefWidth="600.0" side="LEFT" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController" stylesheets="@css/user-view.css">
 
-    <Tab fx:id="user_info" text="User information">
+    <Tab fx:id="user_info" text="User information" closable="false">
         <fx:include source="user-info-view.fxml" />
     </Tab>
 
-    <Tab fx:id="borrow_book" text="Borrow book">
+    <Tab fx:id="borrow_book" text="Borrow book" closable="false">
         <fx:include source="borrow-book-view.fxml" />
     </Tab>
 
-    <Tab fx:id="return_book" text="Return book">
+    <Tab fx:id="return_book" text="Return book" closable="false">
         <fx:include source="return-book-view.fxml" />
     </Tab>
 
-    <Tab fx:id="history" text="History">
+    <Tab fx:id="history" text="History" closable="false">
         <fx:include source="history-view.fxml" />
     </Tab>
 
