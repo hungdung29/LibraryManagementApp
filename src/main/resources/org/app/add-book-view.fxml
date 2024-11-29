@@ -13,7 +13,6 @@
       <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
          <TextField fx:id="searchTextField" promptText="Search by ISBN" HBox.hgrow="ALWAYS" />
          <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
-         <Button fx:id="importButton" mnemonicParsing="false" onAction="#onImportButtonClicked" text="Import" />
       </HBox>
 
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="300.0">

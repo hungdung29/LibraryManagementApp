@@ -26,10 +26,6 @@ public class AddBookController {
 
     Book searchedBook = new Book.Builder().build();
 
-    public void onAddBookButtonClicked(ActionEvent actionEvent) {
-
-    }
-
     public void onBackButtonClicked(ActionEvent actionEvent) {
         try {
             MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
@@ -53,8 +49,9 @@ public class AddBookController {
         }
     }
 
-    public void onImportButtonClicked(ActionEvent actionEvent) {
+    public void onAddBookButtonClicked(ActionEvent actionEvent) {
         if (searchedBook.getIsbn() != null) {
+            searchedBook.setRemaining(searchedBook.getRemaining() + Integer.parseInt(quantityField.getText()));
             BookData.addBook(searchedBook);
             try {
                 MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
@@ -63,7 +60,8 @@ public class AddBookController {
             }
         }
         else {
-            messageLabel.setText("Import book failed");
+
+            messageLabel.setText("Add book failed");
         }
     }
 }

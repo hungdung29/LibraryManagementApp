@@ -154,6 +154,10 @@ public class Book {
         }
     }
 
+    public void setRemaining(int remaining) {
+        this.remaining = remaining;
+    }
+
     public int getQuantity() {
         return BorrowData.getQuantity(isbn);
     }

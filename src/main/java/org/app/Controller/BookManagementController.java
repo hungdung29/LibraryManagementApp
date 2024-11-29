@@ -96,8 +96,6 @@ public class BookManagementController extends BookController implements Initiali
     }
 
     private void configBookManagementTable() {
-        bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
         super.configTable();
         quantityColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures,
                 ObservableValue>() {
