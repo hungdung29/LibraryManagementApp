@@ -100,8 +100,8 @@ public class User {
     }
 
 
-    public int getNumBorrowedBooks() {
-        return BorrowData.getNumberOfBorrowedBooks(username);
+    public int getNumBorrowingBooks() {
+        return BorrowData.getNumberOfBorrowingBooks(username);
     }
 }
 

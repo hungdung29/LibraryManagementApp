@@ -255,11 +255,11 @@ public class BorrowData extends DataBaseAccessor {
         return 0;
     }
 
-    public static ObservableList<BorrowInfo> getBorrowedBooks(String username) {
+    public static ObservableList<BorrowInfo> getBorrowingBooks(String username) {
         ObservableList<BorrowInfo> borrowedBooks = FXCollections.observableArrayList();
         String query = "SELECT books.title, borrows.date_borrow FROM borrows " +
                 "JOIN books ON borrows.book_idBook = books.idBook " +
-                "WHERE borrows.user_username = ?";
+                "WHERE borrows.user_username = ? AND borrows.date_give_back IS NULL";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -277,7 +277,7 @@ public class BorrowData extends DataBaseAccessor {
         return borrowedBooks;
     }
 
-    public static int getNumberOfBorrowedBooks(String username) {
+    public static int getNumberOfBorrowingBooks(String username) {
         String query = "SELECT COUNT(id_borrow) FROM borrows WHERE user_username = ? and date_give_back is null";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);

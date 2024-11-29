@@ -66,7 +66,7 @@ public class MemberManagementController implements Initializable {
 
     private void handleMemberSelection(User selectedUser) {
         configDetailTable();
-        memberDetailTable.setItems(BorrowData.getBorrowedBooks(selectedUser.getUsername()));
+        memberDetailTable.setItems(BorrowData.getBorrowingBooks(selectedUser.getUsername()));
 
         emailLabel.setText("Email: " + selectedUser.getEmail());
         birthdayLabel.setText("Birthday: " + selectedUser.getBirthday());
@@ -92,7 +92,7 @@ public class MemberManagementController implements Initializable {
             @Override
             public ObservableValue call(TableColumn.CellDataFeatures cellDataFeatures) {
                 return new SimpleIntegerProperty(((User)
-                        cellDataFeatures.getValue()).getNumBorrowedBooks());
+                        cellDataFeatures.getValue()).getNumBorrowingBooks());
             }
         });
     }
