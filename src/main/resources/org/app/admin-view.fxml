@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 
-<TabPane fx:id="adminTabPane" prefHeight="400.0" prefWidth="600.0" side="LEFT"
-         xmlns="http://javafx.com/javafx/17.0.12"
-         xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="org.app.Controller.AdminController"
-         stylesheets="@css/admin-view.css">
+<TabPane fx:id="adminTabPane" prefHeight="500.0" prefWidth="819.0" side="LEFT" stylesheets="@css/admin-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.AdminController">
 
-   <Tab fx:id="admin_info" text="Admin">
-      <fx:include source="admin-info-view.fxml"/>
+   <Tab fx:id="admin_info" closable="false" text="Admin">
+      <fx:include source="admin-info-view.fxml" />
    </Tab>
 
-   <Tab fx:id="member_management" text="Member">
-      <fx:include source="member-management-view.fxml"/>
+   <Tab fx:id="member_management" closable="false" text="Member">
+      <fx:include source="member-management-view.fxml" />
    </Tab>
 
-   <Tab fx:id="book_management" text="Book">
-      <fx:include source="book-management-view.fxml"/>
+   <Tab fx:id="book_management" closable="false" text="Book">
+      <fx:include source="book-management-view.fxml" />
    </Tab>
 
-   <Tab text="Chatbot"/>
+   <Tab closable="false" text="Chatbot" />
 </TabPane>
