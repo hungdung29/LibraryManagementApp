@@ -96,9 +96,9 @@ public class AddBookController extends BookController implements Initializable {
     }
 
     public void onAddBookButtonClicked(ActionEvent actionEvent) {
-        if (titleField.getText() == null || authorField.getText() == null
-                || publisherField.getText() == null || isbnField.getText() == null
-                || descriptionField.getText() == null) {
+        if (titleField.getText().equals("") || authorField.getText().equals("")
+                || publisherField.getText().equals("") || isbnField.getText().equals("")
+                || descriptionField.getText().equals("")  || quantityField.getText().equals("")) {
             messageLabel.setText("Please fill in all fields");
         }
         else {
