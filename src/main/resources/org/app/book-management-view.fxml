@@ -16,7 +16,7 @@
         <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
             <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
-         <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" text="Add Book" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButtonClicked" text="Add Book" />
         </HBox>
         <TableView fx:id="bookTable" VBox.vgrow="ALWAYS">
             <columns>

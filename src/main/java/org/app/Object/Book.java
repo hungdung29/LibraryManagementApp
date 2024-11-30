@@ -1,5 +1,6 @@
 package org.app.Object;
 
+import javafx.scene.image.Image;
 import org.app.DataBase.BorrowData;
 
 public class Book {

@@ -3,6 +3,8 @@ package org.app.BookAPI;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.app.Object.Book;
 
 import java.io.InputStreamReader;
@@ -13,7 +15,8 @@ public class GoogleBookSearch {
     private static final String API_BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
     private static final String API_KEY = "AIzaSyByYj71afEARbjzUT9bIfeECg1zTjwjais";
 
-    public static Book searchBook(String query) {
+    public static ObservableList<Book> getBookFromAPI(String query) {
+        ObservableList<Book> books = FXCollections.observableArrayList();
         try {
             JsonObject responseJson = getApiResponse(query);
             JsonArray items = responseJson.getAsJsonArray("items");
@@ -23,16 +26,19 @@ public class GoogleBookSearch {
                 return null;
             }
 
-            JsonObject volumeInfo = items.get(0).getAsJsonObject().getAsJsonObject("volumeInfo");
-            return extractBookFromVolumeInfo(volumeInfo);
-
+            for (int i = 0; i < items.size(); i++) {
+                JsonObject volumeInfo = items.get(i).getAsJsonObject().getAsJsonObject("volumeInfo");
+                Book book = extractBookFromVolumeInfo(volumeInfo);
+                books.add(book);
+            }
+            return books;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private static JsonObject getApiResponse(String query) throws Exception {
+    public static JsonObject getApiResponse(String query) throws Exception {
         String searchUrl = API_BASE_URL + query + "&key=" + API_KEY;
         URL url = new URL(searchUrl);
 
@@ -49,7 +55,7 @@ public class GoogleBookSearch {
         return JsonParser.parseReader(reader).getAsJsonObject();
     }
 
-    private static Book extractBookFromVolumeInfo(JsonObject volumeInfo) {
+    public static Book extractBookFromVolumeInfo(JsonObject volumeInfo) {
         String title = volumeInfo.get("title").getAsString();
         String authors = extractAuthors(volumeInfo);
         String publisher = volumeInfo.has("publisher")
@@ -59,8 +65,8 @@ public class GoogleBookSearch {
                 ? volumeInfo.get("description").getAsString() : "No description available";
         String thumbnail = volumeInfo.has("imageLinks")
                 ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : null;
-        String content = volumeInfo.has("content")
-                ? volumeInfo.get("content").getAsString() : "No content available";
+        String content = volumeInfo.has("language")
+                ? volumeInfo.get("language").getAsString() : "No content available";
         String catalog = volumeInfo.has("categories")
                 ? volumeInfo.getAsJsonArray("categories").get(0).getAsString() : "Unknown";
         Double price = volumeInfo.has("retailPrice")
@@ -86,11 +92,10 @@ public class GoogleBookSearch {
 
         JsonArray authorsJson = volumeInfo.getAsJsonArray("authors");
         StringBuilder authors = new StringBuilder();
-        for (int i = 0; i < authorsJson.size(); i++) {
+        authors.append(authorsJson.get(0).getAsString());
+        for (int i = 1; i < authorsJson.size(); i++) {
+            authors.append(", ");
             authors.append(authorsJson.get(i).getAsString());
-            if (i < authorsJson.size() - 1) {
-                authors.append(", ");
-            }
         }
         return authors.toString();
     }

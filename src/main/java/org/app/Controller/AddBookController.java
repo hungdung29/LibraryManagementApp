@@ -1,30 +1,77 @@
 package org.app.Controller;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import org.app.BookAPI.GoogleBookSearch;
 import org.app.DataBase.BookData;
 import org.app.MainApp;
 import org.app.Object.Book;
 
-public class AddBookController {
-    public TextField bookNameField;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddBookController extends BookController implements Initializable {
+    public TextField searchTextField;
+    public Button searchButton;
+    public Button addBookButton;
+    public Button backButton;
+
+    public TableView bookTable;
+    public TableColumn titleColumn;
+    public TableColumn authorColumn;
+    public TableColumn categoryColumn;
+    public TableColumn publisherColumn;
+
+    public Button importButton;
+
+    public TextField titleField;
     public TextField authorField;
     public TextField publisherField;
     public TextField isbnField;
     public TextField quantityField;
+    public TextField descriptionField;
 
-    public Button addBookButton;
-    public Button backButton;
+    public VBox infoBookVBox;
+    public ImageView bookImage;
+    public Label isbnBookDetailLabel;
+    public Label languageDetailLabel;
+    public Label descriptionDetailLabel;
 
-    public TextField searchTextField;
-    public Button searchButton;
-    public Button importButton;
     public Label messageLabel;
 
-    Book searchedBook = new Book.Builder().build();
+    private Book addBook = null;
+    private Book choosingBook = null;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        configTable();
+        infoBookVBox.setVisible(false);
+
+        // Add a listener for row selection
+        bookTable.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                infoBookVBox.setVisible(true);
+
+                Book selectedBook = (Book) newValue;
+                handleBookSelection("admin", selectedBook);
+            } else {
+                infoBookVBox.setVisible(false);
+            }
+        });
+    }
 
     public void onBackButtonClicked(ActionEvent actionEvent) {
         try {
@@ -35,33 +82,89 @@ public class AddBookController {
     }
 
     public void onSearchButtonClicked(ActionEvent actionEvent) {
-        String search = searchTextField.getText();
-        searchedBook = GoogleBookSearch.searchBook(search);
-        if (searchedBook != null) {
-            bookNameField.setText(searchedBook.getTitle());
-            authorField.setText(searchedBook.getAuthor());
-            publisherField.setText(searchedBook.getPublisher());
-            isbnField.setText(searchedBook.getIsbn());
-            messageLabel.setText("Book found in Books Google API");
-        }
-        else {
-            messageLabel.setText("Book not found in Books Google API");
-        }
+        getDataEntireBook();
+        bookTable.setItems(entireBooks);
+    }
+
+    public void configTable() {
+        bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("catalog"));
+        publisherColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("publisher"));
     }
 
     public void onAddBookButtonClicked(ActionEvent actionEvent) {
-        if (searchedBook.getIsbn() != null) {
-            searchedBook.setRemaining(searchedBook.getRemaining() + Integer.parseInt(quantityField.getText()));
-            BookData.addBook(searchedBook);
-            try {
-                MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (titleField.getText() == null || authorField.getText() == null
+                || publisherField.getText() == null || isbnField.getText() == null
+                || descriptionField.getText() == null) {
+            messageLabel.setText("Please fill in all fields");
         }
         else {
-
-            messageLabel.setText("Add book failed");
+            // Check book from API or not
+            if (addBook == null || (addBook.getTitle() != titleField.getText()
+                    && addBook.getAuthor() != authorField.getText()
+                    && addBook.getPublisher() != publisherField.getText()
+                    && addBook.getIsbn() != isbnField.getText()
+                    && addBook.getDescription() != descriptionField.getText())) {
+                Book newBook = new Book.Builder()
+                        .setTitle(titleField.getText())
+                        .setAuthor(authorField.getText())
+                        .setPublisher(publisherField.getText())
+                        .setIsbn(isbnField.getText())
+                        .setDescription(descriptionField.getText())
+                        .setRemaining(Integer.parseInt(quantityField.getText()))
+                        .build();
+                BookData.addBook(newBook);
+                try {
+                    MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                addBook.setRemaining(Integer.parseInt(quantityField.getText()));
+                BookData.addBook(addBook);
+                try {
+                    MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
+    }
+
+    public void onImportButtonClicked(ActionEvent actionEvent) {
+        addBook = choosingBook;
+        titleField.setText(addBook.getTitle());
+        authorField.setText(addBook.getAuthor());
+        publisherField.setText(addBook.getPublisher());
+        isbnField.setText(addBook.getIsbn());
+        descriptionField.setText(addBook.getDescription());
+    }
+
+    @Override
+    public void handleBookSelection(String username, Book book) {
+        choosingBook = book;
+        if (book.getImagePath() != null) {
+            bookImage.setImage(new Image(book.getImagePath()));
+        }
+        else {
+            bookImage.setImage(new Image("file:image/NoAvailable.jpg"));
+        }
+        isbnBookDetailLabel.setText("ISBN: " + book.getIsbn());
+        languageDetailLabel.setText("Language: " + book.getContent());
+        descriptionDetailLabel.setText("Description: " + book.getDescription());
+    }
+
+    @Override
+    public void getDataEntireBook() {
+        String query = convertStringHaveSpacing(searchTextField.getText());
+        entireBooks = GoogleBookSearch.getBookFromAPI(query);
+        cloneListBook();
+    }
+
+    public String convertStringHaveSpacing(String str) {
+        return str.replace(" ", "+");
     }
 }
