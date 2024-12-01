@@ -20,5 +20,7 @@
         <fx:include source="history-view.fxml" />
     </Tab>
 
-    <Tab text="Chatbot" />
+    <Tab fx:id="inbox" text="Inbox" closable="false">
+        <fx:include source="inbox-view.fxml" />
+    </Tab>
 </TabPane>

@@ -22,5 +22,8 @@
       <fx:include source="borrow-request-view.fxml" />
    </Tab>
 
-   <Tab closable="false" text="Chatbot" />
+   <Tab fx:id="inbox" text="Inbox" closable="false">
+      <fx:include source="inbox-view.fxml" />
+   </Tab>
+
 </TabPane>

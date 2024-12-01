@@ -7,4 +7,5 @@ public class UserController {
     public Tab borrow_book;
     public Tab return_book;
     public Tab history;
+    public Tab inbox;
 }
