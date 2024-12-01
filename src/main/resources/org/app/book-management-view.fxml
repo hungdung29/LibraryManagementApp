@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane fx:id="bookForm" dividerPositions="0.5975073313782991" prefHeight="488.0" prefWidth="684.0" stylesheets="@css/book-management-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BookManagementController">
+<SplitPane fx:id="bookForm" dividerPositions="0.5975073313782991" prefHeight="488.0" prefWidth="684.0" stylesheets="@css/book-management-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BookManagementController">
     <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
         <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
             <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
@@ -26,7 +26,7 @@
                 <TableColumn fx:id="remainingColumn" prefWidth="64.0" text="Remaining" />
                 <TableColumn fx:id="quantityColumn" prefWidth="52.0" text="Quantity" />
             </columns>
-        </TableView >
+        </TableView>
       <padding>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </padding>
@@ -37,7 +37,7 @@
         <Label fx:id="descriptionDetailLabel" text="Description:" />
         <Label text="Comment:" />
         <ListView fx:id="commentList" fixedCellSize="24.0" prefHeight="346.0" prefWidth="260.0" />
-        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" text="Delete" />
+        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="35.0" prefWidth="86.0" text="Delete" />
         <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#onModifyButtonClicked" text="Modify" />
     </VBox>
 </SplitPane>

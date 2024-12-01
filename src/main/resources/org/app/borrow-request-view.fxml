@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="492.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowRequestController">
+<VBox prefHeight="492.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowRequestController" stylesheets="@css/borrow-request-view.css">
     <TableView fx:id="borrowRequestTable" prefHeight="488.0" prefWidth="529.0" VBox.vgrow="ALWAYS">
       <columns>
           <TableColumn fx:id="selectColumn" prefWidth="69.41229444742203">
