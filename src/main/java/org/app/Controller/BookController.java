@@ -22,7 +22,6 @@ abstract public class BookController {
     public TableColumn<Book, String> titleColumn;
     public TableColumn<Book, String> authorColumn;
     public TableColumn<Book, String> isbnBorrowColumn;
-    public TableColumn<Book, Integer> remainingColumn;
 
     // entire Books. Distinguish from borrow books and borrowed books
     protected ObservableList<Book> entireBooks = FXCollections.observableArrayList();
@@ -74,6 +73,5 @@ abstract public class BookController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
         isbnBorrowColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("isbn"));
-        remainingColumn.setCellValueFactory(new PropertyValueFactory<Book, Integer>("remaining"));
     }
 }

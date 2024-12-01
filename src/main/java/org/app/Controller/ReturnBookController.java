@@ -1,12 +1,17 @@
 package org.app.Controller;
 
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
 import org.app.Object.Book;
@@ -15,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReturnBookController extends BookController implements Initializable {
+    public TableColumn borrowedDateColumn;
+
     public Label titleReturnBookLabel;
     public Label borrowDateLabel;
 
@@ -29,6 +36,14 @@ public class ReturnBookController extends BookController implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // set up column for table
         configTable();
+        borrowedDateColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+            @Override
+            public ObservableValue call(TableColumn.CellDataFeatures cellDataFeatures) {
+                return new SimpleObjectProperty<>(
+                        BorrowData.getBorrowDate(SignInViewController.username,
+                        (Book) cellDataFeatures.getValue()));
+            }
+        });
         infoBookVBox.setVisible(false);
 
         // pass data to books

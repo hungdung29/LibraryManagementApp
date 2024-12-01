@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
 import org.app.Object.Book;
@@ -14,10 +16,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HistoryController extends BookController implements Initializable {
+    public TableColumn statusColumn;
+
     public Label titleBookLabel;
     public Label borrowDateLabel;
     public Label returnDateLabel;
-
     public TextField commentTextField;
 
     public Button changeCommentButton;
@@ -29,6 +32,7 @@ public class HistoryController extends BookController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // set up column for table
         configTable();
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("remaining"));
         infoBookVBox.setVisible(false);
         isChange = false;
 

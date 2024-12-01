@@ -33,6 +33,7 @@ public class BookManagementController extends BookController implements Initiali
     public TableColumn titleColumn;
     public TableColumn authorColumn;
     public TableColumn isbnBorrowColumn;
+    public TableColumn remainingColumn;
     public TableColumn quantityColumn;
 
     public VBox infoBookVBox;
@@ -115,6 +116,7 @@ public class BookManagementController extends BookController implements Initiali
 
     private void configBookManagementTable() {
         super.configTable();
+        remainingColumn.setCellValueFactory(new PropertyValueFactory<Book, Integer>("remaining"));
         quantityColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures,
                 ObservableValue>() {
             @Override

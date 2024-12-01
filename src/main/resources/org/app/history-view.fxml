@@ -20,7 +20,7 @@
                 <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="102.0" text="Author" />
                 <TableColumn fx:id="isbnBorrowColumn" prefWidth="107.0" text="ISBN" />
-                <TableColumn fx:id="remainingColumn" prefWidth="62.0" text="Remaining" />
+                <TableColumn fx:id="statusColumn" prefWidth="62.0" text="Status" />
             </columns>
         </TableView>
     </VBox>

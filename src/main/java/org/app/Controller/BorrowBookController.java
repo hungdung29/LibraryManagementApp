@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.app.DataBase.BookData;
@@ -18,6 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BorrowBookController extends BookController implements Initializable {
+    public TableColumn remainingColumn;
+
     public Label titleBookDetailLabel;
     public Label publisherDetailLabel;
     public Label descriptionDetailLabel;
@@ -33,6 +37,7 @@ public class BorrowBookController extends BookController implements Initializabl
     public void initialize(URL location, ResourceBundle resources) {
         // set up column for table
         configTable();
+        remainingColumn.setCellValueFactory(new PropertyValueFactory<>("remaining"));
         infoBookVBox.setVisible(false);
 
         // pass data to books

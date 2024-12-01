@@ -223,8 +223,8 @@ public class BorrowData extends DataBaseAccessor {
 
     public static ObservableList<BorrowInfo> getBorrowingBooks(String username) {
         ObservableList<BorrowInfo> borrowedBooks = FXCollections.observableArrayList();
-        String query = "SELECT books.title, borrows.date_borrow FROM borrows " +
-                "JOIN books ON borrows.book_idBook = books.idBook " +
+        String query = "SELECT books.title, borrows.date_borrow FROM borrows JOIN books " +
+                "ON borrows.book_idBook = books.idBook " +
                 "WHERE borrows.user_username = ? AND borrows.date_give_back IS NULL";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
