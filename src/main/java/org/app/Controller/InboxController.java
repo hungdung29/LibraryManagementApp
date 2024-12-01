@@ -52,6 +52,8 @@ public class InboxController implements Initializable {
         friendListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 messageContainer.setVisible(true);
+                messageContainer.getChildren().clear();
+
                 partner = newValue;
                 showMessage();
             } else {
@@ -66,6 +68,7 @@ public class InboxController implements Initializable {
         for (Message m : messageList) {
             addMessage(m.getContent(), (m.getReceiver().equals(partner)));
         }
+
     }
 
     private void addMessage(String message, boolean isUser) {

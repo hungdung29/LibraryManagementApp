@@ -45,10 +45,20 @@ public class MessageData extends DataBaseAccessor {
     public static ObservableList<String> getListFriend(String username) {
         ObservableList<String> friends = FXCollections.observableArrayList();
 
-        String query = "select accountName from users where accountName != ?";
+        // get username of recently friend
+        String query = "with recent_messages as " +
+                "( select * from messages where receiver = ? or sender = ? ) " +
+                "select distinct (u.accountName) from users u " +
+                "left join recent_messages m " +
+                "on (u.accountName = m.sender or u.accountName = m.receiver) " +
+                "where u.accountName != ? " +
+                "order by  m.created_at desc";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, username);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
