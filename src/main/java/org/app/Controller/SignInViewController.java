@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignInViewController implements Initializable {
-    public VBox loginForm;
+public class SignInViewController {
     public TextField usernameTextField;
     public PasswordField passwordTextField;
     public Button logInButton;
@@ -25,17 +24,7 @@ public class SignInViewController implements Initializable {
     public Button backButton;
 
     public static String username = "default";
-//    private String username;
     private String password;
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        loginForm.addEventFilter(ActionEvent.ACTION, event -> {
-            onLogInButtonClicked(null);
-            event.consume();
-        });
-    }
 
     /**
      * Handle when button log in is clicked
@@ -61,11 +50,11 @@ public class SignInViewController implements Initializable {
 
     private void navigate(int check) {
         if (check == HandleUserAccount.ACCOUNT_NOT_FOUND) {
-            messageLabel.setText("User not found");
+            messageLabel.setText("User not found. Sign up or try again");
             usernameTextField.setText("");
             passwordTextField.setText("");
         } else if (check == HandleUserAccount.WRONG_PASSWORD) {
-            messageLabel.setText("Wrong password");
+            messageLabel.setText("Wrong password. Try a different password");
             passwordTextField.setText("");
         } else if (check == HandleUserAccount.NORM_USER_LOG_IN_SUCCESS){
             // login success

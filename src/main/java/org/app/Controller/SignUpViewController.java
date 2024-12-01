@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 import org.app.Object.User;
@@ -57,7 +56,7 @@ public class SignUpViewController {
                 Parent root = fxmlLoader.load();
 
                 SignInViewController controller = fxmlLoader.getController();
-                controller.setMessageLabel("Sign up Successful");
+                controller.setMessageLabel("Sign up Successful. Sign in now");
 
                 MainApp.setScene(root);
             } catch (Exception e) {
@@ -83,18 +82,29 @@ public class SignUpViewController {
      */
     private boolean extractData() {
         username = usernameTextField.getText();
-        password = passwordTextField.getText();
-        confirmPassword = confirmPasswordTextField.getText();
-        name = nameTextField.getText();
-        address = addressTextField.getText();
-        phoneNumber = phoneNumberTextField.getText();
-        email = emailTextField.getText();
-        birthday = birthdayPicker.getValue().toString();
+        if (username == null || username.isEmpty()) { return false; }
 
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() ||
-                name.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
-            return false;
-        }
+        password = passwordTextField.getText();
+        if (password == null || password.isEmpty()) { return false; }
+
+        confirmPassword = confirmPasswordTextField.getText();
+        if (confirmPassword == null || confirmPassword.isEmpty()) { return false; }
+
+        name = nameTextField.getText();
+        if (name == null || name.isEmpty()) { return false; }
+
+        address = addressTextField.getText();
+        if (address == null || address.isEmpty()) { return false; }
+
+        phoneNumber = phoneNumberTextField.getText();
+        if (phoneNumber == null || phoneNumber.isEmpty()) { return false; }
+
+        email = emailTextField.getText();
+        if (email == null || email.isEmpty()) { return false; }
+
+        birthday = birthdayPicker.getValue().toString();
+        if (birthday.isEmpty()) { return false; }
+
         return true;
     }
 }
