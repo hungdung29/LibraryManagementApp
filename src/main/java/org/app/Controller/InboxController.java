@@ -46,21 +46,21 @@ public class InboxController implements Initializable {
         );
         messageContainer.setVisible(false);
 
-        friendList = MessageData.getListFriend(SignInViewController.username);
+        friendList = MessageData.getListFriend(username);
         friendListView.setItems(friendList);
 
         friendListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 messageContainer.setVisible(true);
                 partner = newValue;
-                handleMessage();
+                showMessage();
             } else {
                 messageContainer.setVisible(false);
             }
         });
     }
 
-    private void handleMessage() {
+    private void showMessage() {
         messageList =  MessageData.getMessageData(username, partner);
 
         for (Message m : messageList) {

@@ -81,6 +81,18 @@ public class CreateDataBase extends DataBaseAccessor {
                 );
                """;
 
+        String query6 = """
+                CREATE TABLE IF NOT EXISTS messages (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    sender TEXT NOT NULL,
+                    receiver TEXT NOT NULL,
+                    content TEXT NOT NULL,
+                    created_at DATETIME,
+                    FOREIGN KEY (sender) REFERENCES users(accountName),
+                    FOREIGN KEY (receiver) REFERENCES users(accountName)
+                );
+                """;
+
         try (Statement stmt = connection.createStatement()) {
 //            // Execute the SQL statement
             stmt.execute(query1);
@@ -88,6 +100,7 @@ public class CreateDataBase extends DataBaseAccessor {
             stmt.execute(query3);
             stmt.execute(query4);
             stmt.execute(query5);
+            stmt.execute(query6);
 
             System.out.println("Database has been created.");
         } catch (SQLException e) {
@@ -121,6 +134,7 @@ public class CreateDataBase extends DataBaseAccessor {
             """;
         String query2 = """
             INSERT INTO users (Name, accountName, password, phoneNumber, address, gmail, birthday) VALUES
+            ('admin', 'admin', 'admin', 'admin', 'admin', 'admin', 'admin'),
             ('John Doe', 'johndoe123', 'password123', '123-456-7890', '123 Main St, Anytown, CA 12345', 'johndoe@example.com', '1990-01-01'),
             ('Jane Smith', 'janesmith456', 'password456', '456-789-0123', '456 Elm St, Anytown, CA 12345', 'janesmith@example.com', '1992-02-02'),
             ('Michael Johnson', 'michaeljohnson789', 'password789', '789-012-3456', '789 Oak St, Anytown, CA 12345', 'michaeljohnson@example.com', '1988-03-03'),
