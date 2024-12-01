@@ -158,6 +158,10 @@ public class AddBookController extends BookController implements Initializable {
     @Override
     public void getDataEntireBook() {
         String query = convertStringHaveSpacing(searchTextField.getText());
+        if (query.isEmpty()) {
+            messageLabel.setText("Please type in search field");
+            return;
+        }
         Task<ObservableList<Book>> getBookTask = new Task<ObservableList<Book>>() {
             @Override
             protected ObservableList<Book> call() throws Exception {
@@ -168,7 +172,7 @@ public class AddBookController extends BookController implements Initializable {
             entireBooks.clear();
             entireBooks = getBookTask.getValue();
             bookTable.setItems(entireBooks);
-            messageLabel.setText("Number of books found: " + entireBooks.size());
+            if (entireBooks != null) messageLabel.setText("Number of books found: " + entireBooks.size());
         });
 
         getBookTask.setOnFailed(event -> {
