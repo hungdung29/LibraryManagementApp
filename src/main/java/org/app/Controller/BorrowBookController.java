@@ -1,6 +1,7 @@
 package org.app.Controller;
 
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -54,8 +55,24 @@ public class BorrowBookController extends BookController implements Initializabl
     }
 
     public void getDataEntireBook() {
-        BookData.getDataAllBook(entireBooks);
-        cloneListBook();
+        Task<Void> getAllBookDataTask = new Task<Void>() {
+            @Override
+            protected Void call() {
+                BookData.getDataAllBook(entireBooks);
+                return null;
+            }
+        };
+
+        getAllBookDataTask.setOnSucceeded(event -> {
+            cloneListBook();
+            System.out.println("Get all book data success");
+        });
+
+        getAllBookDataTask.setOnFailed(event -> {
+            System.out.println("Get all book data failed");
+        });
+
+        new Thread(getAllBookDataTask).start();
     }
 
     /**
@@ -113,8 +130,7 @@ public class BorrowBookController extends BookController implements Initializabl
         RequestData.addRequestInfo(SignInViewController.username, selectedBook.getIdBook());
 
         // pass data to books
-        BookData.getDataAllBook(entireBooks);
-        cloneListBook();
+        getDataEntireBook();
 
         // set content of book table
         bookTable.setItems(shownBooks);

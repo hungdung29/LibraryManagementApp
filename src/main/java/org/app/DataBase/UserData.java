@@ -2,10 +2,8 @@ package org.app.DataBase;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.app.Object.BorrowInfo;
 import org.app.Object.User;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

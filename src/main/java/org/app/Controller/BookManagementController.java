@@ -1,10 +1,12 @@
 package org.app.Controller;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -81,8 +83,24 @@ public class BookManagementController extends BookController implements Initiali
 
     @Override
     public void getDataEntireBook() {
-        BookData.getDataAllBook(entireBooks);
-        cloneListBook();
+        Task<Void> getAllBookDataTask = new Task<Void>() {
+            @Override
+            protected Void call() {
+                BookData.getDataAllBook(entireBooks);
+                return null;
+            }
+        };
+
+        getAllBookDataTask.setOnSucceeded(event -> {
+            cloneListBook();
+            System.out.println("Get all book data success");
+        });
+
+        getAllBookDataTask.setOnFailed(event -> {
+            System.out.println("Get all book data failed");
+        });
+
+        new Thread(getAllBookDataTask).start();
     }
 
     public void onDeleteButtonClicked(ActionEvent actionEvent) {

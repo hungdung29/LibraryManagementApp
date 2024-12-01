@@ -1,10 +1,6 @@
 package org.app.Controller;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -13,7 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import javafx.concurrent.Task;
+import javafx.application.Application;
 import org.app.BookAPI.GoogleBookSearch;
 import org.app.DataBase.BookData;
 import org.app.MainApp;
@@ -160,7 +157,28 @@ public class AddBookController extends BookController implements Initializable {
     @Override
     public void getDataEntireBook() {
         String query = convertStringHaveSpacing(searchTextField.getText());
-        entireBooks = GoogleBookSearch.getBookFromAPI(query);
+        Task<ObservableList<Book>> getBookTask = new Task<ObservableList<Book>>() {
+            @Override
+            protected ObservableList<Book> call() throws Exception {
+                return GoogleBookSearch.getBookFromAPI(query);
+            }
+        };
+        getBookTask.setOnSucceeded(event -> {
+            entireBooks = getBookTask.getValue();
+            bookTable.setItems(entireBooks);
+            messageLabel.setText("Number of books found: " + entireBooks.size());
+        });
+
+        getBookTask.setOnFailed(event -> {
+            Throwable exception = getBookTask.getException();
+            exception.printStackTrace();;
+            messageLabel.setText("Error occurred during searching");
+        });
+
+        Thread getBookFromAPIThread = new Thread(getBookTask);
+        getBookFromAPIThread.setDaemon(true);
+        getBookFromAPIThread.start();
+
         cloneListBook();
     }
 
