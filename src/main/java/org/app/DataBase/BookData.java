@@ -49,6 +49,7 @@ public class BookData extends DataBaseAccessor {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error");
         }
     }
 

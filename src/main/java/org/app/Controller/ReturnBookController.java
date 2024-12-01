@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.app.DataBase.BookData;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 public class ReturnBookController extends BookController implements Initializable {
     public TableColumn borrowedDateColumn;
 
+    public ImageView bookImage;
     public Label titleReturnBookLabel;
     public Label borrowDateLabel;
 
@@ -109,6 +112,12 @@ public class ReturnBookController extends BookController implements Initializabl
      * @param book book need to handle inform or more
      */
     public void handleBookSelection(String username, Book book) {
+        if (book.getImagePath() != null) {
+            bookImage.setImage(new Image(book.getImagePath()));
+        } else {
+            bookImage.setImage(new Image("file:image/NoAvailable.jpg"));
+        }
+
         commentTextField.setText("");
         titleReturnBookLabel.setText("Book title: " + book.getTitle());
         borrowDateLabel.setText("Borrow Date: " + BorrowData.getBorrowDate(username, book));

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
 <SplitPane dividerPositions="0.593108504398827" prefHeight="488.0"
            stylesheets="@css/return-book-view.css" prefWidth="684.0"
            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
@@ -22,6 +23,7 @@
         </TableView>
     </VBox>
     <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0" spacing="8.0">
+        <ImageView fx:id="bookImage" fitHeight="186.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="titleReturnBookLabel" text="Book Title:" />
         <Label fx:id="borrowDateLabel" text="Borrow date:" />
         <TextField fx:id="commentTextField" prefHeight="56.0" prefWidth="313.0" promptText="Comment" />

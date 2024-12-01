@@ -17,6 +17,7 @@ import org.app.MainApp;
 import org.app.Object.Book;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddBookController extends BookController implements Initializable {
@@ -93,18 +94,18 @@ public class AddBookController extends BookController implements Initializable {
     }
 
     public void onAddBookButtonClicked(ActionEvent actionEvent) {
-        if (titleField.getText().equals("") || authorField.getText().equals("")
-                || publisherField.getText().equals("") || isbnField.getText().equals("")
-                || descriptionField.getText().equals("")  || quantityField.getText().equals("")) {
+        if (titleField.getText().isEmpty() || authorField.getText().isEmpty()
+                || publisherField.getText().isEmpty() || isbnField.getText().isEmpty()
+                || descriptionField.getText().isEmpty() || quantityField.getText().isEmpty()) {
             messageLabel.setText("Please fill in all fields");
         }
         else {
             // Check book from API or not
-            if (addBook == null || (addBook.getTitle() != titleField.getText()
-                    && addBook.getAuthor() != authorField.getText()
-                    && addBook.getPublisher() != publisherField.getText()
-                    && addBook.getIsbn() != isbnField.getText()
-                    && addBook.getDescription() != descriptionField.getText())) {
+            if (addBook == null || (!addBook.getTitle().equals(titleField.getText())
+                    || !addBook.getAuthor().equals(authorField.getText())
+                    || !addBook.getPublisher().equals(publisherField.getText())
+                    || !addBook.getIsbn().equals(isbnField.getText())
+                    || !addBook.getDescription().equals(descriptionField.getText()))) {
                 Book newBook = new Book.Builder()
                         .setTitle(titleField.getText())
                         .setAuthor(authorField.getText())
@@ -157,6 +158,10 @@ public class AddBookController extends BookController implements Initializable {
     @Override
     public void getDataEntireBook() {
         String query = convertStringHaveSpacing(searchTextField.getText());
+        if (query.isEmpty()) {
+            messageLabel.setText("Please type in search field");
+            return;
+        }
         Task<ObservableList<Book>> getBookTask = new Task<ObservableList<Book>>() {
             @Override
             protected ObservableList<Book> call() throws Exception {
@@ -164,9 +169,10 @@ public class AddBookController extends BookController implements Initializable {
             }
         };
         getBookTask.setOnSucceeded(event -> {
+            entireBooks.clear();
             entireBooks = getBookTask.getValue();
             bookTable.setItems(entireBooks);
-            messageLabel.setText("Number of books found: " + entireBooks.size());
+            if (entireBooks != null) messageLabel.setText("Number of books found: " + entireBooks.size());
         });
 
         getBookTask.setOnFailed(event -> {
