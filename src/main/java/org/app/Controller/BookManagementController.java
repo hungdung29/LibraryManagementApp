@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -37,6 +39,7 @@ public class BookManagementController extends BookController implements Initiali
     public TableColumn quantityColumn;
 
     public VBox infoBookVBox;
+    public ImageView bookImage;
     public Label titleBookDetailLabel;
     public Label publisherDetailLabel;
     public Label descriptionDetailLabel;
@@ -76,6 +79,12 @@ public class BookManagementController extends BookController implements Initiali
 
     @Override
     public void handleBookSelection(String username, Book selectedBook) {
+        if (selectedBook.getImagePath() != null) {
+            bookImage.setImage(new Image(selectedBook.getImagePath()));
+        } else {
+            bookImage.setImage(new Image("file:image/NoAvailable.jpg"));
+        }
+
         titleBookDetailLabel.setText("Title: " + selectedBook.getTitle());
         publisherDetailLabel.setText("Publisher: " + selectedBook.getPublisher());
         descriptionDetailLabel.setText("Description: " + selectedBook.getDescription());

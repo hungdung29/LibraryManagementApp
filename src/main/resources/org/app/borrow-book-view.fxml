@@ -27,7 +27,7 @@
         </TableView>
     </VBox>
     <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
-      <ImageView fx:id="bookImage" fitHeight="186.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="bookImage" fitHeight="186.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="titleBookDetailLabel" text="Title:" />
         <Label fx:id="publisherDetailLabel" text="Publisher" />
         <Label fx:id="descriptionDetailLabel" text="Description:" />

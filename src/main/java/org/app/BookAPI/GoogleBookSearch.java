@@ -21,7 +21,7 @@ public class GoogleBookSearch {
             JsonObject responseJson = getApiResponse(query);
             JsonArray items = responseJson.getAsJsonArray("items");
 
-            if (items == null || items.size() == 0) {
+            if (items == null || items.isEmpty()) {
                 System.out.println("No book found");
                 return null;
             }
@@ -87,7 +87,7 @@ public class GoogleBookSearch {
 
     private static String extractAuthors(JsonObject volumeInfo) {
         if (!volumeInfo.has("authors")) {
-            return "";
+            return "Unknown";
         }
 
         JsonArray authorsJson = volumeInfo.getAsJsonArray("authors");
@@ -109,9 +109,23 @@ public class GoogleBookSearch {
         for (int i = 0; i < identifiers.size(); i++) {
             JsonObject identifier = identifiers.get(i).getAsJsonObject();
             if ("ISBN_13".equals(identifier.get("type").getAsString())) {
-                return identifier.get("identifier").getAsString();
+                String isbn = identifier.get("identifier").getAsString();
+                for (int j = 0; j < isbn.length(); j++) {
+                    if (isbn.charAt(j) >= '0' && isbn.charAt(j) <= '9') {
+                        isbn = isbn.substring(j);
+                        return isbn;
+                    }
+                }
+                return isbn;
             }
         }
-        return identifiers.get(0).getAsJsonObject().get("identifier").getAsString();
+        String isbn = identifiers.get(0).getAsJsonObject().get("identifier").getAsString();
+        for (int j = 0; j < isbn.length(); j++) {
+            if (isbn.charAt(j) >= '0' && isbn.charAt(j) <= '9') {
+                isbn = isbn.substring(j);
+                return isbn;
+            }
+        }
+        return null;
     }
 }
