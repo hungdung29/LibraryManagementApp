@@ -2,6 +2,7 @@ package org.app.Controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.app.DataBase.MessageData;
+import org.app.Object.Book;
 import org.app.Object.Message;
 
 import java.net.URL;
@@ -68,7 +70,6 @@ public class InboxController implements Initializable {
         for (Message m : messageList) {
             addMessage(m.getContent(), (m.getReceiver().equals(partner)));
         }
-
     }
 
     private void addMessage(String message, boolean isUser) {
@@ -96,6 +97,20 @@ public class InboxController implements Initializable {
     }
 
     public void onFindButtonClicked(ActionEvent actionEvent) {
+//        String keyword = searchFrTextField.getText();
+//        // restore shown books = entire book
+////        getDataEntireBook();
+//
+//        if (keyword == null || keyword.isEmpty()) {
+//            return;
+//        }
+//        FilteredList<String> filteredBooks = new FilteredList<>(entireBooks, book ->
+//                book.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+//                        book.getAuthor().toLowerCase().contains(keyword.toLowerCase()) ||
+//                        book.getIsbn().toLowerCase().contains(keyword.toLowerCase())
+//        );
+//
+//        shownBooks.setAll(filteredBooks);
     }
 
     public void onSendButtonClicked(ActionEvent actionEvent) {

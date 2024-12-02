@@ -37,7 +37,7 @@
         <Label fx:id="descriptionDetailLabel" text="Description:" />
         <Label text="Comment:" />
         <ListView fx:id="commentList" fixedCellSize="24.0" prefHeight="346.0" prefWidth="260.0" />
-        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="35.0" prefWidth="86.0" text="Delete" />
+        <Button fx:id="inboxButton" mnemonicParsing="false" onAction="#onDeleteButtonClicked" prefHeight="35.0" prefWidth="86.0" text="Delete" />
         <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#onModifyButtonClicked" text="Modify" />
     </VBox>
 </SplitPane>
