@@ -61,30 +61,21 @@ public class HistoryController extends BookController implements Initializable {
         });
     }
 
+    @Override
+    public void onSearchButtonClicked(ActionEvent actionEvent) {
+        getDataEntireBook();
+        super.onSearchButtonClicked(actionEvent);
+    }
+
     public void getDataEntireBook() {
-        Task<Void> getAllBookDataTask = new Task<Void>() {
-            @Override
-            protected Void call() {
-                shownBooks.clear();
-                BorrowData.getDataReturnedBook(SignInViewController.username, entireBooks);
-                shownBooks.addAll(entireBooks);
-                BorrowData.getDataBorrowingBook(SignInViewController.username, entireBooks);
-                shownBooks.addAll(entireBooks);
-                RequestData.getBookisPending(SignInViewController.username, entireBooks);
-                shownBooks.addAll(entireBooks);
-                return null;
-            }
-        };
-
-        getAllBookDataTask.setOnSucceeded(event -> {
-            System.out.println("Get all book data success");
-        });
-
-        getAllBookDataTask.setOnFailed(event -> {
-            System.out.println("Get all book data failed");
-        });
-
-        new Thread(getAllBookDataTask).start();
+        entireBooks.clear();
+        BorrowData.getDataReturnedBook(SignInViewController.username, shownBooks);
+        entireBooks.addAll(shownBooks);
+        BorrowData.getDataBorrowingBook(SignInViewController.username, shownBooks);
+        entireBooks.addAll(shownBooks);
+        RequestData.getBookisPending(SignInViewController.username, shownBooks);
+        entireBooks.addAll(shownBooks);
+        cloneListBook();
     }
 
     public void onChangeCommentButtonClicked(ActionEvent actionEvent) {

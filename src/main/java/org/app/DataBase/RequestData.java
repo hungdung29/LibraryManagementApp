@@ -59,7 +59,7 @@ public class RequestData extends DataBaseAccessor {
 
             preparedStatement.executeUpdate();
 
-            System.out.println("delete " + idBook);
+            //System.out.println("delete " + idBook);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -84,17 +84,15 @@ public class RequestData extends DataBaseAccessor {
                         .setContent(resultSet.getString("content"))
                         .setCatalog(resultSet.getString("catalog"))
                         .setPrice(resultSet.getDouble("price"))
-                        .setImagePath(resultSet.getString("imagePath"))
+                        .setImagePath(resultSet.getString("image_path"))
                         .setRemaining(resultSet.getInt("remaining"))
                         .setPublisher(resultSet.getString("publisher"))
-                        .setQuantity(resultSet.getInt("quantity"))
                         .setStatus("Pending")
                         .build();
                 books.add(book);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            System.out.println("Error");
         }
     }
 

@@ -15,6 +15,8 @@ import org.app.DataBase.RequestData;
 import org.app.Object.BorrowRequest;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BorrowRequestController  implements Initializable {
@@ -43,30 +45,33 @@ public class BorrowRequestController  implements Initializable {
 
     // delete selected request and add to borrow
     public void onAcceptButtonClicked(ActionEvent actionEvent) {
+        List<BorrowRequest> toRemove = new ArrayList<>();
         for (BorrowRequest borrowRequest : borrowRequests) {
             if (borrowRequest.getCheckBox().isSelected()) {
-                System.out.println(borrowRequest.getBookTitle());
+                //System.out.println(borrowRequest.getBookTitle());
 
                 BorrowData.addBorrowInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
                 BookData.updateRemainingBook(borrowRequest.getBookID(), -1);
 
                 RequestData.deleteRequestInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
-                borrowRequests.remove(borrowRequest);
+                toRemove.add(borrowRequest);
             }
         }
-
+        borrowRequests.removeAll(toRemove);
         borrowRequestTable.setItems(borrowRequests);
     }
 
     // delete selected request
     public void onRejectButtonClicked(ActionEvent actionEvent) {
+        List<BorrowRequest> toRemove = new ArrayList<>();
         for (BorrowRequest borrowRequest : borrowRequests) {
             if (borrowRequest.getCheckBox().isSelected()) {
                 RequestData.deleteRequestInfo(SignInViewController.username, borrowRequest.getBookID());
 
-                borrowRequests.remove(borrowRequest);
+                toRemove.add(borrowRequest);
             }
         }
+        borrowRequests.removeAll(toRemove);
         borrowRequestTable.setItems(borrowRequests);
     }
 

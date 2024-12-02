@@ -122,9 +122,4 @@ public class ReturnBookController extends BookController implements Initializabl
         titleReturnBookLabel.setText("Book title: " + book.getTitle());
         borrowDateLabel.setText("Borrow Date: " + BorrowData.getBorrowDate(username, book));
     }
-
-    public void refreshReturnTable() {
-        getDataEntireBook();
-        bookTable.setItems(shownBooks);
-    }
 }
