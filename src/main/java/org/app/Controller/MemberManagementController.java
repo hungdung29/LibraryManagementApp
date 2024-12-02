@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.app.DataBase.BorrowData;
 import org.app.DataBase.UserData;
+import org.app.MainApp;
 import org.app.Object.User;
 
 import java.net.URL;
@@ -32,13 +33,15 @@ public class MemberManagementController implements Initializable {
     public Label birthdayLabel;
     public Label numCommentsLabel;
 
-    public Button deleteButton;
+    public Button inboxButton;
     
     public TableView memberDetailTable;
     public TableColumn borrowedBookColumn;
     public TableColumn borrowedDateColumn;
 
     ObservableList<User> users;
+
+    private User selectedUser;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,14 +57,12 @@ public class MemberManagementController implements Initializable {
             if (newValue != null) {
                 infoMemberVBox.setVisible(true);
 
-                User selectedUser = (User) newValue;
+                selectedUser = (User) newValue;
                 handleMemberSelection(selectedUser);
             } else {
                 infoMemberVBox.setVisible(false);
             }
         });
-
-
     }
 
     private void handleMemberSelection(User selectedUser) {
@@ -97,8 +98,6 @@ public class MemberManagementController implements Initializable {
         });
     }
 
-
-
     public void onSearchButtonClicked(ActionEvent actionEvent) {
         users = UserData.getAllUsers();
         String keyword = searchTextField.getText();
@@ -116,6 +115,11 @@ public class MemberManagementController implements Initializable {
         memberTable.setItems(filteredUsers);
     }
 
-    public void onDeleteButtonClicked(ActionEvent actionEvent) {
+    public void onInboxButtonClicked(ActionEvent actionEvent) {
+        try {
+            MainApp.navigateToScene("admin-view.fxml#adminTabPane#inbox");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

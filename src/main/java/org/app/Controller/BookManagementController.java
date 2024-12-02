@@ -1,11 +1,7 @@
 package org.app.Controller;
 
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
@@ -45,7 +40,7 @@ public class BookManagementController extends BookController implements Initiali
     public Label descriptionDetailLabel;
     public ListView commentList;
 
-    public Button deleteButton;
+    public Button inboxButton;
     public Button addButton;
     public Button modifyButton;
 
@@ -74,7 +69,7 @@ public class BookManagementController extends BookController implements Initiali
             }
         });
         bookTable.setEditable(false);
-        deleteButton.setDisable(true);
+        inboxButton.setDisable(true);
     }
 
     @Override
@@ -155,11 +150,11 @@ public class BookManagementController extends BookController implements Initiali
         if (modifyButton.getText().equals("Modify")) {
             bookTable.setEditable(true);
             modifyButton.setText("Save");
-            deleteButton.setDisable(false);
+            inboxButton.setDisable(false);
         } else {
             bookTable.setEditable(false);
             modifyButton.setText("Modify");
-            deleteButton.setDisable(true);
+            inboxButton.setDisable(true);
 
             //refresh table
             getDataEntireBook();

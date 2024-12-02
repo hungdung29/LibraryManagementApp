@@ -40,7 +40,7 @@ public class UserData extends DataBaseAccessor {
         ObservableList<User> users = FXCollections.observableArrayList();
         users.clear();
 
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM users WHERE accountName != 'admin'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);

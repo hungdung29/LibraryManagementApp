@@ -8,7 +8,6 @@ import org.app.Object.Message;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MessageData extends DataBaseAccessor {
     public static ObservableList<Message> getMessageData(String user, String partner) {

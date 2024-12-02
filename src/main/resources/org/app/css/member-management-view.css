@@ -68,7 +68,7 @@ Label {
     -fx-border-radius: 10px;
 }
 
-#deleteButton {
+#inboxButton {
     -fx-font-size: 14px;
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #E74C3C;
@@ -78,10 +78,10 @@ Label {
     -fx-cursor: hand;
 }
 
-#deleteButton:hover {
+#inboxButton:hover {
     -fx-background-color: #D84B38;
 }
 
-#deleteButton:pressed {
+#inboxButton:pressed {
     -fx-background-color: #C23D29;
 }

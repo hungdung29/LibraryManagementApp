@@ -34,6 +34,7 @@ public class MainApp extends Application {
     }
 
     public static void navigateToScene(String fxmlFile) throws IOException {
+        // admin-view.fxml#adminTabPane#inbox
         String[] parts = fxmlFile.split("#");
         String fxmlPath = parts[0];
         String fragment = parts.length > 1 ? parts[1] : null;

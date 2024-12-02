@@ -64,7 +64,7 @@
     -fx-padding: 5px;
 }
 
-#deleteButton {
+#inboxButton {
     -fx-background-color: #ff6961;
     -fx-text-fill: white;
     -fx-font-size: 14px;
@@ -72,6 +72,6 @@
     -fx-border-radius: 5px;
 }
 
-#deleteButton:hover {
+#inboxButton:hover {
     -fx-background-color: #e34a47;
 }
