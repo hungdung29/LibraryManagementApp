@@ -1,0 +1,73 @@
+.hbox {
+    -fx-background-color: #f2f2f2;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.hbox .text-field {
+    -fx-padding: 5;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button {
+    -fx-background-color: #6a98d9;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.0, 1, 1);
+}
+
+button:hover {
+    -fx-background-color: #5a9bd3;
+}
+
+.list-view {
+    -fx-border-color: #b0c4de;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.scroll-pane {
+    -fx-background: #ffffff;
+    -fx-border-color: #b0c4de;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+.scroll-pane .vbox {
+    -fx-spacing: 10;
+}
+
+TextField {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4A6A7D;
+    -fx-background-color: #E7EFF6;
+    -fx-border-color: #A3C3D9;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.hbox .button {
+    -fx-background-color: #4682b4;
+    -fx-text-fill: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.hbox .button:hover {
+    -fx-background-color: #5a9bd3;
+}

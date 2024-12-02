@@ -38,3 +38,14 @@ Button:pressed {
     -fx-background-color: #48918B;
 }
 
+#logOutButton {
+    -fx-background-color: #d9534f;
+}
+
+#logOutButton:hover {
+    -fx-background-color: #c9302c;
+}
+
+#logOutButton:pressed {
+    -fx-background-color: #ac2925;
+}

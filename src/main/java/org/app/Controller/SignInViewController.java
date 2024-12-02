@@ -22,6 +22,7 @@ public class SignInViewController {
     public Button logInButton;
     public Label messageLabel;
     public Button backButton;
+    public Label messageLabel1;
 
     public static String username = "admin";
     private String password;

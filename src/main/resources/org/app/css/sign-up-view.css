@@ -61,6 +61,6 @@
 }
 
 .hbox {
-    -fx-spacing: 10px;
+    -fx-spacing: 0px;
     -fx-alignment: CENTER_LEFT;
 }

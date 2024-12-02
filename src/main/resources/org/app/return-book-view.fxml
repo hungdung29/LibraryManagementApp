@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0"
-           stylesheets="@css/return-book-view.css" prefWidth="684.0"
-           xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="org.app.Controller.ReturnBookController">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" stylesheets="@css/return-book-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.ReturnBookController">
     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
         <HBox prefHeight="15.0" prefWidth="401.0">
-            <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
-            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" text="Search" />
+            <TextField fx:id="searchTextField" prefHeight="32.0" prefWidth="272.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="30.0" prefWidth="71.0" text="Search" HBox.hgrow="ALWAYS" />
         </HBox>
-        <TableView fx:id="bookTable" VBox.vgrow="ALWAYS">
+        <TableView fx:id="bookTable" prefHeight="418.0" prefWidth="376.0" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
                 <TableColumn fx:id="authorColumn" prefWidth="102.0" text="Author" />

@@ -8,10 +8,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
 <SplitPane fx:id="bookForm" dividerPositions="0.5975073313782991" prefHeight="488.0" prefWidth="684.0" stylesheets="@css/book-management-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BookManagementController">
     <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
         <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
@@ -32,7 +32,7 @@
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </padding>
     </VBox>
-    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+    <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0" spacing="5.0">
         <ImageView fx:id="bookImage" fitHeight="186.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="titleBookDetailLabel" text="Title:" />
         <Label fx:id="publisherDetailLabel" text="Publisher" />
