@@ -26,7 +26,5 @@ Button:hover {
 
 Button:pressed {
     -fx-background-color: #48918B;
-
-VBox {
-    -fx-padding: 20px;
 }
+
