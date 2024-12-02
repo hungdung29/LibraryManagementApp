@@ -106,6 +106,8 @@ public class InboxController implements Initializable {
             MessageData.addMessageToDataBase(message, username, partner);
 
             messageTextField.clear();
+            friendList = MessageData.getListFriend(username);
+            friendListView.setItems(friendList);
         }
     }
 }

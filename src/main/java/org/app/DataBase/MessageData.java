@@ -46,13 +46,28 @@ public class MessageData extends DataBaseAccessor {
         ObservableList<String> friends = FXCollections.observableArrayList();
 
         // get username of recently friend
-        String query = "with recent_messages as " +
-                "( select * from messages where receiver = ? or sender = ? ) " +
-                "select distinct (u.accountName) from users u " +
-                "left join recent_messages m " +
-                "on (u.accountName = m.sender or u.accountName = m.receiver) " +
-                "where u.accountName != ? " +
-                "order by  m.created_at desc";
+//        String query = "with recent_messages as " +
+//                "( select * from messages where receiver = ? or sender = ? ) " +
+//                "select distinct (u.accountName) from users u " +
+//                "left join recent_messages m " +
+//                "on (u.accountName = m.sender or u.accountName = m.receiver) " +
+//                "where u.accountName != ? " +
+//                "order by  m.created_at desc";
+        String query = "select distinct name from " +
+                        "( select distinct name from ( " +
+                            "select sender as name, created_at " +
+                            "from messages " +
+                            "where sender != ?" +
+                            " union " +
+                            "select receiver as name, created_at " +
+                            "from messages " +
+                            "where receiver != ? " +
+                            "order by created_at desc ) " +
+                        "union all " +
+                        "select accountName as name " +
+                        "from users " +
+                        "where accountName != ? " +
+                ");";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
@@ -62,7 +77,7 @@ public class MessageData extends DataBaseAccessor {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                friends.add(resultSet.getString("accountName"));
+                friends.add(resultSet.getString("name"));
             }
         } catch (Exception e) {
             e.printStackTrace();
