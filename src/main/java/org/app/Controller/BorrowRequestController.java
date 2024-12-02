@@ -1,5 +1,9 @@
 package org.app.Controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +18,7 @@ import org.app.DataBase.BorrowData;
 import org.app.DataBase.RequestData;
 import org.app.Object.BorrowRequest;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-public class BorrowRequestController  implements Initializable {
+public class BorrowRequestController implements Initializable {
     public TableView<BorrowRequest> borrowRequestTable;
 
     public CheckBox selectAllCheckBox;
@@ -36,59 +35,81 @@ public class BorrowRequestController  implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        configTable();
+	   configTable();
 
-        RequestData.getDataAllRequest(borrowRequests);
+	   RequestData.getDataAllRequest(borrowRequests);
 
-        borrowRequestTable.setItems(borrowRequests);
+	   borrowRequestTable.setItems(borrowRequests);
     }
 
-    // delete selected request and add to borrow
+    /**
+	* Handle accept button clicked.
+	*
+	* @param actionEvent event
+	*/
     public void onAcceptButtonClicked(ActionEvent actionEvent) {
-        List<BorrowRequest> toRemove = new ArrayList<>();
-        for (BorrowRequest borrowRequest : borrowRequests) {
-            if (borrowRequest.getCheckBox().isSelected()) {
-                //System.out.println(borrowRequest.getBookTitle());
+	   List<BorrowRequest> toRemove = new ArrayList<>();
+	   for (BorrowRequest borrowRequest : borrowRequests) {
+		  if (borrowRequest.getCheckBox().isSelected()) {
+			 //System.out.println(borrowRequest.getBookTitle());
 
-                BorrowData.addBorrowInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
-                BookData.updateRemainingBook(borrowRequest.getBookID(), -1);
+			 BorrowData.addBorrowInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
+			 BookData.updateRemainingBook(borrowRequest.getBookID(), -1);
 
-                RequestData.deleteRequestInfo(borrowRequest.getUserName(), borrowRequest.getBookID());
-                toRemove.add(borrowRequest);
-            }
-        }
-        borrowRequests.removeAll(toRemove);
-        borrowRequestTable.setItems(borrowRequests);
+			 RequestData.deleteRequestInfo(borrowRequest.getUserName(),
+				    borrowRequest.getBookID());
+			 toRemove.add(borrowRequest);
+		  }
+	   }
+	   borrowRequests.removeAll(toRemove);
+	   borrowRequestTable.setItems(borrowRequests);
     }
 
-    // delete selected request
+    /**
+	* Handle reject button clicked.
+	*
+	* @param actionEvent event when reject button clicked
+	*/
     public void onRejectButtonClicked(ActionEvent actionEvent) {
-        List<BorrowRequest> toRemove = new ArrayList<>();
-        for (BorrowRequest borrowRequest : borrowRequests) {
-            if (borrowRequest.getCheckBox().isSelected()) {
-                RequestData.deleteRequestInfo(SignInViewController.username, borrowRequest.getBookID());
+	   List<BorrowRequest> toRemove = new ArrayList<>();
+	   for (BorrowRequest borrowRequest : borrowRequests) {
+		  if (borrowRequest.getCheckBox().isSelected()) {
+			 RequestData.deleteRequestInfo(SignInViewController.username,
+				    borrowRequest.getBookID());
 
-                toRemove.add(borrowRequest);
-            }
-        }
-        borrowRequests.removeAll(toRemove);
-        borrowRequestTable.setItems(borrowRequests);
+			 toRemove.add(borrowRequest);
+		  }
+	   }
+	   borrowRequests.removeAll(toRemove);
+	   borrowRequestTable.setItems(borrowRequests);
     }
 
+    /**
+	* Config table view.
+	*/
     private void configTable() {
-        borrowRequestTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	   borrowRequestTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        selectColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, CheckBox>("checkBox"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>("userName"));
-        bookTitleColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>("bookTitle"));
-        dateRequestColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>("dateRequested"));
+	   selectColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, CheckBox>(
+			 "checkBox"));
+	   usernameColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>(
+			 "userName"));
+	   bookTitleColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>(
+			 "bookTitle"));
+	   dateRequestColumn.setCellValueFactory(new PropertyValueFactory<BorrowRequest, String>(
+			 "dateRequested"));
     }
 
+    /**
+	* Handle select all checkbox clicked.
+	*
+	* @param actionEvent event when select all checkbox clicked
+	*/
     public void onAllCheckBoxClicked(ActionEvent actionEvent) {
-        boolean checked = selectAllCheckBox.isSelected();
+	   boolean checked = selectAllCheckBox.isSelected();
 
-        for (BorrowRequest borrowRequest : borrowRequests) {
-            borrowRequest.getCheckBox().setSelected(checked);
-        }
+	   for (BorrowRequest borrowRequest : borrowRequests) {
+		  borrowRequest.getCheckBox().setSelected(checked);
+	   }
     }
 }
