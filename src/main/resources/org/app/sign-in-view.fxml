@@ -12,7 +12,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-   <Label fx:id="messageLabel" prefHeight="41.0" prefWidth="277.0" text="Sign in to use Triple Wolves app" />
+   <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="41.0" prefWidth="437.0" text="Sign in to use Triple Wolves app" />
     <TextField fx:id="usernameTextField" alignment="CENTER" opacity="0.63" promptText="username" />
     <PasswordField fx:id="passwordTextField" alignment="CENTER" promptText="password" />
     <Button fx:id="logInButton" mnemonicParsing="false" onAction="#onLogInButtonClicked" text="Log In" />

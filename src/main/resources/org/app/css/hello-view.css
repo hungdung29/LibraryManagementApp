@@ -1,19 +1,19 @@
 VBox {
-    -fx-background-color: #F5F7FA;
+    -fx-background-color: #ffffff;
     -fx-padding: 20px;
     -fx-spacing: 20px;
 }
 
 Label {
     -fx-font-size: 33px;
-    -fx-text-fill: #2C3E50; /* Xanh đậm để dễ đọc */
+    -fx-text-fill: #2C3E50;
     -fx-font-weight: bold;
 }
 
 Button {
     -fx-font-size: 14px;
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #76C7C0; /* Xanh pastel nhẹ để nổi bật nhưng không quá chói */
+    -fx-background-color: #76C7C0;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-padding: 10px 20px;
@@ -21,12 +21,11 @@ Button {
 }
 
 Button:hover {
-    -fx-background-color: #5FA9A4; /* Màu khi rê chuột qua */
+    -fx-background-color: #5FA9A4;
 }
 
 Button:pressed {
-    -fx-background-color: #48918B; /* Màu khi nhấn giữ */
-}
+    -fx-background-color: #48918B;
 
 VBox {
     -fx-padding: 20px;

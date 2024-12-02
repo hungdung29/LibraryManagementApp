@@ -1,18 +1,18 @@
 VBox {
-    -fx-background-color: #F0F4F8;
+    -fx-background-color: #ffffff;
     -fx-padding: 20px;
-    -fx-spacing: 30px;
+    -fx-spacing: 5px;
 }
 
 Label {
-    -fx-font-size: 33px;
+    -fx-font-size: 20px;
     -fx-text-fill: #2C3E50;
-    -fx-font-weight: bold;
 }
 
-Label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #4A6A7D;
+#userInformationLabel {
+    -fx-font-size: 40px;
+    -fx-text-fill: #032b79;
+    -fx-font-weight: bold;
 }
 
 HBox {
@@ -38,7 +38,3 @@ Button:pressed {
     -fx-background-color: #48918B;
 }
 
-Label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #34495E;
-}

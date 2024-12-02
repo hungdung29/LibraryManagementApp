@@ -43,14 +43,14 @@ public class ChangePasswordController implements Initializable {
 
         // verify old password
         if ( !oldPassword.equals(getOldPassword) ) {
-            messageLabel.setText("Old password is incorrect ");
+            messageLabel.setText("Old password is incorrect");
             cleanTextFields();
             return;
         }
 
         // check valid password
         if ( !HandleUserAccount.checkValidPassword(newPassword, confirmPassword) ) {
-            messageLabel.setText("Invalid password ");
+            messageLabel.setText("Invalid password");
             cleanTextFields();
             return;
         }
