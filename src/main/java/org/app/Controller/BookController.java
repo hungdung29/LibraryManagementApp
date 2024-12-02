@@ -33,6 +33,7 @@ abstract public class BookController {
     public void onSearchButtonClicked(ActionEvent actionEvent) {
         String keyword = searchTextField.getText();
         // restore shown books = entire book
+        getDataEntireBook();
         cloneListBook();
 
         if (keyword == null || keyword.isEmpty()) {
