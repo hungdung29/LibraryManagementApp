@@ -1,6 +1,5 @@
 package org.app.Controller;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -17,7 +16,6 @@ import org.app.MainApp;
 import org.app.Object.Book;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddBookController extends BookController implements Initializable {

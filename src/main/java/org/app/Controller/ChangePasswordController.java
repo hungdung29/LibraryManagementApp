@@ -59,6 +59,9 @@ public class ChangePasswordController implements Initializable {
         HandleUserAccount.changePassword(SignInViewController.username, newPassword);
         messageLabel.setText("Change password successfully");
         cleanTextFields();
+        try {
+            MainApp.navigateToScene("user-view.fxml");
+        } catch (IOException e) {e.printStackTrace();}
     }
 
     private void cleanTextFields() {

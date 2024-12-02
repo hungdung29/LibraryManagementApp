@@ -1,6 +1,7 @@
 package org.app.DataBase;
 
 import javafx.collections.ObservableList;
+import org.app.Object.Book;
 import org.app.Object.BorrowRequest;
 
 import java.sql.PreparedStatement;
@@ -64,6 +65,38 @@ public class RequestData extends DataBaseAccessor {
         }
     }
 
+    public static void getBookisPending (String username, ObservableList<Book> books) {
+        books.clear();
+        String query = "SELECT * FROM books JOIN borrows_request " +
+                "ON books.idBook = borrows_request.book_idBook where user_username = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Book book = new Book.Builder()
+                        .setIdBook(resultSet.getInt("idBook"))
+                        .setTitle(resultSet.getString("title"))
+                        .setAuthor(resultSet.getString("author"))
+                        .setIsbn(resultSet.getString("isbn"))
+                        .setDescription(resultSet.getString("description"))
+                        .setContent(resultSet.getString("content"))
+                        .setCatalog(resultSet.getString("catalog"))
+                        .setPrice(resultSet.getDouble("price"))
+                        .setImagePath(resultSet.getString("imagePath"))
+                        .setRemaining(resultSet.getInt("remaining"))
+                        .setPublisher(resultSet.getString("publisher"))
+                        .setQuantity(resultSet.getInt("quantity"))
+                        .setStatus("Pending")
+                        .build();
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error");
+        }
+    }
 
     // check whether this book already request to borrow
     public static boolean isPending(String username, int idBook) {

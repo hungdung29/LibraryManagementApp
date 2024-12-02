@@ -40,7 +40,7 @@ public class BookManagementController extends BookController implements Initiali
     public Label descriptionDetailLabel;
     public ListView commentList;
 
-    public Button inboxButton;
+    public Button deleteButton;
     public Button addButton;
     public Button modifyButton;
 
@@ -69,7 +69,7 @@ public class BookManagementController extends BookController implements Initiali
             }
         });
         bookTable.setEditable(false);
-        inboxButton.setDisable(true);
+        deleteButton.setDisable(true);
     }
 
     @Override
@@ -150,11 +150,11 @@ public class BookManagementController extends BookController implements Initiali
         if (modifyButton.getText().equals("Modify")) {
             bookTable.setEditable(true);
             modifyButton.setText("Save");
-            inboxButton.setDisable(false);
+            deleteButton.setDisable(false);
         } else {
             bookTable.setEditable(false);
             modifyButton.setText("Modify");
-            inboxButton.setDisable(true);
+            deleteButton.setDisable(true);
 
             //refresh table
             getDataEntireBook();

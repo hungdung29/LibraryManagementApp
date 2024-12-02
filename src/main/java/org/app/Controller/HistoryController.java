@@ -1,5 +1,7 @@
 package org.app.Controller;
 
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -7,10 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import org.app.DataBase.BookData;
 import org.app.DataBase.BorrowData;
+import org.app.DataBase.RequestData;
 import org.app.Object.Book;
 import org.app.Object.BorrowInfo;
+import org.app.Object.BorrowRequest;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +37,7 @@ public class HistoryController extends BookController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // set up column for table
         configTable();
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("remaining"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         infoBookVBox.setVisible(false);
         isChange = false;
 
@@ -57,8 +62,29 @@ public class HistoryController extends BookController implements Initializable {
     }
 
     public void getDataEntireBook() {
-        BorrowData.getDataReturnedBook(SignInViewController.username, entireBooks);
-        cloneListBook();
+        Task<Void> getAllBookDataTask = new Task<Void>() {
+            @Override
+            protected Void call() {
+                shownBooks.clear();
+                BorrowData.getDataReturnedBook(SignInViewController.username, entireBooks);
+                shownBooks.addAll(entireBooks);
+                BorrowData.getDataBorrowingBook(SignInViewController.username, entireBooks);
+                shownBooks.addAll(entireBooks);
+                RequestData.getBookisPending(SignInViewController.username, entireBooks);
+                shownBooks.addAll(entireBooks);
+                return null;
+            }
+        };
+
+        getAllBookDataTask.setOnSucceeded(event -> {
+            System.out.println("Get all book data success");
+        });
+
+        getAllBookDataTask.setOnFailed(event -> {
+            System.out.println("Get all book data failed");
+        });
+
+        new Thread(getAllBookDataTask).start();
     }
 
     public void onChangeCommentButtonClicked(ActionEvent actionEvent) {
@@ -84,14 +110,22 @@ public class HistoryController extends BookController implements Initializable {
      */
     public void handleBookSelection(String username, Book book) {
         titleBookLabel.setText("Book title: " + book.getTitle());
-        BorrowInfo borrowInfo = BorrowData.getBorrowInfo(username, book);
+        BorrowInfo borrowInfo;
+        if (book.getStatus().equals("Borrowing"))  {
+            borrowInfo = BorrowData.getBorrowingInfo(username, book);
+        } else if (book.getStatus().equals("Returned")) {
+            borrowInfo = BorrowData.getBorrowedInfo(username, book);
+        } else {
+            borrowInfo = new BorrowInfo(null, null, null);
+        }
+
         if (borrowInfo == null) {
             infoBookVBox.setVisible(false);
             return;
         }
 
-        borrowDateLabel.setText("Borrow Date: " + borrowInfo.getBorrowDate());
-        returnDateLabel.setText("Return Date: " + borrowInfo.getReturnDate());
+        borrowDateLabel.setText("Borrowed Date: " + borrowInfo.getBorrowDate());
+        returnDateLabel.setText("Returned Date: " + borrowInfo.getReturnDate());
         commentTextField.setText(borrowInfo.getComment());
     }
 }

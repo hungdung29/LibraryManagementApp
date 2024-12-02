@@ -16,6 +16,7 @@ public class Book {
     private int remaining;
     private String publisher;
     private int quantity;
+    private String status;
 
     private Book(Builder builder) {
         this.idBook = builder.idBook;
@@ -30,6 +31,7 @@ public class Book {
         this.remaining = builder.remaining;
         this.publisher = builder.publisher;
         this.quantity = builder.quantity;
+        this.status = builder.status;
     }
 
     public int getIdBook() {
@@ -76,6 +78,10 @@ public class Book {
         return publisher;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public static class Builder {
         private int idBook;
         private String title;
@@ -89,6 +95,7 @@ public class Book {
         private int remaining;
         private String publisher;
         private int quantity;
+        private String status;
 
         public Builder setIdBook(int idBook) {
             this.idBook = idBook;
@@ -150,9 +157,18 @@ public class Book {
             return this;
         }
 
+        public Builder setStatus(String status) {
+            this.status = status;
+            return this;
+        }
+
         public Book build() {
             return new Book(this);
         }
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setRemaining(int remaining) {

@@ -89,6 +89,7 @@ public class BorrowData extends DataBaseAccessor {
                         .setCatalog(resultSet.getString("catalog"))
                         .setRemaining(resultSet.getInt("remaining"))
                         .setPublisher(resultSet.getString("publisher"))
+                        .setStatus("Borrowing")
                         .build();
                 books.add(book);
             }
@@ -121,6 +122,7 @@ public class BorrowData extends DataBaseAccessor {
                         .setCatalog(resultSet.getString("catalog"))
                         .setRemaining(resultSet.getInt("remaining"))
                         .setPublisher(resultSet.getString("publisher"))
+                        .setStatus("Returned")
                         .build();
                 books.add(book);
             }
@@ -159,7 +161,7 @@ public class BorrowData extends DataBaseAccessor {
         }
     }
 
-    public static BorrowInfo getBorrowInfo(String username, Book book) {
+    public static BorrowInfo getBorrowedInfo(String username, Book book) {
         String query = "select date_borrow, date_give_back, " +
                 "(select comment " +
                 "from comments " +
@@ -177,6 +179,35 @@ public class BorrowData extends DataBaseAccessor {
                 BorrowInfo borrowInfo = new BorrowInfo(
                         resultSet.getString("date_borrow"),
                         resultSet.getString("date_give_back"),
+                        resultSet.getString("comment")
+                );
+
+                return borrowInfo;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static BorrowInfo getBorrowingInfo(String username, Book book) {
+        String query = "select date_borrow, " +
+                "(select comment " +
+                "from comments " +
+                "where comments.user_username = ? " +
+                "and comments.book_ISBN = ?) as comment " +
+                "from borrows where user_username = ? and date_give_back is null";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, book.getIsbn());
+            preparedStatement.setString(3, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                BorrowInfo borrowInfo = new BorrowInfo(
+                        resultSet.getString("date_borrow"),
+                        null,
                         resultSet.getString("comment")
                 );
 
