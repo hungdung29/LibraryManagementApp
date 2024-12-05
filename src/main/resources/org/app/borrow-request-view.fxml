@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="492.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowRequestController" stylesheets="@css/borrow-request-view.css">
+<VBox prefHeight="492.0" prefWidth="549.0" stylesheets="@css/borrow-request-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.BorrowRequestController">
     <TableView fx:id="borrowRequestTable" prefHeight="488.0" prefWidth="529.0" VBox.vgrow="ALWAYS">
       <columns>
-          <TableColumn fx:id="selectColumn" prefWidth="69.41229444742203">
+          <TableColumn fx:id="selectColumn" prefWidth="26.666686058044434">
             <graphic>
-               <CheckBox fx:id="selectAllCheckBox" mnemonicParsing="false" onAction="#onAllCheckBoxClicked" text="All" />
+               <CheckBox fx:id="selectAllCheckBox" mnemonicParsing="false" onAction="#onAllCheckBoxClicked" />
             </graphic>
           </TableColumn>
 
-          <TableColumn fx:id="usernameColumn" prefWidth="138.0876922607422" text="User Name" />
+          <TableColumn fx:id="usernameColumn" prefWidth="181.99993515014648" text="User Name" />
           <TableColumn fx:id="bookTitleColumn" prefWidth="195.8751678466797" text="Book Title" />
           <TableColumn fx:id="dateRequestColumn" prefWidth="146.50552368164062" text="Date Request" />
       </columns>

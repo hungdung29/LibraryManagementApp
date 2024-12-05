@@ -25,7 +25,7 @@ public class MainApp extends Application {
         CreateDataBase.addSample();
 
         currentStage = stage;
-        navigateToScene("hello-view.fxml");
+        navigateToScene2("hello-view.fxml", 473, 549);
         stage.show();
     }
 
@@ -44,6 +44,29 @@ public class MainApp extends Application {
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         currentStage.setScene(scene);
 
+        if (fragment != null) {
+            TabPane tabPane = (TabPane) scene.lookup("#" + fragment);
+            if (tabPane != null) {
+                for (Tab tab : tabPane.getTabs()) {
+                    if (tab.getId().equals(parts[2])) {
+                        tabPane.getSelectionModel().select(tab);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void navigateToScene2(String fxmlFile, int width, int height) throws IOException {
+        // admin-view.fxml#adminTabPane#inbox
+        String[] parts = fxmlFile.split("#");
+        String fxmlPath = parts[0];
+        String fragment = parts.length > 1 ? parts[1] : null;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, width, height);
+        currentStage.setScene(scene);
         if (fragment != null) {
             TabPane tabPane = (TabPane) scene.lookup("#" + fragment);
             if (tabPane != null) {

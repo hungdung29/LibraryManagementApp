@@ -1,7 +1,11 @@
-VBox {
-    -fx-background-color: #ffffff;
-    -fx-padding: 20px;
-    -fx-spacing: 5px;
+.vbox {
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0, 5, 5);
+    -fx-border-radius: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
 }
 
 Label {
@@ -20,22 +24,26 @@ HBox {
     -fx-alignment: CENTER;
 }
 
-Button {
+.button {
     -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: #76C7C0;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-padding: 10px 20px;
+    -fx-background-color: #6a98d9;
+    -fx-text-fill: white;
+    -fx-padding: 0.7em 1em 0.7em 0.9em;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-alignment: center;
     -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+    -fx-transition: all 0.2s;
 }
 
-Button:hover {
-    -fx-background-color: #5FA9A4;
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 6, 0, 0, 2);
 }
 
-Button:pressed {
-    -fx-background-color: #48918B;
+.button:pressed {
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
 #logOutButton {
