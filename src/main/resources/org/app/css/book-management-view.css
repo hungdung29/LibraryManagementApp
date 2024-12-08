@@ -1,40 +1,50 @@
-.split-pane {
+SplitPane {
     -fx-background-color: #ffffff;
+}
+
+VBox {
+    -fx-spacing: 10px;
     -fx-padding: 10px;
 }
 
-.vbox {
+HBox {
     -fx-spacing: 10px;
+    -fx-alignment: CENTER_LEFT;
 }
 
-.hbox {
-    -fx-spacing: 10px;
-}
-
-.text-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #d1d1d1;
+TextField {
+    -fx-font-size: 14px;
+    -fx-text-fill: #4A6A7D;
+    -fx-background-color: #E7EFF6;
+    -fx-border-color: #A3C3D9;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-padding: 5px;
+}
+
+TextField:focused {
+    -fx-border-color: #76C7C0;
+    -fx-background-color: #DCE6EE;
+}
+
+Button {
     -fx-font-size: 14px;
-}
-
-.text-field:focused {
-    -fx-border-color: #6a98d9;
-}
-
-.button {
+    -fx-text-fill: #FFFFFF;
     -fx-background-color: #6a98d9;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 5px 10px;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
     -fx-cursor: hand;
 }
 
-.button:hover {
-    -fx-background-color: #4e7ab7;
+Button:hover {
+    -fx-background-color: #1919b5;
 }
+
+Button:pressed {
+    -fx-background-color: #48918B;
+}
+
 {
  	-fx-primary-color: #007acc;
  	-fx-secondary-color: #4B6EAF;
