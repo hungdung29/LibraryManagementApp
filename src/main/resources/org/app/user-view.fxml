@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<TabPane prefHeight="400.0" prefWidth="600.0" side="LEFT" xmlns="http://javafx.com/javafx/17.0.12"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController">
+<TabPane prefHeight="400.0" prefWidth="600.0" side="LEFT" stylesheets="@css/user-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserController">
 
-    <Tab fx:id="user_info" text="User information">
-        <fx:include source="user-info-view.fxml"/>
+    <Tab fx:id="user_info" closable="false" text="User information">
+        <fx:include source="user-info-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="85.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/user%20(2).png" />
+            </image>
+         </ImageView>
+      </graphic>
     </Tab>
 
-    <Tab fx:id="borrow_book" text="Borrow book">
-        <fx:include source="borrow-book-view.fxml"/>
+    <Tab fx:id="borrow_book" closable="false" text="Borrow book">
+        <fx:include source="borrow-book-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="108.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/books-stack-of-three.png" />
+            </image>
+         </ImageView>
+      </graphic>
     </Tab>
 
-    <Tab fx:id="return_book" text="Return book">
-        <fx:include source="return-book-view.fxml"/>
+    <Tab fx:id="return_book" closable="false" text="Return book">
+        <fx:include source="return-book-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="31.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/product-return.png" />
+            </image>
+         </ImageView>
+      </graphic>
     </Tab>
 
-    <Tab text="Chatbot"/>
+    <Tab fx:id="history" closable="false" text="History">
+        <fx:include source="history-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="96.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/history.png" />
+            </image>
+         </ImageView>
+      </graphic>
+    </Tab>
+
+    <Tab fx:id="inbox" closable="false" text="Inbox">
+        <fx:include source="inbox-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="84.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/mail-inbox-app.png" />
+            </image>
+         </ImageView>
+      </graphic>
+    </Tab>
 </TabPane>

@@ -1,41 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="CENTER" prefHeight="382.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserInfoController">
-    <Label text="User information">
+
+<VBox alignment="CENTER" prefHeight="506.0" prefWidth="491.0" spacing="10.0" stylesheets="@css/user-info-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.UserInfoController">
+   <ImageView fitHeight="181.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@assets/comunication.png" />
+      </image>
+   </ImageView>
+    <Label fx:id="userInformationLabel" text="USER INFORMATION">
         <font>
-            <Font size="33.0"/>
+            <Font name="System Bold Italic" size="48.0" />
         </font>
     </Label>
-    <VBox alignment="CENTER" prefHeight="117.0" prefWidth="571.0">
+    <VBox alignment="BOTTOM_CENTER" depthTest="ENABLE" prefHeight="117.0" prefWidth="571.0" spacing="10.0">
         <Label fx:id="nameLabel" layoutX="258.0" layoutY="31.0" text="Name: ">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </Label>
-        <Label fx:id="usernameLabel" text="Username: ">
+        <Label fx:id="usernameLabel" graphicTextGap="0.0" text="Username: ">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </Label>
         <Label fx:id="addressLabel" text="Address: ">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </Label>
         <Label fx:id="phoneLabel" text="Phone number: ">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="emailLabel" text="Email: ">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="birthdayLabel" text="Birthday: ">
+            <font>
+                <Font size="16.0" />
             </font>
         </Label>
     </VBox>
-    <HBox alignment="CENTER" prefHeight="135.0" prefWidth="272.0" spacing="30.0">
-        <Button fx:id="changePassButton" mnemonicParsing="false" onAction="#onChangePassButtonClicked"
-                text="Change password"/>
-        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutButtonClicked" text="Log out"/>
+    <HBox alignment="CENTER" prefHeight="126.0" prefWidth="491.0" spacing="30.0">
+        <Button fx:id="changePassButton" mnemonicParsing="false" onAction="#onChangePassButtonClicked" text="Change password" />
+        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#onLogOutButtonClicked" text="Log out" />
     </HBox>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </VBox>

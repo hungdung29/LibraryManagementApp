@@ -11,8 +11,9 @@ module org.app {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires java.sql;
     requires jdk.compiler;
+    requires org.xerial.sqlitejdbc;
+    requires com.google.gson;
 
     opens org.app to javafx.fxml;
     exports org.app;

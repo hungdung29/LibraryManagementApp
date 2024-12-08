@@ -1,32 +1,82 @@
 package org.app.Object;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import org.app.DataBase.BorrowData;
 
 public class User {
     private String username;
+    private String password;
     private String name;
     private String phoneNumber;
     private String address;
-//    ObservableList<Book> listOfBorrowedBooks;
+    private String email;
+    private String birthday;
 
-    public User(String username, String name, String phoneNumber, String address) {
-        this.username = username;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-//        this.listOfBorrowedBooks = FXCollections.observableArrayList();
+    private User(Builder builder) {
+        this.username = builder.username;
+        this.password = builder.password;
+        this.name = builder.name;
+        this.phoneNumber = builder.phoneNumber;
+        this.address = builder.address;
+        this.email = builder.email;
+        this.birthday = builder.birthday;
     }
 
-    public User() {
-        this.username = "nan";
-        this.name = "nan";
-        this.phoneNumber = "nan";
-        this.address = "nan";
+    public static class Builder {
+        private String username;
+        private String password;
+        private String name;
+        private String phoneNumber;
+        private String address;
+        private String email;
+        private String birthday;
+
+        public Builder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setBirthday(String birthday) {
+            this.birthday = birthday;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 
+    // Getters and setters
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -41,23 +91,17 @@ public class User {
         return address;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public int getNumBorrowingBooks() {
+        return BorrowData.getNumberOfBorrowingBooks(username);
     }
-
-    //    public ObservableList<Book> getListOfBorrowedBooks() {
-//        return listOfBorrowedBooks;
-//    }
 }
+

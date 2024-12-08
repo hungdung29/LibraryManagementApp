@@ -1,0 +1,66 @@
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+#messageLabel {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3f5d7e;
+}
+
+.text-field, .password-field {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-border-color: #d1d1d1;
+    -fx-font-size: 14px;
+    -fx-pref-width: 320px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #6a98d9;
+    -fx-background-color: #f9fbfd;
+}
+
+.text-field .prompt-text, .password-field .prompt-text {
+    -fx-font-style: italic;
+    -fx-text-fill: #b3b3b3;
+}
+
+.button {
+    -fx-background-color: #6a98d9;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.0, 1, 1);
+}
+
+.button:hover {
+    -fx-background-color: #4e7ab7;
+}
+
+.button:pressed {
+    -fx-background-color: #3b6091;
+}
+
+#backButton {
+    -fx-background-color: #d1d1d1;
+    -fx-text-fill: #3f5d7e;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+}
+
+#backButton:hover {
+    -fx-background-color: #b8b8b8;
+}
+
+.hbox {
+    -fx-spacing: 0px;
+    -fx-alignment: CENTER_LEFT;
+}

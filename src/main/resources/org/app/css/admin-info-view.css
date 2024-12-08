@@ -1,0 +1,36 @@
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a4a4a;
+}
+
+.hbox {
+    -fx-spacing: 50px;
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.0, 1, 1);
+}
+
+.button:hover {
+    -fx-background-color: #c9302c;
+}
+
+.button:pressed {
+    -fx-background-color: #ac2925;
+}

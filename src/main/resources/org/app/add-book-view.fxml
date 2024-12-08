@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER" layoutX="177.0" layoutY="100.0" prefHeight="200.0" prefWidth="247.0">
+<SplitPane dividerPositions="0.593108504398827" prefHeight="488.0" prefWidth="684.0" stylesheets="@css/borrow-book-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.AddBookController">
+   <VBox prefHeight="200.0" prefWidth="100.0">
+      <HBox prefHeight="15.0" prefWidth="401.0" spacing="5.0">
+         <TextField fx:id="searchTextField" HBox.hgrow="ALWAYS" />
+         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onSearchButtonClicked" prefHeight="22.0" prefWidth="83.0" text="Search" />
+      </HBox>
+      <Label fx:id="messageLabel" />
+      <HBox alignment="CENTER" prefHeight="15.0" prefWidth="401.0" spacing="10.0">
+         <Button fx:id="addBookButton" mnemonicParsing="false" onAction="#onAddBookButtonClicked" text="Add Book" textAlignment="CENTER" />
+         <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClicked" text="Back" textAlignment="CENTER" />
+      </HBox>
+      <TableView fx:id="bookTable" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="titleColumn" prefWidth="120.0" text="Title" />
+            <TableColumn fx:id="authorColumn" prefWidth="102.0" text="Author" />
+            <TableColumn fx:id="categoryColumn" prefWidth="107.0" text="Category" />
+            <TableColumn fx:id="publisherColumn" prefWidth="62.0" text="Publisher" />
+         </columns>
+      </TableView>
+      <HBox prefHeight="85.0" prefWidth="402.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="100.0">
+            <GridPane alignment="CENTER" focusTraversable="true" prefHeight="53.0" prefWidth="265.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.20001220703125" minWidth="10.0" prefWidth="60.59999771118164" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.60000228881836" minWidth="10.0" prefWidth="133.40000228881837" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book name:" />
-                  <TextField promptText="bookname" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <TextField fx:id="titleField" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <TextField fx:id="authorField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="publisherField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
+            </GridPane>
+            <GridPane alignment="CENTER" focusTraversable="true" prefHeight="53.0" prefWidth="288.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.20001220703125" minWidth="10.0" prefWidth="76.00001220703125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.60000228881836" minWidth="10.0" prefWidth="136.59998779296873" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
-                  <TextField promptText="author" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <TextField fx:id="isbnField" GridPane.columnIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="quantityField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:" />
-                  <TextField promptText="publisher" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN: " />
-                  <TextField promptText="author" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="247.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
-                  <TextField promptText="quantity" />
-               </children>
-            </HBox>
+            </GridPane>
          </children>
-      </VBox>
-   </children>
-</Pane>
+      </HBox>
+   </VBox>
+   <VBox fx:id="infoBookVBox" alignment="CENTER" prefHeight="400.0" prefWidth="255.0">
+      <ImageView fx:id="bookImage" fitHeight="186.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="isbnBookDetailLabel" text="ISBN:" />
+      <Label fx:id="languageDetailLabel" text="Language:" />
+      <Label fx:id="descriptionDetailLabel" text="Description:" />
+      <Button fx:id="importButton" mnemonicParsing="false" onAction="#onImportButtonClicked" text="Import" />
+   </VBox>
+</SplitPane>

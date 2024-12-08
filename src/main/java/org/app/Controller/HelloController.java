@@ -1,32 +1,47 @@
 package org.app.Controller;
 
-import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.app.MainApp;
-
-import java.io.IOException;
 
 public class HelloController {
     public Button signInButton;
     public Button signUpButton;
     public Label messageLabel;
 
+    /**
+	* Handle sign in button clicked.
+	*
+	* @param actionEvent event
+	*/
     public void onSignInButtonClick(ActionEvent actionEvent) {
-        try {
-            MainApp.navigateToScene("sign-in-view.fxml");
-        } catch (Exception e) { e.printStackTrace(); }
+	   try {
+		  MainApp.navigateToScene("sign-in-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
+	   } catch (Exception e) {
+		  e.printStackTrace();
+	   }
     }
 
+    /**
+	* Handle sign up button clicked.
+	*
+	* @param actionEvent event
+	*/
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
-        try {
-            MainApp.navigateToScene("sign-up-view.fxml");
-        } catch (Exception e) { e.printStackTrace(); }
+	   try {
+		  MainApp.navigateToScene("sign-up-view.fxml");
+	   } catch (Exception e) {
+		  e.printStackTrace();
+	   }
     }
 
+    /**
+	* Set message label.
+	*
+	* @param message message
+	*/
     public void setMessageLabel(String message) {
-        messageLabel.setText(message);
+	   messageLabel.setText(message);
     }
 }

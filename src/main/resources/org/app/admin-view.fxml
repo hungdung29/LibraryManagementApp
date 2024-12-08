@@ -1,103 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.AdminController">
-   <Tab text="Admin">
-      <content>
-         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-            <children>
-               <Label text="Remaining book(s)::" />
-               <Label text="Borrowed book(s):" />
-               <Label text="Total:" />
-               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
-                  <children>
-                     <Button mnemonicParsing="false" text="Change password" />
-                     <Button mnemonicParsing="false" text="Log out" />
-                  </children>
-                  <VBox.margin>
-                     <Insets />
-                  </VBox.margin>
-                  <opaqueInsets>
-                     <Insets />
-                  </opaqueInsets>
-               </HBox>
-            </children>
-         </VBox>
-      </content>
+<TabPane fx:id="adminTabPane" prefHeight="500.0" prefWidth="819.0" side="LEFT" stylesheets="@css/admin-view.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.AdminController">
+
+   <Tab fx:id="admin_info" closable="false" text="Admin">
+      <fx:include source="admin-info-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="28.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/administrator.png" />
+            </image>
+         </ImageView>
+      </graphic>
    </Tab>
 
-    <Tab text="Member">
-        <SplitPane dividerPositions="0.5" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-         <items>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <HBox prefHeight="34.0" prefWidth="282.0">
-                     <children>
-                        <TextField HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" text="Button" />
-                     </children>
-                  </HBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                  <ListView prefHeight="355.0" prefWidth="282.0" />
-                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="282.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="Delete" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Name:" />
-                  <Label text="Address:" />
-                  <Label text="Phone number:" />
-                  <Label text="List of borrowed book(s):" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-         </items></SplitPane>
-    </Tab>
-   <Tab text="Books">
-      <content>
-         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
-            <items>
-               <VBox prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <HBox prefHeight="33.0" prefWidth="282.0">
-                        <children>
-                           <TextField HBox.hgrow="ALWAYS" />
-                           <Button mnemonicParsing="false" text="Search" />
-                        </children>
-                     </HBox>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of book(s):" />
-                     <ListView prefHeight="276.0" prefWidth="282.0" />
-                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
-                        <children>
-                           <Button mnemonicParsing="false" text="Delete" />
-                           <Button mnemonicParsing="false" text="Add" />
-                        </children>
-                     </HBox>
-                  </children>
-               </VBox>
-               <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Label text="Name:" />
-                     <Label text="Author:" />
-                     <Label text="Publisher:" />
-                     <Label text="Remaining: " />
-                     <Label text="Borrowed:" />
-                     <Label text="ISBN:" />
-                     <Label text="Comment:" />
-                     <ListView prefHeight="294.0" prefWidth="281.0" />
-                  </children>
-               </VBox>
-            </items>
-         </SplitPane>
-      </content>
+   <Tab fx:id="member_management" closable="false" text="Member">
+      <fx:include source="member-management-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/comunication.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Tab>
+
+   <Tab fx:id="book_management" closable="false" text="Book">
+      <fx:include source="book-management-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="67.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/books-stack-of-three.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Tab>
+
+   <Tab fx:id="borrow_request_tab" closable="false" text="Borrow Request">
+      <fx:include source="borrow-request-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="80.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/quote-request.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Tab>
+
+   <Tab fx:id="inbox" closable="false" text="Inbox">
+      <fx:include source="inbox-view.fxml" />
+      <graphic>
+         <ImageView fitHeight="87.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@assets/mail-inbox-app.png" />
+            </image>
+         </ImageView>
+      </graphic>
    </Tab>
 
 </TabPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox prefHeight="447.0" prefWidth="589.0" stylesheets="@css/inbox-view.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.Controller.InboxController">
+  <VBox prefHeight="447.0" prefWidth="410.0">
+    <HBox prefHeight="15.0" prefWidth="401.0">
+      <TextField fx:id="searchFriendTextField" promptText="Find Friend" HBox.hgrow="ALWAYS" />
+      <Button fx:id="findButton" mnemonicParsing="false" onAction="#onFindButtonClicked" prefHeight="30.0" prefWidth="72.0" text="Find" />
+    </HBox>
+    <ListView fx:id="friendListView" prefHeight="383.0" prefWidth="208.0" VBox.vgrow="ALWAYS" />
+  </VBox>
+
+  <VBox alignment="BOTTOM_RIGHT" prefHeight="447.0" prefWidth="582.0">
+    <ScrollPane fx:id="messageScrollPane" hbarPolicy="NEVER" prefHeight="429.0" prefWidth="381.0" VBox.vgrow="ALWAYS">
+      <VBox fx:id="messageContainer" alignment="BOTTOM_CENTER" prefHeight="738.0" prefWidth="511.0" spacing="6.0" />
+    </ScrollPane>
+
+        <HBox prefHeight="5.0" prefWidth="381.0">
+            <TextField fx:id="messageTextField" prefHeight="32.0" prefWidth="296.0" promptText="Message" HBox.hgrow="ALWAYS" />
+            <Button fx:id="sendButton" mnemonicParsing="false" onAction="#onSendButtonClicked" prefHeight="30.0" prefWidth="57.0" text="Send" />
+        </HBox>
+    </VBox>
+</HBox>
