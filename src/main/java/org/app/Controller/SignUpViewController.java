@@ -1,5 +1,6 @@
 package org.app.Controller;
 
+import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,7 +47,8 @@ public class SignUpViewController {
 		  messageLabel.setText("Please type in all cell");
 	   }
 
-	   if (HandleUserAccount.checkValidAccount(username, password, confirmPassword)) {
+	   int checkValidAccount = HandleUserAccount.checkValidAccount(username, password, confirmPassword, email);
+	   if (checkValidAccount == HandleUserAccount.VALID_ACCOUNT) {
 		  User user = new User.Builder()
 				.setUsername(username)
 				.setPassword(password)
@@ -66,17 +68,24 @@ public class SignUpViewController {
 			 SignInViewController controller = fxmlLoader.getController();
 			 controller.setMessageLabel("Sign up Successful. Sign in now");
 
-			 MainApp.setScene(root);
+			 MainApp.setScene(root, MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 		  } catch (Exception e) {
 			 e.printStackTrace();
 		  }
-	   } else {
-		  messageLabel.setText("Invalid username or password");
+	   } else if (checkValidAccount == HandleUserAccount.ACCOUNT_ALREADY_EXISTS) {
+		  messageLabel.setText("Username already exists");
 		  usernameTextField.setText("");
 		  passwordTextField.setText("");
 		  confirmPasswordTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.INVALID_PASSWORD) {
+		   messageLabel.setText("Invalid password");
+		   passwordTextField.setText("");
+		   confirmPasswordTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.INVALID_EMAIL) {
+		   messageLabel.setText("Invalid email");
+		   emailTextField.setText("");
 	   }
-    }
+	}
 
     /**
 	* Handle when button back is clicked.
@@ -85,7 +94,7 @@ public class SignUpViewController {
 	*/
     public void onBackButtonClicked(ActionEvent actionEvent) {
 	   try {
-		  MainApp.navigateToScene("hello-view.fxml");
+		  MainApp.navigateToScene("hello-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 	   } catch (Exception e) {
 		  e.printStackTrace();
 	   }
