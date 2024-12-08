@@ -1,6 +1,7 @@
 package org.app.DataBase;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 abstract public class DataBaseAccessor {
