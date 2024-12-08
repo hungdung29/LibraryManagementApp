@@ -92,6 +92,7 @@ public class AddBookController extends BookController implements Initializable {
     public void onSearchButtonClicked(ActionEvent actionEvent) {
 	   getDataEntireBook();
 	   bookTable.setItems(entireBooks);
+	   messageLabel.setText("Number of books found: " + entireBooks.size());
     }
 
     /**
@@ -132,6 +133,7 @@ public class AddBookController extends BookController implements Initializable {
 				    .setRemaining(Integer.parseInt(quantityField.getText()))
 				    .build();
 			 BookData.addBook(newBook);
+			 messageLabel.setText("Book was added successfully");
 			 try {
 				MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
 			 } catch (Exception e) {
@@ -140,6 +142,7 @@ public class AddBookController extends BookController implements Initializable {
 		  } else {
 			 addBook.setRemaining(Integer.parseInt(quantityField.getText()));
 			 BookData.addBook(addBook);
+			 messageLabel.setText("Book was added successfully");
 			 try {
 				MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
 			 } catch (Exception e) {
@@ -155,16 +158,28 @@ public class AddBookController extends BookController implements Initializable {
 	* @param actionEvent event
 	*/
     public void onImportButtonClicked(ActionEvent actionEvent) {
+	   if (BookData.isBookExist(choosingBook.getIsbn())) {
+		  messageLabel.setText("Book was found in library");
+		  titleField.setText("");
+		  authorField.setText("");
+		  publisherField.setText("");
+		  isbnField.setText("");
+		  descriptionField.setText("");
+		  quantityField.setText("");
+		  return;
+	   }
 	   addBook = choosingBook;
 	   titleField.setText(addBook.getTitle());
 	   authorField.setText(addBook.getAuthor());
 	   publisherField.setText(addBook.getPublisher());
 	   isbnField.setText(addBook.getIsbn());
 	   descriptionField.setText(addBook.getDescription());
+	   messageLabel.setText("Book was imported successfully");
     }
 
     @Override
     public void handleBookSelection(String username, Book book) {
+	   messageLabel.setText("");
 	   choosingBook = book;
 	   if (book.getImagePath()!=null) {
 		  bookImage.setImage(new Image(book.getImagePath()));
