@@ -72,11 +72,12 @@ public class SignUpViewController {
 		  } catch (Exception e) {
 			 e.printStackTrace();
 		  }
-	   } else if (checkValidAccount == HandleUserAccount.ACCOUNT_ALREADY_EXISTS) {
+	   } else if (checkValidAccount == HandleUserAccount.USERNAME_HAS_SPACE) {
+		   messageLabel.setText("Username must not contain spaces");
+		   usernameTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.USERNAME_ALREADY_EXISTS) {
 		  messageLabel.setText("Username already exists");
 		  usernameTextField.setText("");
-		  passwordTextField.setText("");
-		  confirmPasswordTextField.setText("");
 	   } else if (checkValidAccount == HandleUserAccount.INVALID_PASSWORD) {
 		   messageLabel.setText("Invalid password");
 		   passwordTextField.setText("");

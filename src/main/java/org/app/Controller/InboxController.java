@@ -85,6 +85,8 @@ public class InboxController implements Initializable {
 	   HBox messageBox = new HBox();
 	   messageBox.prefWidthProperty().bind(messageContainer.widthProperty());
 
+	   // set to black
+//		messageBox.setStyle("-fx-background-color: rgba(0, 0, 0, 0.6);");
         messageBox.setStyle("-fx-background-color: #ffffff;");
         messageBox.setAlignment(isUser ? Pos.BOTTOM_RIGHT : Pos.BOTTOM_LEFT);
 
@@ -93,7 +95,7 @@ public class InboxController implements Initializable {
 	   TextFlow textFlow = new TextFlow(text);
 
         // Style the message box
-        textFlow.setStyle("-fx-background-color: " + (isUser ? "#D1F8D1" : "#ffffff") + "; " +
+        textFlow.setStyle("-fx-background-color: " + (isUser ? "#ADD8E6" : "#D3D3D3") + "; " +
                 "-fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;");
         textFlow.setMaxWidth(500); // Set a maximum width for wrapping
 
