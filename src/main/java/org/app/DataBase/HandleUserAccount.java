@@ -11,7 +11,8 @@ public class HandleUserAccount extends DataBaseAccessor {
     public static final int NORM_USER_LOG_IN_SUCCESS = 1;
     public static final int ADMIN_LOG_IN_SUCCESS = 2;
 
-	public static final int ACCOUNT_ALREADY_EXISTS = 3;
+	public static final int USERNAME_HAS_SPACE = 7;
+	public static final int USERNAME_ALREADY_EXISTS = 3;
 	public static final int INVALID_PASSWORD = 4;
 	public static final int INVALID_EMAIL = 5;
 	public static final int VALID_ACCOUNT = 6;
@@ -108,8 +109,13 @@ public class HandleUserAccount extends DataBaseAccessor {
 	*/
     public static int checkValidAccount(String username, String password,
 								    String confirmpasswordText, String mail) {
+
+		if (username.contains(" ")) {
+			return USERNAME_HAS_SPACE;
+		}
+
 	   if (isUsernameExist(username)) {
-		  return ACCOUNT_ALREADY_EXISTS;
+		  return USERNAME_ALREADY_EXISTS;
 	   }
 
 	   if (!checkValidPassword(password, confirmpasswordText)) {
