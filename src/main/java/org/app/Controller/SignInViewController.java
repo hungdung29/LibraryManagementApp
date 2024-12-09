@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
+import org.app.Utils.Utils;
 
 public class SignInViewController {
     public TextField usernameTextField;
@@ -57,22 +58,22 @@ public class SignInViewController {
 	*/
     private void navigate(int check) {
 	   if (check==HandleUserAccount.ACCOUNT_NOT_FOUND) {
-		  messageLabel.setText("User not found. Sign up or try again");
+		   Utils.setTextAndShakingLabel(messageLabel, "User not found. Sign up or try again");
 		  usernameTextField.setText("");
 		  passwordTextField.setText("");
 	   } else if (check==HandleUserAccount.WRONG_PASSWORD) {
-		  messageLabel.setText("Wrong password. Try a different password");
+		  Utils.setTextAndShakingLabel(messageLabel, "Wrong password. Try a different password");
 		  passwordTextField.setText("");
 	   } else if (check==HandleUserAccount.NORM_USER_LOG_IN_SUCCESS) {
 		  // login success
-		  messageLabel.setText("Login successful!");
+		  Utils.setTextAndShakingLabel(messageLabel, "Login successful!");
 		  try {
 			 switchToUserPanel();
 		  } catch (IOException e) {
 			 e.printStackTrace();
 		  }
 	   } else if (check==HandleUserAccount.ADMIN_LOG_IN_SUCCESS) {
-		  messageLabel.setText("Admin logged in");
+		  Utils.setTextAndShakingLabel(messageLabel, "Admin logged in");
 		  try {
 			 MainApp.navigateToScene("admin-view.fxml");
 		  } catch (IOException e) {
@@ -102,7 +103,11 @@ public class SignInViewController {
 	   password = passwordTextField.getText();
     }
 
+	/**
+	 * allow other controller set message label for this view.
+	 * @param message message
+	 */
     public void setMessageLabel(String message) {
-	   messageLabel.setText(message);
+	   Utils.setTextAndShakingLabel(messageLabel, message);
     }
 }

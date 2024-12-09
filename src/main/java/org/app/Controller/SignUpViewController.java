@@ -1,6 +1,5 @@
 package org.app.Controller;
 
-import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +11,7 @@ import javafx.scene.control.TextField;
 import org.app.DataBase.HandleUserAccount;
 import org.app.MainApp;
 import org.app.Object.User;
+import org.app.Utils.Utils;
 
 public class SignUpViewController {
     public Label messageLabel;
@@ -39,17 +39,35 @@ public class SignUpViewController {
 
     /**
 	* Handle when button sign up is clicked.
-	*
 	* @param actionEvent event
 	*/
     public void onSignUpButtonClicked(ActionEvent actionEvent) {
 	   if (!extractData()) {
-		  messageLabel.setText("Please type in all cell");
+		   Utils.setTextAndShakingLabel(messageLabel, "Please type in all cell");
+		   return;
 	   }
 
 	   int checkValidAccount = HandleUserAccount.checkValidAccount(username, password, confirmPassword, email);
 	   if (checkValidAccount == HandleUserAccount.VALID_ACCOUNT) {
-		  User user = new User.Builder()
+			signUp();
+	   } else if (checkValidAccount == HandleUserAccount.USERNAME_HAS_SPACE) {
+		   Utils.setTextAndShakingLabel(messageLabel,"Username must not contain spaces");
+		   usernameTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.USERNAME_ALREADY_EXISTS) {
+		  Utils.setTextAndShakingLabel(messageLabel,"Username already exists");
+		  usernameTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.INVALID_PASSWORD) {
+		   Utils.setTextAndShakingLabel(messageLabel,"Invalid password");
+		   passwordTextField.setText("");
+		   confirmPasswordTextField.setText("");
+	   } else if (checkValidAccount == HandleUserAccount.INVALID_EMAIL) {
+		   Utils.setTextAndShakingLabel(messageLabel,"Invalid email");
+		   emailTextField.setText("");
+	   }
+	}
+
+	private void signUp() {
+		User user = new User.Builder()
 				.setUsername(username)
 				.setPassword(password)
 				.setName(name)
@@ -59,33 +77,19 @@ public class SignUpViewController {
 				.setEmail(email)
 				.build();
 
-		  HandleUserAccount.addAccount(user);
+		HandleUserAccount.addAccount(user);
 
-		  try {
-			 FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("sign-in-view.fxml"));
-			 Parent root = fxmlLoader.load();
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("sign-in-view.fxml"));
+			Parent root = fxmlLoader.load();
 
-			 SignInViewController controller = fxmlLoader.getController();
-			 controller.setMessageLabel("Sign up Successful. Sign in now");
+			SignInViewController controller = fxmlLoader.getController();
+			controller.setMessageLabel("Sign up Successful. Sign in now");
 
-			 MainApp.setScene(root, MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
-		  } catch (Exception e) {
-			 e.printStackTrace();
-		  }
-	   } else if (checkValidAccount == HandleUserAccount.USERNAME_HAS_SPACE) {
-		   messageLabel.setText("Username must not contain spaces");
-		   usernameTextField.setText("");
-	   } else if (checkValidAccount == HandleUserAccount.USERNAME_ALREADY_EXISTS) {
-		  messageLabel.setText("Username already exists");
-		  usernameTextField.setText("");
-	   } else if (checkValidAccount == HandleUserAccount.INVALID_PASSWORD) {
-		   messageLabel.setText("Invalid password");
-		   passwordTextField.setText("");
-		   confirmPasswordTextField.setText("");
-	   } else if (checkValidAccount == HandleUserAccount.INVALID_EMAIL) {
-		   messageLabel.setText("Invalid email");
-		   emailTextField.setText("");
-	   }
+			MainApp.setScene(root, MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
     /**
