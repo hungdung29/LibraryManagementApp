@@ -17,7 +17,7 @@ public class HelloController {
 	*/
     public void onSignInButtonClick(ActionEvent actionEvent) {
 	   try {
-		  MainApp.navigateToScene2("sign-in-view.fxml", 473, 549);
+		  MainApp.navigateToScene("sign-in-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 	   } catch (Exception e) {
 		  e.printStackTrace();
 	   }

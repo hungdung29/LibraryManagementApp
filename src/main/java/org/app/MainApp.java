@@ -18,6 +18,9 @@ public class MainApp extends Application {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 800;
 
+    public static final int SMALL_WIDTH = 470;
+    public static final int SMALL_HEIGHT = 550;
+
     @Override
     public void start(Stage stage) throws IOException {
         DataBaseAccessor.connect(); 
@@ -25,39 +28,19 @@ public class MainApp extends Application {
         CreateDataBase.addSample();
 
         currentStage = stage;
-        navigateToScene2("hello-view.fxml", 473, 549);
+        navigateToScene("hello-view.fxml", SMALL_WIDTH, SMALL_HEIGHT);
         stage.show();
     }
 
+    public static void setScene(Parent root, int width, int height) {
+        currentStage.setScene(new Scene(root, width, height));
+    }
+
     public static void setScene(Parent root) {
-        currentStage.setScene(new Scene(root, WIDTH, HEIGHT));
+        setScene(root, WIDTH, HEIGHT);
     }
 
-    public static void navigateToScene(String fxmlFile) throws IOException {
-        // admin-view.fxml#adminTabPane#inbox
-        String[] parts = fxmlFile.split("#");
-        String fxmlPath = parts[0];
-        String fragment = parts.length > 1 ? parts[1] : null;
-
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-        currentStage.setScene(scene);
-
-        if (fragment != null) {
-            TabPane tabPane = (TabPane) scene.lookup("#" + fragment);
-            if (tabPane != null) {
-                for (Tab tab : tabPane.getTabs()) {
-                    if (tab.getId().equals(parts[2])) {
-                        tabPane.getSelectionModel().select(tab);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    public static void navigateToScene2(String fxmlFile, int width, int height) throws IOException {
+    public static void navigateToScene(String fxmlFile, int width, int height) throws IOException {
         // admin-view.fxml#adminTabPane#inbox
         String[] parts = fxmlFile.split("#");
         String fxmlPath = parts[0];
@@ -78,6 +61,10 @@ public class MainApp extends Application {
                 }
             }
         }
+    }
+
+    public static void navigateToScene(String fxmlFile) throws IOException {
+        navigateToScene(fxmlFile, WIDTH, HEIGHT);
     }
 
     public static void main(String[] args) {

@@ -205,4 +205,16 @@ public class BookData extends DataBaseAccessor {
 		  System.out.println(e.getMessage());
 	   }
     }
+
+    public static boolean isBookExist(String isbn) {
+	   String query = "SELECT * FROM books WHERE ISBN = " + isbn;
+	   try {
+		  Statement statement = connection.createStatement();
+		  ResultSet resultSet = statement.executeQuery(query);
+		  return resultSet.next();
+	   } catch (SQLException e) {
+		  e.printStackTrace();
+	   }
+	   return false;
+    }
 }

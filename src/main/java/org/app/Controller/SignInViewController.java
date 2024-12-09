@@ -44,7 +44,7 @@ public class SignInViewController {
 	*/
     public void onBackButtonClicked(ActionEvent actionEvent) {
 	   try {
-		  MainApp.navigateToScene("hello-view.fxml");
+		  MainApp.navigateToScene("hello-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 	   } catch (IOException e) {
 		  e.printStackTrace();
 	   }

@@ -11,6 +11,12 @@ public class HandleUserAccount extends DataBaseAccessor {
     public static final int NORM_USER_LOG_IN_SUCCESS = 1;
     public static final int ADMIN_LOG_IN_SUCCESS = 2;
 
+	public static final int USERNAME_HAS_SPACE = 7;
+	public static final int USERNAME_ALREADY_EXISTS = 3;
+	public static final int INVALID_PASSWORD = 4;
+	public static final int INVALID_EMAIL = 5;
+	public static final int VALID_ACCOUNT = 6;
+
     /**
 	* Check if username is existing in database.
 	*
@@ -101,13 +107,26 @@ public class HandleUserAccount extends DataBaseAccessor {
 	* @param confirmpasswordText make sure = password
 	* @return true if account is valid. Otherwise, return false
 	*/
-    public static boolean checkValidAccount(String username, String password,
-								    String confirmpasswordText) {
+    public static int checkValidAccount(String username, String password,
+								    String confirmpasswordText, String mail) {
+
+		if (username.contains(" ")) {
+			return USERNAME_HAS_SPACE;
+		}
+
 	   if (isUsernameExist(username)) {
-		  return false;
+		  return USERNAME_ALREADY_EXISTS;
 	   }
 
-	   return checkValidPassword(password, confirmpasswordText);
+	   if (!checkValidPassword(password, confirmpasswordText)) {
+		   return INVALID_PASSWORD;
+	   }
+
+	   if (!checkValidMail(mail)) {
+		   	return INVALID_EMAIL;
+	   }
+
+	   return VALID_ACCOUNT;
     }
 
     /**
@@ -133,6 +152,13 @@ public class HandleUserAccount extends DataBaseAccessor {
 
 	   return true;
     }
+
+	public static boolean checkValidMail(String mail) {
+		String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
+		// Check if the email matches the regex
+		return mail.matches(emailRegex);
+	}
 
     /**
 	* Update password of user.

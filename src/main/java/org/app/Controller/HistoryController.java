@@ -83,6 +83,14 @@ public class HistoryController extends BookController implements Initializable {
 	* @param actionEvent event
 	*/
     public void onChangeCommentButtonClicked(ActionEvent actionEvent) {
+	   if (changeCommentButton.getText().equals("Cancel Request")) {
+		  // cancel request
+		  RequestData.deleteRequestInfo(SignInViewController.username, selectedBook.getIdBook());
+		  entireBooks.remove(selectedBook);
+		  cloneListBook();
+		  bookTable.setItems(shownBooks);
+		  return;
+	   }
 	   // Save changed comment
 	   if (isChange) {
 		  changeCommentButton.setText("Change Comment");
@@ -106,6 +114,13 @@ public class HistoryController extends BookController implements Initializable {
 	* @param book     book need to handle inform or more
 	*/
     public void handleBookSelection(String username, Book book) {
+	   if (book.getStatus().equals("Pending")) {
+		  commentTextField.setVisible(false);
+		  changeCommentButton.setText("Cancel Request");
+	   } else {
+		  commentTextField.setVisible(true);
+		  changeCommentButton.setText("Change Comment");
+	   }
 	   titleBookLabel.setText("Book title: " + book.getTitle());
 	   BorrowInfo borrowInfo;
 	   if (book.getStatus().equals("Borrowing")) {
