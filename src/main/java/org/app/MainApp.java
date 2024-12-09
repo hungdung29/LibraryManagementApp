@@ -23,7 +23,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        DataBaseAccessor.connect();
+        DataBaseAccessor.connect(); 
         CreateDataBase.createDatabase();
         CreateDataBase.addSample();
 

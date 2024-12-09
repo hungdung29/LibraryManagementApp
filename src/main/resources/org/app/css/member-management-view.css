@@ -48,7 +48,7 @@ Button {
 }
 
 Button:hover {
-    -fx-background-color: #5FA9A4;
+    -fx-background-color: #1919b5;
 }
 
 Button:pressed {
