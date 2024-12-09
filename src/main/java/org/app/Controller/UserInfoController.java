@@ -2,6 +2,8 @@ package org.app.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -53,7 +55,7 @@ public class UserInfoController implements Initializable {
 	*/
     public void onLogOutButtonClicked(ActionEvent actionEvent) {
 	   try {
-		  MainApp.navigateToScene("hello-view.fxml");
+		  MainApp.navigateToScene("hello-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 	   } catch (Exception e) {
 		  e.printStackTrace();
 	   }

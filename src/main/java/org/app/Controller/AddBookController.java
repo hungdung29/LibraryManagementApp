@@ -19,6 +19,7 @@ import org.app.BookAPI.GoogleBookSearch;
 import org.app.DataBase.BookData;
 import org.app.MainApp;
 import org.app.Object.Book;
+import org.app.Utils.Utils;
 
 public class AddBookController extends BookController implements Initializable {
     public TextField searchTextField;
@@ -92,7 +93,8 @@ public class AddBookController extends BookController implements Initializable {
     public void onSearchButtonClicked(ActionEvent actionEvent) {
 	   getDataEntireBook();
 	   bookTable.setItems(entireBooks);
-	   messageLabel.setText("Number of books found: " + entireBooks.size());
+	   Utils.setTextAndShakingLabel(messageLabel, "Number of books found: " + entireBooks.size());
+		Utils.setTextAndShakingLabel(messageLabel, "Number of books found: " + entireBooks.size());
     }
 
     /**
@@ -116,7 +118,7 @@ public class AddBookController extends BookController implements Initializable {
 	   if (titleField.getText().isEmpty() || authorField.getText().isEmpty()
 			 || publisherField.getText().isEmpty() || isbnField.getText().isEmpty()
 			 || descriptionField.getText().isEmpty() || quantityField.getText().isEmpty()) {
-		  messageLabel.setText("Please fill in all fields");
+		  Utils.setTextAndShakingLabel(messageLabel, "Please fill in all fields");
 	   } else {
 		  // Check book from API or not
 		  if (addBook==null || (!addBook.getTitle().equals(titleField.getText())
@@ -133,7 +135,7 @@ public class AddBookController extends BookController implements Initializable {
 				    .setRemaining(Integer.parseInt(quantityField.getText()))
 				    .build();
 			 BookData.addBook(newBook);
-			 messageLabel.setText("Book was added successfully");
+			 Utils.setTextAndShakingLabel(messageLabel, "Book was added successfully");
 			 try {
 				MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
 			 } catch (Exception e) {
@@ -142,7 +144,7 @@ public class AddBookController extends BookController implements Initializable {
 		  } else {
 			 addBook.setRemaining(Integer.parseInt(quantityField.getText()));
 			 BookData.addBook(addBook);
-			 messageLabel.setText("Book was added successfully");
+			 Utils.setTextAndShakingLabel(messageLabel, "Book was added successfully");
 			 try {
 				MainApp.navigateToScene("admin-view.fxml#adminTabPane#book_management");
 			 } catch (Exception e) {
@@ -159,7 +161,7 @@ public class AddBookController extends BookController implements Initializable {
 	*/
     public void onImportButtonClicked(ActionEvent actionEvent) {
 	   if (BookData.isBookExist(choosingBook.getIsbn())) {
-		  messageLabel.setText("Book was found in library");
+		  Utils.setTextAndShakingLabel(messageLabel, "Book was found in library");
 		  titleField.setText("");
 		  authorField.setText("");
 		  publisherField.setText("");
@@ -174,12 +176,12 @@ public class AddBookController extends BookController implements Initializable {
 	   publisherField.setText(addBook.getPublisher());
 	   isbnField.setText(addBook.getIsbn());
 	   descriptionField.setText(addBook.getDescription());
-	   messageLabel.setText("Book was imported successfully");
+	   Utils.setTextAndShakingLabel(messageLabel, "Book was imported successfully");
     }
 
     @Override
     public void handleBookSelection(String username, Book book) {
-	   messageLabel.setText("");
+	   Utils.setTextAndShakingLabel(messageLabel, "");
 	   choosingBook = book;
 	   if (book.getImagePath()!=null) {
 		  bookImage.setImage(new Image(book.getImagePath()));
@@ -195,7 +197,7 @@ public class AddBookController extends BookController implements Initializable {
     public void getDataEntireBook() {
 	   String query = convertStringHaveSpacing(searchTextField.getText());
 	   if (query.isEmpty()) {
-		  messageLabel.setText("Please type in search field");
+		  Utils.setTextAndShakingLabel(messageLabel, "Please type in search field");
 		  return;
 	   }
 	   Task<ObservableList<Book>> getBookTask = new Task<ObservableList<Book>>() {
@@ -209,7 +211,7 @@ public class AddBookController extends BookController implements Initializable {
 		  entireBooks = getBookTask.getValue();
 		  bookTable.setItems(entireBooks);
 		  if (entireBooks!=null) {
-			 messageLabel.setText("Number of books found: " + entireBooks.size());
+			 Utils.setTextAndShakingLabel(messageLabel, "Number of books found: " + entireBooks.size());
 		  }
 	   });
 
@@ -217,7 +219,7 @@ public class AddBookController extends BookController implements Initializable {
 		  Throwable exception = getBookTask.getException();
 		  exception.printStackTrace();
 		  ;
-		  messageLabel.setText("Error occurred during searching");
+		  Utils.setTextAndShakingLabel(messageLabel, "Error occurred during searching");
 	   });
 
 	   Thread getBookFromAPIThread = new Thread(getBookTask);

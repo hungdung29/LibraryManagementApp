@@ -34,7 +34,7 @@ public class AdminInfoController implements Initializable {
 	*/
     public void onLogOutButton(ActionEvent actionEvent) {
 	   try {
-		  MainApp.navigateToScene("hello-view.fxml");
+		  MainApp.navigateToScene("hello-view.fxml", MainApp.SMALL_WIDTH, MainApp.SMALL_HEIGHT);
 	   } catch (Exception e) {
 		  e.printStackTrace();
 	   }
