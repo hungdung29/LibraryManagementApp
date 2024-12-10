@@ -115,7 +115,11 @@ public class AddBookController extends BookController implements Initializable {
 	* @param actionEvent event
 	*/
     public void onAddBookButtonClicked(ActionEvent actionEvent) {
-	   if (titleField.getText().isEmpty() || authorField.getText().isEmpty()
+	   if (titleField.getText() == null || authorField.getText() == null
+			 || publisherField.getText() == null || isbnField.getText() == null
+			 || descriptionField.getText() == null || quantityField.getText() == null) {
+		  Utils.setTextAndShakingLabel(messageLabel, "Please fill in all fields");
+	   } else if (titleField.getText().isEmpty() || authorField.getText().isEmpty()
 			 || publisherField.getText().isEmpty() || isbnField.getText().isEmpty()
 			 || descriptionField.getText().isEmpty() || quantityField.getText().isEmpty()) {
 		  Utils.setTextAndShakingLabel(messageLabel, "Please fill in all fields");
