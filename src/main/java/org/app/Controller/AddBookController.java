@@ -218,7 +218,6 @@ public class AddBookController extends BookController implements Initializable {
 	   getBookTask.setOnFailed(event -> {
 		  Throwable exception = getBookTask.getException();
 		  exception.printStackTrace();
-		  ;
 		  Utils.setTextAndShakingLabel(messageLabel, "Error occurred during searching");
 	   });
 

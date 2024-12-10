@@ -49,7 +49,16 @@ public class MainApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxmlPath));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root, width, height);
+
+        // Set the scene to the current stage
         currentStage.setScene(scene);
+
+        // Center the stage on the screen
+        currentStage.setWidth(width);
+        currentStage.setHeight(height);
+        currentStage.centerOnScreen();
+
+        // Handle fragment navigation (if any)
         if (fragment != null) {
             TabPane tabPane = (TabPane) scene.lookup("#" + fragment);
             if (tabPane != null) {
